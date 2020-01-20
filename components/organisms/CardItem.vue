@@ -53,6 +53,7 @@ export default {
     text-overflow: ellipsis;
     @include font-cardtitle;
   }
+
   &__info {
     display: flex;
     justify-content: space-between;
