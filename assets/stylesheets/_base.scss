@@ -1,0 +1,64 @@
+html{
+  font-size: 8px;
+}
+p,li,a,h1,h2{
+  @include font-text
+  line-height: normal;
+}
+
+i{
+  color: $color-textcolorblack;
+}
+li{
+  list-style-type: none;
+}
+p,i,li,h1,h2,h3,img{
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+input[type="text"],
+input[type="password"],
+textarea,
+select {
+    outline: none;
+      border: none;
+}
+
+body{
+  background: $color-background;
+}
+button{
+  padding: 0px;
+  background: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+a{
+  cursor: pointer;
+  color: $color-textcolorblack;
+  text-decoration: none;
+}
+p{
+  @include font-textbold;
+}
+h2{
+  @include font-cardtitle;
+}
+*{
+  background-repeat: no-repeat;
+  background-size: cover;
+  scrollbar-width: none;
+}
+*::-webkit-scrollbar {
+  display:none;
+}
+.material-icons {
+  font-size: 16px;
+}
+img{
+  pointer-events: none;
+}

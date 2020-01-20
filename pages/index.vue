@@ -1,51 +1,44 @@
 <template lang="pug">
   .container
-    ul(v-for="post in this.getPosts()")
-      li {{post.title.rendered}}
+    AppHeader
+    .latest-news
+      CardItem(
+        v-for="post in this.latestPosts"
+        key="post.id"
+        :title="post.title.rendered"
+        :thumbnail="post._embedded['wp:featuredmedia'][0].source_url"
+        )
+    AppFooter
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import AppHeader from '@/components/organisms/AppHeader.vue'
+import AppFooter from '@/components/organisms/AppFooter.vue'
+import CardItem from '@/components/organisms/CardItem.vue'
 
 export default {
   components: {
-    Logo
+    AppHeader,
+    AppFooter,
+    CardItem
   },
   mounted() {
-    console.log(1, this.getPosts())
+    console.log(1, this.latestPosts)
   }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
+  margin-top: 84px;
+  .latest-news {
+    padding: 16px 0;
+    margin: auto;
+    display: grid;
+    width: 1080px;
+    grid-gap: 48px;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
 }
 </style>

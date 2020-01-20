@@ -13,12 +13,32 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
+
   loading: { color: '#fff' },
-  css: [],
-  plugins: ['~plugins/fetchData.js'],
+
+  css: [
+    '~/assets/stylesheets/reset.css',
+    { src: '~/assets/stylesheets/style.scss', lang: 'scss' }
+  ],
+
+  plugins: ['~plugins/fetchData.js', { src: '~/plugins/feather.js' }],
+
   buildModules: ['@nuxtjs/eslint-module'],
-  modules: ['@nuxtjs/axios'],
+
+  modules: ['@nuxtjs/axios', ['nuxt-webfontloader'], '@nuxtjs/style-resources'],
+
+  styleResources: {
+    scss: ['~/assets/stylesheets/style.scss']
+  },
+
   axios: {},
+
+  webfontloader: {
+    google: {
+      families: ['Noto+Sans+JP', 'Open+Sans']
+    }
+  },
+
   build: {
     extend(config, ctx) {}
   }

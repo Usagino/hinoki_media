@@ -1,0 +1,120 @@
+$color-textcolorblack: rgba(51,51,51,1);
+$color-textcolorwhite: rgba(255,255,255,1);
+$color-textsecondary: rgba(121,121,121,1);
+$color-background: rgba(244,244,244,1);
+@mixin font-title {
+	font-size:30px;
+	font-family:"Noto Sans JP";
+	font-weight:bold;
+}
+@mixin font-cardtitle {
+	font-size:20px;
+	font-family:"Noto Sans JP";
+	font-weight:bold;
+}
+@mixin font-text {
+	font-size:14px;
+	font-family:"Noto Sans JP";
+	font-weight:normal;
+	line-height:1.7em;
+}
+@mixin font-textbold {
+	font-size:14px;
+	font-family:"Noto Sans JP";
+	font-weight:bold;
+	line-height:1.7em;
+}
+@mixin font-textunderline {
+	font-size:14px;
+	font-family:"Noto Sans JP";
+	font-weight:normal;
+	line-height:1.7em;
+}
+@mixin font-minifytext {
+	font-size:10px;
+	font-family:"Noto Sans JP";
+	font-weight:normal;
+	line-height:1.7em;
+}
+@mixin font-minifytextbold {
+	font-size:12px;
+	font-family:"Noto Sans JP";
+	font-weight:bold;
+	line-height:1.7em;
+}
+@mixin font-tagtitle {
+	font-size:16px;
+	font-family:"Noto Sans JP";
+	font-weight:bold;
+}
+@mixin font-codetext {
+	font-size:14px;
+	font-family:"SF Compact Display";
+	font-weight:normal;
+	line-height:200px;
+}
+
+// Useragent
+$breakpoints: (
+  'sm': 'screen and (max-width: 450px)',
+  'md': 'screen and (max-width: 768px)',
+  'lg': 'screen and (min-width: 1000px)',
+  'xl': 'screen and (min-width: 1200px)'
+) !default;
+
+@mixin mq($breakpoint: md) {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}
+
+
+@mixin flex-middle{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin full-screen{
+  height: 100vh;
+  width: 100vw;
+}
+@mixin full-size{
+  height: 100%;
+  width: 100%;
+}
+@mixin flex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin gap-right($i){
+  & > * {
+    margin-right: $i;
+    &:last-child {
+      margin-right: 0px;
+    }
+  }
+}
+@mixin gap-bottom($i){
+  & > * {
+    margin-bottom: $i;
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
+}
+
+@mixin repeat-rows($i){
+	display: grid;
+	grid-auto-rows: auto;
+	grid-gap: $i;
+	grid-auto-flow: column;
+}
+
+@mixin repeat-columns($i){
+	display: grid;
+	grid-auto-columns: auto;
+	grid-gap: $i;
+	grid-auto-flow: row;
+}
