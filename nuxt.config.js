@@ -21,7 +21,12 @@ export default {
     { src: '~/assets/stylesheets/style.scss', lang: 'scss' }
   ],
 
-  plugins: ['~plugins/fetchData.js', { src: '~/plugins/feather.js' }],
+  plugins: [
+    '~plugins/fetchData.js',
+    '~plugins/components.js',
+    { src: '~/plugins/feather.js' },
+    { src: '~/plugins/carousel.js', ssr: false }
+  ],
 
   buildModules: ['@nuxtjs/eslint-module'],
 

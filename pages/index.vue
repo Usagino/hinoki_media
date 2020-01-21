@@ -1,27 +1,34 @@
 <template lang="pug">
   .container
     AppHeader
-    .latest-news
-      CardItem(
+    Carousel.carousel(:per-page="1" :paginationEnabled="false" :autoplay="true" :autoplayTimeout="4000" :loop="true")
+      Slide.carousel__slide(
         v-for="post in this.latestPosts"
-        key="post.id"
-        :title="post.title.rendered"
-        :thumbnail="post._embedded['wp:featuredmedia'][0].source_url"
-        )
+        :key="post.id"
+        :style="{ backgroundImage: 'url(' + post._embedded['wp:featuredmedia'][0].source_url + ')' }")
+        .carousel__cover
+        .carousel__text
+          p DESIGN
+          h2.carousel__text__title {{ post.title.rendered }}
+          .carousel__info
+            p 2020.01.01
+            p written by hayato
+    .latest-news
+      .latest-news__items
+        CardItem(
+          v-for="post in this.latestPosts"
+          :key="post.id"
+          :title="post.title.rendered"
+          :thumbnail="post._embedded['wp:featuredmedia'][0].source_url"
+          )
+        span
+        span
+      AppButton(text="NEXT" to="/")
     AppFooter
 </template>
 
 <script>
-import AppHeader from '@/components/organisms/AppHeader.vue'
-import AppFooter from '@/components/organisms/AppFooter.vue'
-import CardItem from '@/components/organisms/CardItem.vue'
-
 export default {
-  components: {
-    AppHeader,
-    AppFooter,
-    CardItem
-  },
   mounted() {
     console.log(1, this.latestPosts)
   }
@@ -31,14 +38,78 @@ export default {
 <style lang="scss" scoped>
 .container {
   margin-top: 84px;
-  .latest-news {
-    padding: 16px 0;
+  .carousel {
+    padding-top: 40px;
     margin: auto;
-    display: grid;
-    width: 1080px;
-    grid-gap: 48px;
-    grid-template-columns: auto auto auto;
-    grid-template-rows: 1fr 1fr 1fr;
+    width: $default-size;
+    height: 500px;
+    &__slide {
+      width: $default-size;
+      height: 500px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      display: flex;
+      justify-content: flex-end;
+      flex-direction: column;
+
+      box-sizing: border-box;
+    }
+    &__cover {
+      @include full-size;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(13, 13, 13, 0.47) 84.5%
+      );
+    }
+    &__text {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 24px;
+      z-index: 2;
+      @include gap-bottom(8px);
+      & > * {
+        color: $color-textcolorwhite;
+      }
+      &__title {
+        @include font-title;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: $default-size - 48px;
+      }
+    }
+    &__info {
+      display: flex;
+      justify-content: flex-start;
+      @include gap-right(12px);
+    }
+  }
+  .latest-news {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 48px 0;
+    &__items {
+      padding: 16px 0;
+      margin: auto;
+      width: $default-size;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      & > * {
+        margin-bottom: 36px;
+      }
+      span {
+        width: 340px;
+      }
+    }
   }
 }
 </style>

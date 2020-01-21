@@ -63,7 +63,7 @@ export default {}
     }
   }
   &__info {
-    width: 1080px;
+    width: $default-size;
     margin: auto;
     display: flex;
     justify-content: space-between;

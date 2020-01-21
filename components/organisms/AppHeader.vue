@@ -27,8 +27,9 @@ export default {}
   left: 0;
   width: 100vw;
   padding: 20px 0;
+  z-index: 100;
   &__wrap {
-    width: 1080px;
+    width: $default-size;
     margin: auto;
     display: flex;
     flex-direction: row;

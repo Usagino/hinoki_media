@@ -25,12 +25,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$card-width: 300px;
 .carditem {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background: $color-textcolorwhite;
   padding: 16px 20px;
+  min-height: 380px;
   &__wrap {
     @include gap-bottom(12px);
     margin-bottom: 12px;
@@ -39,16 +41,16 @@ export default {
     color: $color-textsecondary;
   }
   &__thumbnail {
-    width: 320px;
+    width: $card-width;
     height: 200px;
     object-fit: cover;
   }
   &__title {
-    max-width: 320px;
+    max-width: $card-width;
     display: block;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 3;
     overflow: hidden;
     text-overflow: ellipsis;
     @include font-cardtitle;
