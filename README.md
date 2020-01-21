@@ -1,6 +1,6 @@
 # HINOKI
 
-> Design and culture media
+> this is original design media
 
 ## Build Setup
 
@@ -19,5 +19,3 @@ $ npm run start
 $ npm run generate
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
-# hinoki_media
