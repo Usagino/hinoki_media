@@ -11,12 +11,26 @@
       li
         nuxt-link(to="/news") ABOUT
       li
+        button(@click="searchToggle = true")
+          feather-search
+  transition
+    form.header__search(v-if="searchToggle")
+      .header__wrap
+        input(type="text" placeholder="ここにテキストを入力して検索")
         button
           feather-search
+  transition
+    .header__cover(v-if="searchToggle" @click="searchToggle = false")
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      searchToggle: false
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -47,5 +61,38 @@ export default {}
       @include font-tagtitle;
     }
   }
+  &__search {
+    // display: none;
+    background: $color-textcolorwhite;
+    width: 100vw;
+    position: absolute;
+    top: -100%;
+    top: 0%;
+    left: 0;
+    z-index: 900;
+    padding: 20px 0;
+    input {
+      height: 42px;
+      @include font-textbold;
+      width: $default-size - 32px;
+    }
+  }
+  &__cover {
+    @include full-screen;
+    background: rgba(77, 76, 76, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+}
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.2s;
+}
+
+.v-enter,
+.v-leave-to {
+  opacity: 0;
 }
 </style>
