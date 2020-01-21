@@ -48,9 +48,15 @@ export default {
     padding-top: 40px;
     margin: auto;
     width: $default-size;
+    @include mq(sm) {
+      width: $default-size-sp;
+    }
     height: 500px;
     &__slide {
       width: $default-size;
+      @include mq(sm) {
+        width: $default-size-sp;
+      }
       height: 500px;
       background-size: cover;
       background-position: center;
@@ -58,7 +64,6 @@ export default {
       display: flex;
       justify-content: flex-end;
       flex-direction: column;
-
       box-sizing: border-box;
     }
     &__cover {
@@ -80,6 +85,10 @@ export default {
       padding: 24px;
       z-index: 2;
       @include gap-bottom(8px);
+      @include mq(sm) {
+        width: $default-size-sp;
+        box-sizing: border-box;
+      }
       & > * {
         color: $color-textcolorwhite;
       }
@@ -89,6 +98,9 @@ export default {
         text-overflow: ellipsis;
         white-space: nowrap;
         width: $default-size - 48px;
+        @include mq(sm) {
+          width: $default-size-sp;
+        }
       }
     }
     &__info {
@@ -106,6 +118,9 @@ export default {
       padding: 16px 0;
       margin: auto;
       width: $default-size;
+      @include mq(sm) {
+        width: $default-size-sp;
+      }
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -114,6 +129,7 @@ export default {
       }
       span {
         width: 340px;
+        margin-bottom: 0px;
       }
     }
   }
