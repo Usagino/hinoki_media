@@ -20,10 +20,15 @@
           :key="post.id"
           :title="post.title.rendered"
           :thumbnail="post._embedded['wp:featuredmedia'][0].source_url"
+          :time="post.date"
+          :categoryId='post.categories[0]'
           )
         span
         span
       AppButton(text="NEXT" to="/")
+    .feature
+      FeatureItem
+      FeatureItem
     AppFooter
 </template>
 
@@ -31,6 +36,7 @@
 export default {
   mounted() {
     console.log(1, this.latestPosts)
+    console.log('Category:　', this.categories)
   }
 }
 </script>

@@ -1,11 +1,11 @@
 <template lang="pug">
 .carditem
   .carditem__wrap
-    p.carditem__category DESIGN
+    p.carditem__category {{category}}
     img.carditem__thumbnail(:src="thumbnail")
     h2.carditem__title {{title}}
   .carditem__info
-    p 2020.1.12
+    p {{getTime(time)}}
     p written by hayato
 </template>
 
@@ -19,6 +19,27 @@ export default {
     thumbnail: {
       type: String,
       default: ''
+    },
+    time: {
+      type: String,
+      default: ''
+    },
+    categoryId: {
+      type: Number,
+      default: null
+    }
+  },
+  data() {
+    return {
+      postTime: '',
+      category: ''
+    }
+  },
+  mounted() {},
+  methods: {
+    getTime(time) {
+      const getTime = new Date(time)
+      return `${getTime.getFullYear()}.${getTime.getMonth()}.${getTime.getDate()}`
     }
   }
 }
@@ -32,7 +53,7 @@ $card-width: 300px;
   justify-content: space-between;
   background: $color-textcolorwhite;
   padding: 16px 20px;
-  min-height: 380px;
+  min-height: 360px;
   &__wrap {
     @include gap-bottom(12px);
     margin-bottom: 12px;
@@ -50,7 +71,7 @@ $card-width: 300px;
     display: block;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
     @include font-cardtitle;
