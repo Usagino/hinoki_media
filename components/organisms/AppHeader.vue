@@ -13,6 +13,7 @@
       li
         button(@click="searchToggle = true")
           feather-search
+
   transition
     form.header__search(v-if="searchToggle")
       .header__wrap
@@ -21,13 +22,18 @@
           feather-search
   transition
     .header__cover(v-if="searchToggle" @click="searchToggle = false")
+  transition
+    .header__sp-menu(v-if="spMenuToggle")
+      button.header__sp-menu__close(@click="spMenuToggle=false")
+  button.header__menu-button(@click="spMenuToggle=!spMenuToggle")
 </template>
 
 <script>
 export default {
   data() {
     return {
-      searchToggle: false
+      searchToggle: false,
+      spMenuToggle: false
     }
   }
 }
@@ -42,6 +48,7 @@ export default {
   width: 100vw;
   padding: 20px 0;
   z-index: 100;
+
   &__wrap {
     width: $default-size;
     margin: auto;
@@ -49,6 +56,11 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    @include mq(sm) {
+      width: $default-size-sp;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
   }
   &__logo {
     img {
@@ -57,6 +69,9 @@ export default {
   }
   &__menu {
     @include repeat-rows(32px);
+    @include mq(sm) {
+      display: none;
+    }
     a {
       @include font-tagtitle;
     }
@@ -85,12 +100,37 @@ export default {
     left: 0;
     z-index: -1;
   }
+  &__menu-button {
+    display: none;
+    height: 44px;
+    width: 44px;
+    background: red;
+    height: 44px;
+    width: 44px;
+    background: red;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: red;
+    z-index: 1001;
+    @include mq(sm) {
+      display: block;
+    }
+  }
+  &__sp-menu {
+    @include full-screen;
+    background: $color-textcolorblack;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
 }
+
 .v-enter-active,
 .v-leave-active {
   transition: opacity 0.2s;
 }
-
 .v-enter,
 .v-leave-to {
   opacity: 0;

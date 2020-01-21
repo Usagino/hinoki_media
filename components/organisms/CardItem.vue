@@ -54,6 +54,9 @@ $card-width: 300px;
   background: $color-textcolorwhite;
   padding: 16px 20px;
   min-height: 360px;
+  @include mq(sm) {
+    margin: auto;
+  }
   &__wrap {
     @include gap-bottom(12px);
     margin-bottom: 12px;
