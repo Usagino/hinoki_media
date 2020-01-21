@@ -6,6 +6,7 @@ import AppFooter from '@/components/organisms/AppFooter.vue'
 import CardItem from '@/components/organisms/CardItem.vue'
 import AppButton from '@/components/molecules/AppButton.vue'
 
+// Vue original component
 Vue.component('AppHeader', AppHeader)
 Vue.component('AppFooter', AppFooter)
 Vue.component('CardItem', CardItem)
