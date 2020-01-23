@@ -46,7 +46,7 @@ export default {
     }
   },
   generate: {
-    interval: 1000,
+    interval: 2000,
     routes() {
       return Promise.all([
         axios.get(`${apiUrl}/wp-json/wp/v2/posts?per_page=100&page=1&_embed=1`)
