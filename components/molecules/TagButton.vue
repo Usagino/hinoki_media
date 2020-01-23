@@ -12,9 +12,6 @@ export default {
         return {}
       }
     }
-  },
-  mounted() {
-    console.log(this.tag.name)
   }
 }
 </script>

@@ -21,9 +21,6 @@ export default {
         return []
       }
     }
-  },
-  mounted() {
-    console.log(this.posts[0])
   }
 }
 </script>

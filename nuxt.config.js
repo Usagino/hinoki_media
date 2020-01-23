@@ -1,3 +1,5 @@
+import axios from 'axios'
+const apiUrl = 'https://admin.frontartgraph.com'
 export default {
   mode: 'universal',
   head: {
@@ -13,12 +15,10 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
-
   css: [
     '~/assets/stylesheets/reset.css',
     { src: '~/assets/stylesheets/style.scss', lang: 'scss' }
   ],
-
   plugins: [
     '~plugins/fetchData.js',
     '~plugins/components.js',
@@ -26,24 +26,40 @@ export default {
     { src: '~/plugins/feather.js' },
     { src: '~/plugins/carousel.js', ssr: false }
   ],
-
   buildModules: ['@nuxtjs/eslint-module'],
-
   modules: ['@nuxtjs/axios', ['nuxt-webfontloader'], '@nuxtjs/style-resources'],
-
   styleResources: {
     scss: ['~/assets/stylesheets/style.scss']
   },
-
   axios: {},
-
   webfontloader: {
     google: {
       families: ['Noto+Sans+JP', 'Open+Sans']
     }
   },
-
   build: {
-    extend(config, ctx) {}
+    extend(config, ctx) {},
+    terser: {
+      terserOptions: {
+        compress: { drop_console: true }
+      }
+    }
+  },
+  generate: {
+    interval: 1000,
+    routes() {
+      return Promise.all([
+        axios.get(`${apiUrl}/wp-json/wp/v2/posts?per_page=100&page=1&_embed=1`)
+      ]).then((data) => {
+        const posts = data[0]
+        console.log(posts)
+        return posts.data.map((post) => {
+          return {
+            route: '/news/' + post.slug,
+            payload: post
+          }
+        })
+      })
+    }
   }
 }
