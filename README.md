@@ -22,3 +22,4 @@ $ npm run generate
 
 
 https://app.netlify.com/sites/hinoki-media/overview
+

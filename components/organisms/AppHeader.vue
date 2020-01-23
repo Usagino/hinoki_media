@@ -1,7 +1,7 @@
 <template lang="pug">
 .header
   .header__wrap
-    a.header__logo
+    nuxt-link.header__logo(to="/")
       img(src="/image/logo_inline.svg")
     ul.header__menu
       li

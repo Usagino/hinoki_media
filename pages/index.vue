@@ -1,49 +1,42 @@
 <template lang="pug">
   .container
     AppHeader
-    Carousel.carousel(:per-page="1" :paginationEnabled="false" :autoplay="true" :autoplayTimeout="4000" :loop="true")
+    Carousel.carousel(:per-page="1" :paginationEnabled="false" :autoplay="true" :autoplayTimeout="3000" :loop="true")
       Slide.carousel__slide(
-        v-for="post in this.latestPosts"
+        v-for="post in rankingPosts"
         :key="post.id"
-        :style="{ backgroundImage: 'url(' + post._embedded['wp:featuredmedia'][0].source_url + ')' }")
+        :style="{ backgroundImage: 'url(' + getThumbnail(post) + ')' }")
         .carousel__cover
-        .carousel__text
-          p DESIGN
-          h2.carousel__text__title {{ post.title.rendered }}
+        nuxt-link.carousel__text.item(:to="'news/'+post.id")
+          p.category {{ getCategory(post) }}
+          h2.carousel__text__title {{ getTitle(post) }}
           .carousel__info
-            p 2020.01.01
-            p written by hayato
+            p {{ getCreatedAt(post) }}
+            p Written by {{getAuthor(post)}}
     .latest-news
       .latest-news__items
         CardItem(
           v-for="post in this.latestPosts"
           :key="post.id"
-          :title="post.title.rendered"
-          :thumbnail="post._embedded['wp:featuredmedia'][0].source_url"
-          :time="post.date"
-          :categoryId='post.categories[0]'
+          :post ="post"
           )
         span
         span
       AppButton(text="NEXT" to="/")
     .feature
-      FeatureItem
-      FeatureItem
+      FeatureItem(
+        v-for="post in this.featurePosts"
+        :key="post.id"
+        :post="post" )
     AppFooter
 </template>
 
 <script>
-export default {
-  mounted() {
-    console.log(1, this.latestPosts)
-    console.log('Category:　', this.categories)
-  }
-}
+export default {}
 </script>
 
 <style lang="scss" scoped>
 .container {
-  margin-top: 84px;
   .carousel {
     padding-top: 40px;
     margin: auto;
@@ -54,6 +47,10 @@ export default {
     height: 500px;
     &__slide {
       width: $default-size;
+      cursor: grab;
+      &:active {
+        cursor: grabbing;
+      }
       @include mq(sm) {
         width: $default-size-sp;
       }
@@ -98,6 +95,7 @@ export default {
         text-overflow: ellipsis;
         white-space: nowrap;
         width: $default-size - 48px;
+        color: $color-textcolorwhite;
         @include mq(sm) {
           width: $default-size-sp;
         }
@@ -107,6 +105,9 @@ export default {
       display: flex;
       justify-content: flex-start;
       @include gap-right(12px);
+      p {
+        color: $color-textcolorwhite;
+      }
     }
   }
   .latest-news {
