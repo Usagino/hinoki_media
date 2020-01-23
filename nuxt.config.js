@@ -14,8 +14,6 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
 
-  loading: { color: '#fff' },
-
   css: [
     '~/assets/stylesheets/reset.css',
     { src: '~/assets/stylesheets/style.scss', lang: 'scss' }
@@ -24,6 +22,7 @@ export default {
   plugins: [
     '~plugins/fetchData.js',
     '~plugins/components.js',
+    '~plugins/postDecode.js',
     { src: '~/plugins/feather.js' },
     { src: '~/plugins/carousel.js', ssr: false }
   ],
