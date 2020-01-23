@@ -1,16 +1,26 @@
 <template lang="pug">
-.feature-item
+nuxt-link.feature-item.item(:to="getLink(post)")
   .feature-item__text
-    h3 FEATURE
-    h2 アメリカン・ギャングスターズの知られざる“黒い雑学”まとめ
+    h3.category FEATURE
+    h2.title {{ getTitle(post) }}
     .feature-item__text__info
-      p 2020.01.01
-      p written by hayato
-  img.feature-item__thumbnail(src="https://admin.frontartgraph.com/wp-content/uploads/2020/01/E964CD4B-FEEF-4A74-BA03-BF1CF0FEFE29-scaled.jpg")
+      p {{ getCreatedAt(post) }}
+      p Written by {{getAuthor(post)}}
+  img.feature-item__thumbnail(:src="getThumbnail(post)")
+  h3.feature-item__sp-title FEATURE
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    post: {
+      type: Object,
+      default: () => {
+        return []
+      }
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -18,25 +28,60 @@ export default {}
   width: $default-size;
   height: 200px;
   margin: 0 auto 40px;
-  background: $color-textcolorwhite;
+  background: rgba($color-textcolorblack, 0.9);
   display: flex;
   justify-content: space-between;
+  @include mq(sm) {
+    width: $default-size-sp;
+    flex-direction: column-reverse;
+    height: auto;
+    margin: 0 auto;
+    padding: 16px;
+    box-sizing: border-box;
+    &:last-child {
+      margin-bottom: 40px;
+      .feature-item__sp-title {
+        display: none;
+      }
+    }
+  }
   &__text {
     padding: 24px 100px;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    @include mq(sm) {
+      padding: 16px;
+      @include gap-bottom(8px);
+    }
     h2,
     h3 {
       text-align: center;
       @include font-cardtitle;
+      color: $color-textcolorwhite;
+    }
+    h2 {
+      display: block;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      @include mq(sm) {
+        text-align: left;
+      }
+    }
+    h3 {
+      @include mq(sm) {
+        display: none;
+      }
     }
     &__info {
       display: flex;
       justify-content: space-between;
       * {
-        color: $color-textsecondary;
         @include font-textbold;
+        color: $color-textcolorwhite;
       }
     }
   }
@@ -44,6 +89,22 @@ export default {}
     width: 50%;
     height: 100%;
     object-fit: cover;
+    @include mq(sm) {
+      width: 100%;
+      height: 50%;
+    }
+  }
+  &__sp-title {
+    display: none;
+    @include font-cardtitle;
+    color: $color-textcolorwhite;
+    padding: 12px 0;
+    @include mq(sm) {
+      padding-top: 0px;
+      padding-bottom: 16px;
+      display: block;
+      text-align: center;
+    }
   }
 }
 </style>

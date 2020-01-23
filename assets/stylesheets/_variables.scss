@@ -6,56 +6,67 @@ $color-background: rgba(244,244,244,1);
 	font-size:30px;
 	font-family:"Noto Sans JP";
 	font-weight:bold;
+  color:$color-textcolorblack;
 }
 @mixin font-cardtitle {
 	font-size:20px;
 	font-family:"Noto Sans JP";
 	font-weight:bold;
+  color:$color-textcolorblack;
 }
 @mixin font-text {
 	font-size:14px;
 	font-family:"Noto Sans JP";
 	font-weight:normal;
 	line-height:1.7em;
+  color:$color-textcolorblack;
 }
 @mixin font-textbold {
 	font-size:14px;
 	font-family:"Noto Sans JP";
 	font-weight:bold;
 	line-height:1.7em;
+  color:$color-textcolorblack;
 }
 @mixin font-textunderline {
 	font-size:14px;
 	font-family:"Noto Sans JP";
 	font-weight:normal;
 	line-height:1.7em;
+  color:$color-textcolorblack;
 }
 @mixin font-minifytext {
 	font-size:10px;
 	font-family:"Noto Sans JP";
 	font-weight:normal;
 	line-height:1.7em;
+  color:$color-textcolorblack;
 }
 @mixin font-minifytextbold {
 	font-size:12px;
 	font-family:"Noto Sans JP";
 	font-weight:bold;
 	line-height:1.7em;
+  color:$color-textcolorblack;
 }
 @mixin font-tagtitle {
 	font-size:16px;
 	font-family:"Noto Sans JP";
 	font-weight:bold;
+  color:$color-textcolorblack;
 }
 @mixin font-codetext {
 	font-size:14px;
 	font-family:"SF Compact Display";
 	font-weight:normal;
 	line-height:200px;
+  color:$color-textcolorblack;
 }
 
-
 $default-size:1080px;
+$default-size-sp:100%;
+
+
 // Useragent
 $breakpoints: (
   'sm': 'screen and (max-width: 450px)',

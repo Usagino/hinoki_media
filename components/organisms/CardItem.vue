@@ -1,45 +1,29 @@
 <template lang="pug">
-.carditem
+//nuxt-link.carditem.item(:to="'news/'+post.id")
+nuxt-link.carditem.item(:to="getLink(post)")
   .carditem__wrap
-    p.carditem__category {{category}}
-    img.carditem__thumbnail(:src="thumbnail")
-    h2.carditem__title {{title}}
+    p.carditem__category {{ getCategory(post) }}
+    img.carditem__thumbnail(:src="getThumbnail(post)")
+    h2.carditem__title {{ getTitle(post) }}
   .carditem__info
-    p {{getTime(time)}}
-    p written by hayato
+    p {{ getCreatedAt(post) }}
+    p Written by {{getAuthor(post)}}
 </template>
 
 <script>
 export default {
   props: {
-    title: {
-      type: String,
-      default: ''
-    },
-    thumbnail: {
-      type: String,
-      default: ''
-    },
-    time: {
-      type: String,
-      default: ''
-    },
-    categoryId: {
-      type: Number,
-      default: null
+    post: {
+      type: Object,
+      default: () => {
+        return []
+      }
     }
   },
   data() {
     return {
       postTime: '',
       category: ''
-    }
-  },
-  mounted() {},
-  methods: {
-    getTime(time) {
-      const getTime = new Date(time)
-      return `${getTime.getFullYear()}.${getTime.getMonth()}.${getTime.getDate()}`
     }
   }
 }
@@ -54,6 +38,9 @@ $card-width: 300px;
   background: $color-textcolorwhite;
   padding: 16px 20px;
   min-height: 360px;
+  @include mq(sm) {
+    margin: auto;
+  }
   &__wrap {
     @include gap-bottom(12px);
     margin-bottom: 12px;

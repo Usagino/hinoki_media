@@ -42,16 +42,38 @@ export default {}
     display: flex;
     flex-direction: column;
     @include repeat-columns(24px);
+    @include mq(sm) {
+      & > a {
+        display: inline;
+        margin: auto;
+      }
+    }
     &__logo {
       height: 60px;
       width: auto;
       display: block;
       margin: auto;
+      @include mq(sm) {
+        display: inline;
+      }
     }
     &__menu {
       display: flex;
       justify-content: space-between;
       flex-direction: row;
+      @include mq(sm) {
+        flex-direction: column;
+        justify-content: center;
+        @include gap-bottom(12px);
+        li {
+          display: flex;
+        }
+        li > a {
+          @include flex-middle;
+          display: inline-flex;
+          margin: auto;
+        }
+      }
       a {
         @include font-tagtitle;
       }
@@ -60,6 +82,9 @@ export default {}
       display: flex;
       justify-content: center;
       @include gap-right(12px);
+      @include mq(sm) {
+        margin-bottom: 12px;
+      }
     }
   }
   &__info {
@@ -67,9 +92,22 @@ export default {}
     margin: auto;
     display: flex;
     justify-content: space-between;
+    @include mq(sm) {
+      width: $default-size-sp;
+      flex-direction: column;
+      @include gap-bottom(12px);
+    }
+    p {
+      @include mq(sm) {
+        text-align: center;
+      }
+    }
     &__menu {
       display: flex;
       @include gap-right(12px);
+      @include mq(sm) {
+        justify-content: center;
+      }
     }
   }
 }
