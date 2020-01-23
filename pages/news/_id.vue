@@ -29,9 +29,6 @@
 
 <script>
 export default {
-  mounted() {
-    console.log('post', this.Article)
-  },
   methods: {
     getArticle() {
       return this.Article

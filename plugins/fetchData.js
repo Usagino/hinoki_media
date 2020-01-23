@@ -32,7 +32,6 @@ Vue.mixin({
         `${endpoint}wp-json/wp/v2/posts/${id}?_embed`
       )
     }
-
     return {
       latestPosts: latestItems,
       featurePosts: featureItems,
