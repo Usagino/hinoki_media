@@ -7,7 +7,7 @@
       :to="getLink(post)"
       )
       .ranking-items__item__text
-        p TOP {{index + 1}}
+        p.ranking-items__item--ranking TOP {{index + 1}}
         h3 {{getTitle(post)}}
       img.ranking-items__item__image(:src="getThumbnail(post)")
 </template>
@@ -48,11 +48,13 @@ export default {
     grid-template-columns: auto 90px;
     grid-template-rows: 100%;
     grid-gap: 8px;
+    &--ranking {
+      opacity: 0.3;
+    }
     &__text {
       p {
         @include font-tagtitle;
         color: $color-textcolorblack;
-        opacity: 30%;
       }
       h3 {
         @include font-minifytextbold;

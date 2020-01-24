@@ -27,7 +27,7 @@ Vue.mixin({
       return post._embedded['wp:featuredmedia'][0].source_url
     },
     getLink(post) {
-      return `news/${post.id}`
+      return `/news/${post.id}`
     },
     getArticle(id) {
       return id
