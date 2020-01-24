@@ -27,7 +27,12 @@ export default {
     { src: '~/plugins/carousel.js', ssr: false }
   ],
   buildModules: ['@nuxtjs/eslint-module'],
-  modules: ['@nuxtjs/axios', ['nuxt-webfontloader'], '@nuxtjs/style-resources'],
+  modules: [
+    '@nuxtjs/axios',
+    'nuxt-webfontloader',
+    '@nuxtjs/style-resources',
+    '@nuxtjs/pwa'
+  ],
   styleResources: {
     scss: ['~/assets/stylesheets/style.scss']
   },

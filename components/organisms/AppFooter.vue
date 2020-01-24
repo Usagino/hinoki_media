@@ -2,7 +2,7 @@
 .footer
   .footer__guide
     nuxt-link(to="/")
-      img.footer__guide__logo(src="/image/logo_inline.svg")
+      img.footer__guide__logo(src="/image/logo_inline.svg" decoding="async")
     ul.footer__guide__menu
       li
         nuxt-link(to="/news") DESIGN
