@@ -19,6 +19,7 @@ export default {
     '~/assets/stylesheets/reset.css',
     { src: '~/assets/stylesheets/style.scss', lang: 'scss' }
   ],
+  loading: false,
   plugins: [
     '~plugins/fetchData.js',
     '~plugins/components.js',
