@@ -10,7 +10,7 @@
         .article__body__info
           h1 {{ getTitle(this.Article) }}
           p Written by {{getAuthor(this.Article)}}
-      img.article__body__thumbnail(:src="getThumbnail(this.Article)")
+      img.article__body__thumbnail(:src="getThumbnail(this.Article)" decoding="async")
       .article__body__text(v-html="this.Article.content.rendered")
       .article__body__tags
         TagButton(

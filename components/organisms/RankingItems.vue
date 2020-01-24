@@ -9,7 +9,7 @@
       .ranking-items__item__text
         p.ranking-items__item--ranking TOP {{index + 1}}
         h3 {{getTitle(post)}}
-      img.ranking-items__item__image(:src="getThumbnail(post)")
+      img.ranking-items__item__image(:src="getThumbnail(post)" decoding="async")
 </template>
 
 <script>
