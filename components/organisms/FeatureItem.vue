@@ -6,7 +6,7 @@ nuxt-link.feature-item.item(:to="getLink(post)")
     .feature-item__text__info
       p {{ getCreatedAt(post) }}
       p Written by {{getAuthor(post)}}
-  img.feature-item__thumbnail(:src="getThumbnail(post)")
+  img.feature-item__thumbnail(:src="getThumbnail(post)" decoding="async")
   h3.feature-item__sp-title FEATURE
 </template>
 

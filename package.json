@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.9.3",
+    "@nuxtjs/pwa": "^3.0.0-beta.19",
     "axios": "^0.19.1",
     "core-js": "^2.6.2",
     "feather-icons": "^4.25.0",

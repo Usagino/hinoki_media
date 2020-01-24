@@ -3,7 +3,7 @@
 nuxt-link.carditem.item(:to="getLink(post)")
   .carditem__wrap
     p.carditem__category {{ getCategory(post) }}
-    img.carditem__thumbnail(:src="getThumbnail(post)")
+    img.carditem__thumbnail(:src="getThumbnail(post)" decoding="async")
     h2.carditem__title {{ getTitle(post) }}
   .carditem__info
     p {{ getCreatedAt(post) }}
