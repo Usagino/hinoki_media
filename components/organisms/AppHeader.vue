@@ -48,6 +48,7 @@ export default {
   width: 100vw;
   padding: 20px 0;
   z-index: 100;
+  border-bottom: 1px solid rgba($color-textsecondary, 0.2);
 
   &__wrap {
     width: $default-size;

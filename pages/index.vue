@@ -33,6 +33,11 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: 'TOP'
+    }
+  },
   mounted() {}
 }
 </script>

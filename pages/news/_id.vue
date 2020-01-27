@@ -29,9 +29,9 @@
 
 <script>
 export default {
-  methods: {
-    getArticle() {
-      return this.Article
+  head() {
+    return {
+      title: this.getTitle(this.Article)
     }
   }
 }

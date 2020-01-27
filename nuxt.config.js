@@ -3,7 +3,7 @@ const apiUrl = 'https://admin.frontartgraph.com'
 export default {
   mode: 'universal',
   head: {
-    title: process.env.npm_package_name || '',
+    titleTemplate: '%s | HINOKI',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -19,7 +19,12 @@ export default {
     '~/assets/stylesheets/reset.css',
     { src: '~/assets/stylesheets/style.scss', lang: 'scss' }
   ],
-  loading: false,
+  loading: {
+    color: '#333333',
+    height: '5px',
+    continuous: true,
+    duration: 4000
+  },
   plugins: [
     '~plugins/fetchData.js',
     '~plugins/components.js',
