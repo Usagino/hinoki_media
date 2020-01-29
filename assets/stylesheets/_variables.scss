@@ -103,17 +103,21 @@ $breakpoints: (
 }
 @mixin gap-right($i){
   & > * {
-    margin-right: $i;
+    margin: 0px;
+    margin-right: $i !important;
     &:last-child {
-      margin-right: 0px;
+      margin: 0px;
+      margin-right: 0px !important;
     }
   }
 }
 @mixin gap-bottom($i){
   & > * {
-    margin-bottom: $i;
+    margin: 0px;
+    margin-bottom: $i !important;
     &:last-child {
-      margin-bottom: 0px;
+      margin: 0px;
+      margin-bottom: 0px !important;
     }
   }
 }

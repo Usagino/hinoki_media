@@ -1,5 +1,5 @@
 <template lang="pug">
-nuxt-link.feature-item.item(:to="getLink(post)")
+a.feature-item.item(:href="getLink(post)")
   .feature-item__text
     h3.category FEATURE
     h2.title {{ getTitle(post) }}

@@ -30,7 +30,8 @@ export default {
     '~plugins/components.js',
     '~plugins/postDecode.js',
     { src: '~/plugins/feather.js' },
-    { src: '~/plugins/carousel.js', ssr: false }
+    { src: '~/plugins/carousel.js', ssr: false },
+    { src: 'plugins/axios.js', ssr: false }
   ],
   buildModules: ['@nuxtjs/eslint-module'],
   modules: [
@@ -42,10 +43,18 @@ export default {
   styleResources: {
     scss: ['~/assets/stylesheets/style.scss']
   },
-  axios: {},
+  axios: {
+    proxy: true
+  },
+  proxy: {
+    '/api/': {
+      target: 'https://admin.frontartgraph.com/wp-json/wp/v2/posts',
+      pathRewrite: { '^/api/': '/' }
+    }
+  },
   webfontloader: {
     google: {
-      families: ['Noto+Sans+JP', 'Open+Sans']
+      families: ['Noto+Sans+JP:400,700', 'Open+Sans']
     }
   },
   build: {

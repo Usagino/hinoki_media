@@ -7,7 +7,7 @@
         :key="post.id"
         :style="{ backgroundImage: 'url(' + getThumbnail(post) + ')' }")
         .carousel__cover
-        nuxt-link.carousel__text.item(:to="'news/'+post.id")
+        a.carousel__text.item(:href="'news/'+post.id")
           p.category {{ getCategory(post) }}
           h2.carousel__text__title {{ getTitle(post) }}
           .carousel__info
@@ -22,7 +22,7 @@
           )
         span
         span
-      AppButton(text="NEXT" to="/")
+      AppButton(text="NEXT" to="/page/1")
     .feature
       FeatureItem(
         v-for="post in this.featurePosts"
