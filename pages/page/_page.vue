@@ -48,12 +48,16 @@ export default {
         console.log(this.displayPostNum > this.whatPageNum)
         return {
           link: '/page/' + String(pageNum),
-          toggle: this.displayPostNum >= this.whatPageNum + 2
+          toggle:
+            this.displayPostNum >= this.whatPageNum + 2 &&
+            this.canDisplayPage >= pageNum
         }
       } else {
         return {
           link: '/page/' + String(pageNum),
-          toggle: this.displayPostNum >= this.whatPageNum + 1
+          toggle:
+            this.displayPostNum >= this.whatPageNum + 1 &&
+            this.canDisplayPage >= pageNum
         }
       }
     }

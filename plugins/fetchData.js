@@ -43,7 +43,7 @@ Vue.mixin({
         )
       }
       const pagination = app.context.params.page
-      const getPostNum = 10
+      const getPostNum = 4
       let paginationItems = []
       if (!(pagination === undefined)) {
         paginationItems = await app.$axios.$get(
@@ -71,7 +71,7 @@ Vue.mixin({
       }
 
       const canDisplayPageNum =
-        Math.floor(Number(headers['x-wp-total'])) / getPostNum + count
+        Math.floor(Number(headers['x-wp-total']) / getPostNum) + count
 
       return {
         latestPosts: latestItems,
