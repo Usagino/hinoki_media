@@ -5,11 +5,11 @@
       img(src="/image/logo_inline.svg")
     ul.header__menu
       li
-        a(href="/news") NEWS
+        a(href="/news/1") NEWS
       li
-        a(href="/news") CONTACT
+        a(href="/contact") CONTACT
       li
-        a(href="/news") ABOUT
+        a(href="/about") ABOUT
       li
         button(@click="searchToggle = true")
           feather-search
