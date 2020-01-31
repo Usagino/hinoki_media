@@ -1,6 +1,7 @@
 <template lang="pug">
 .appbutton
-  p.text {{text}}
+  a.text(v-if="to !== undefined" :href="to" :class="{circle:text.length === 1}") {{text}}
+  p.text(v-else :class="{circle:text.length === 1}") {{text}}
 </template>
 
 <script>
@@ -9,22 +10,43 @@ export default {
     text: {
       type: String,
       default: 'TEXT'
+    },
+    to: {
+      type: String,
+      default: null
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .appbutton {
-  background: $color-textcolorblack;
-  display: inline-block;
-  padding: 4px 36px;
-  cursor: pointer;
-  border-radius: 100vh;
-  margin: auto;
+  display: inline-flex;
   .text {
+    height: 42px;
+    background: $color-textcolorblack;
+    display: inline-flex;
+    align-items: center;
+    padding: 0px 36px;
+    cursor: pointer;
+    border-radius: 100vh;
+    margin: auto;
     @include font-cardtitle;
     color: $color-textcolorwhite;
+  }
+}
+.circle {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  padding: 0px !important;
+  width: 42px;
+  height: 42px;
+}
+.currentLink {
+  .text {
+    background: $color-textcolorwhite;
+    color: $color-textcolorblack !important;
   }
 }
 </style>

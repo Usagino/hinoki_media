@@ -9,6 +9,7 @@ import TagButton from '@/components/molecules/TagButton.vue'
 import AppHeader from '@/components/organisms/AppHeader.vue'
 import AppFooter from '@/components/organisms/AppFooter.vue'
 import CardItem from '@/components/organisms/CardItem.vue'
+import CardItemInline from '@/components/organisms/CardItemInline.vue'
 import FeatureItem from '@/components/organisms/FeatureItem.vue'
 import RankingItems from '@/components/organisms/RankingItems.vue'
 
@@ -16,6 +17,7 @@ import RankingItems from '@/components/organisms/RankingItems.vue'
 Vue.component('AppHeader', AppHeader)
 Vue.component('AppFooter', AppFooter)
 Vue.component('CardItem', CardItem)
+Vue.component('CardItemInline', CardItemInline)
 Vue.component('AppButton', AppButton)
 Vue.component('FeatureItem', FeatureItem)
 Vue.component('TagButton', TagButton)
