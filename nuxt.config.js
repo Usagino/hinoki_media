@@ -58,6 +58,7 @@ export default {
     }
   },
   build: {
+    hardSource: true,
     extend(config, ctx) {},
     terser: {
       terserOptions: {
@@ -67,17 +68,39 @@ export default {
   },
   generate: {
     interval: 2000,
-    routes() {
-      return Promise.all([
-        axios.get(`${apiUrl}/wp-json/wp/v2/posts?per_page=100&page=1&_embed=1`)
-      ]).then((data) => {
-        const posts = data[0]
-        return posts.data.map((post) => {
-          return {
-            route: '/news/' + post.id,
-            payload: post
-          }
+    async routes() {
+      // paginate
+      const paginate = await axios.get(
+        `${apiUrl}/wp-json/wp/v2/posts?per_page=100&page=1&_embed=1`
+      )
+      const paginateRes = paginate.data.map((paginate) => {
+        return {
+          route: '/news/' + paginate.id,
+          payload: { paginate }
+        }
+      })
+      // console.log(paginateRes)
+      // pagination
+      const { headers } = await axios(`${apiUrl}/wp-json/wp/v2/posts`, {
+        'Access-Control-Expose-Headers': 'x-wp-total'
+      })
+      const getPostNum = 10
+      let count = 0
+      if (Number(headers['x-wp-total']) % getPostNum) {
+        count = 1
+      }
+      const canDisplayPageNum =
+        Math.floor(Number(headers['x-wp-total']) / getPostNum) + count
+
+      const paginationRes = []
+      for (let i = 1; i < canDisplayPageNum + 1; i++) {
+        paginationRes.push({
+          route: '/page/' + i,
+          payload: { i }
         })
+      }
+      return Promise.all([paginateRes, paginationRes]).then((values) => {
+        return [...values[0], ...values[1]]
       })
     }
   }

@@ -24,6 +24,9 @@ Vue.mixin({
       const latestItems = await app.$axios.$get(
         endpoint + 'wp-json/wp/v2/posts?per_page=12&page=1&_embed=1'
       )
+
+      console.log(latestItems)
+
       const categorieItem = await app.$axios.$get(
         endpoint + 'wp-json/wp/v2/categories'
       )
@@ -43,20 +46,13 @@ Vue.mixin({
         )
       }
       const pagination = app.context.params.page
-      const getPostNum = 4
+      const getPostNum = 10
       let paginationItems = []
       if (!(pagination === undefined)) {
         paginationItems = await app.$axios.$get(
           `${endpoint}wp-json/wp/v2/posts?per_page=${getPostNum}&page=${pagination}&_embed=1`
         )
       }
-      fetch('https://admin.frontartgraph.com/wp-json/wp/v2/posts').then(
-        (response) => {
-          // 総ページ数をコンソールに出力
-
-          return response.headers.get('X-WP-Total')
-        }
-      )
 
       const {
         headers
