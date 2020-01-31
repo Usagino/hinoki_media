@@ -1,15 +1,15 @@
 <template lang="pug">
 .header
   .header__wrap
-    nuxt-link.header__logo(to="/")
+    a.header__logo(href="/")
       img(src="/image/logo_inline.svg")
     ul.header__menu
       li
-        nuxt-link(to="/news") NEWS
+        a(href="/news") NEWS
       li
-        nuxt-link(to="/news") CONTACT
+        a(href="/news") CONTACT
       li
-        nuxt-link(to="/news") ABOUT
+        a(href="/news") ABOUT
       li
         button(@click="searchToggle = true")
           feather-search
@@ -48,6 +48,7 @@ export default {
   width: 100vw;
   padding: 20px 0;
   z-index: 100;
+  border-bottom: 1px solid rgba($color-textsecondary, 0.2);
 
   &__wrap {
     width: $default-size;

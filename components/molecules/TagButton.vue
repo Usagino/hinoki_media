@@ -1,5 +1,5 @@
 <template lang="pug">
-nuxt-link.tag-button(:to="'/tag/'+tag.name")
+a.tag-button(:href="'/tag/'+tag.name")
   | # {{tag.name}}
 </template>
 

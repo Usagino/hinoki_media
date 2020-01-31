@@ -1,10 +1,10 @@
 <template lang="pug">
   .ranking-items
     h2.ranking-items__title WEEKLY RANKING TOP3
-    nuxt-link.ranking-items__item(
+    a.ranking-items__item(
       v-for="(post,index) in posts"
       :key="post.id"
-      :to="getLink(post)"
+      :href="getLink(post)"
       )
       .ranking-items__item__text
         p.ranking-items__item--ranking TOP {{index + 1}}

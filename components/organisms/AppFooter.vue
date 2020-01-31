@@ -1,30 +1,30 @@
 <template lang="pug">
 .footer
   .footer__guide
-    nuxt-link(to="/")
+    a(href="/")
       img.footer__guide__logo(src="/image/logo_inline.svg" decoding="async")
     ul.footer__guide__menu
       li
-        nuxt-link(to="/news") DESIGN
+        a(href="/news") DESIGN
       li
-        nuxt-link(to="/news") TECHNOLOGY
+        a(href="/news") TECHNOLOGY
       li
-        nuxt-link(to="/news") CULTURE
+        a(href="/news") CULTURE
       li
-        nuxt-link(to="/news") GADGET
+        a(href="/news") GADGET
     .footer__guide__sns
-      nuxt-link(to="/")
+      a(href="/")
         feather-facebook
-      nuxt-link(to="/")
+      a(href="/")
         feather-twitter
-      nuxt-link(to="/")
+      a(href="/")
         feather-instagram
   .footer__info
     ul.footer__info__menu
       li
-        nuxt-link(to="/news") ABOUT
+        a(href="/news") ABOUT
       li
-        nuxt-link(to="/news") CONTACT
+        a(href="/news") CONTACT
     p ©HINOKI, All RIGHTS RESERVED.
 </template>
 
