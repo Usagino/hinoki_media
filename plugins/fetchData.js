@@ -13,19 +13,17 @@ Vue.mixin({
       getTotalArticle: 0,
       totalArticleNum: 0,
       displayPostNum: 0,
-      canDisplayPage: 0
+      canDisplayPage: 0,
+      paginationData: {}
     }
   },
   async asyncData({ app, error }) {
     try {
       const endpoint = 'https://admin.frontartgraph.com/'
-      const Posts = await app.$axios.$get(`${endpoint}wp-json/wp/v2/posts`)
-      const postsLength = Posts.length
+      // const Posts = await app.$axios.$get(`${endpoint}wp-json/wp/v2/posts`)
       const latestItems = await app.$axios.$get(
         endpoint + 'wp-json/wp/v2/posts?per_page=12&page=1&_embed=1'
       )
-
-      console.log(latestItems)
 
       const categorieItem = await app.$axios.$get(
         endpoint + 'wp-json/wp/v2/categories'
@@ -46,7 +44,7 @@ Vue.mixin({
         )
       }
       const pagination = app.context.params.page
-      const getPostNum = 10
+      const getPostNum = 3
       let paginationItems = []
       if (!(pagination === undefined)) {
         paginationItems = await app.$axios.$get(
@@ -65,7 +63,6 @@ Vue.mixin({
       if (Number(headers['x-wp-total']) % getPostNum) {
         count = 1
       }
-
       const canDisplayPageNum =
         Math.floor(Number(headers['x-wp-total']) / getPostNum) + count
 
@@ -75,11 +72,12 @@ Vue.mixin({
         rankingPosts: rankingItems,
         Article: ArticleItem,
         paginationPosts: paginationItems,
-        postNum: postsLength,
         whatPageNum: Number(pagination),
-        getTotalArticle: Number(headers['x-wp-total']),
-        displayPostNum: getPostNum,
-        canDisplayPage: canDisplayPageNum
+        paginationData: {
+          canDisplayPage: canDisplayPageNum,
+          getTotalArticle: Number(headers['x-wp-total']),
+          displayPostNum: getPostNum
+        }
       }
     } catch (err) {
       console.log(err)

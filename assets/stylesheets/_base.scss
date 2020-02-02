@@ -71,3 +71,58 @@ img{
 .feature{
   width: 100vw;
 }
+
+.pages {
+  width: $default-size;
+  padding: 16px 0 48px;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+  @include mq(sm) {
+    width: $default-size-sp;
+    flex-direction: column;
+  }
+  &__title {
+    text-align: center;
+    @include font-title;
+  }
+  &__body {
+    background: $color-textcolorwhite;
+    width: 775px;
+    box-sizing: border-box;
+    padding: 30px;
+    @include gap-bottom(30px);
+    @include mq(sm) {
+      width: $default-size-sp;
+    }
+  }
+  &__link {
+    display: flex;
+    &--image {
+      width: 300px;
+      height: 200px;
+      -o-object-fit: cover;
+      object-fit: cover;
+      margin-right: 30px;
+    }
+    &--category {
+      color: $color-textsecondary;
+    }
+    &__textbox {
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+      padding: 8px;
+    }
+    &__tags {
+      display: flex;
+      margin-top: auto;
+      justify-content: space-between;
+      width: 100%;
+      p,
+      a {
+        color: $color-textsecondary;
+      }
+    }
+  }
+}
