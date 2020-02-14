@@ -1,6 +1,6 @@
 <template lang="pug">
-a.tag-button(:href="'/tag/'+tag.name")
-  | # {{tag.name}}
+  a.tag-button(:href="'/tag/' +tag.name + '/1'")
+    | # {{tag.name}}
 </template>
 
 <script>

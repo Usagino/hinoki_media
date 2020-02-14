@@ -2,11 +2,11 @@
 .pagination
   AppButton.prevButton(text="PREV" :to="`/page/${Number(currentPageNum()) -  1}`" v-if='currentPageNum() > 1')
   .pagination--more(v-if="currentPageNum() >= 3") ……
-  AppButton(:text="String(currentPageNum() - 2)" :to="`/page/${Number(currentPageNum()) -  2}`" v-if="this.data.canDisplayPage === this.currentPageNum() && this.data.canDisplayPage > 2")
-  AppButton(:text="String(currentPageNum() - 1)" :to="`/page/${Number(currentPageNum()) -  1}`" v-if='currentPageNum() > 1')
+  AppButton(:text="String(currentPageNum() - 2)" :to="`${routeString()}${Number(currentPageNum()) -  2}`" v-if="this.data.canDisplayPage === this.currentPageNum() && this.data.canDisplayPage > 2")
+  AppButton(:text="String(currentPageNum() - 1)" :to="`${routeString()}${Number(currentPageNum()) -  1}`" v-if='currentPageNum() > 1')
   AppButton.currentLink(:text="String(currentPageNum())" to="")
-  AppButton(:text="String(currentPageNum() + 1)" :to="`/page/${Number(currentPageNum()) +  1}`" v-if="!(this.data.canDisplayPage === this.currentPageNum())")
-  AppButton(:text="String(currentPageNum() + 2)" :to="`/page/${Number(currentPageNum()) +  2}`" v-if="currentPageNum() === 1 && this.data.canDisplayPage > 2")
+  AppButton(:text="String(currentPageNum() + 1)" :to="`${routeString()}${Number(currentPageNum()) +  1}`" v-if="!(this.data.canDisplayPage === this.currentPageNum())")
+  AppButton(:text="String(currentPageNum() + 2)" :to="`${routeString()}${Number(currentPageNum()) +  2}`" v-if="currentPageNum() === 1 && this.data.canDisplayPage > 2")
   .pagination--more(v-if="!(this.data.canDisplayPage === this.currentPageNum())") ……
   AppButton.nextButton(text="NEXT" :to="`/page/${Number(currentPageNum()) +  1}`" v-if="!(this.data.canDisplayPage === this.currentPageNum())")
 </template>
@@ -21,9 +21,19 @@ export default {
   },
   mounted() {
     console.log(this.data)
-    console.log()
+    this.routeString()
   },
   methods: {
+    routeString() {
+      const params = this.$route.params
+      if (!(params.categories === undefined)) {
+        console.log(`/categories/${params.categories}/`)
+        return `/categories/${params.categories}/`
+      } else {
+        console.log('/page/')
+        return '/page/'
+      }
+    },
     currentPageNum() {
       return Number(this.$route.params.page)
     },
@@ -32,12 +42,12 @@ export default {
       if (boolean) {
         return {
           toggle: this.whatPageNum > 2,
-          link: '/page/' + String(pageNum)
+          link: this.routeString() + String(pageNum)
         }
       } else {
         return {
           toggle: this.currentPageNum > 1,
-          link: '/page/' + String(pageNum)
+          link: this.routeString() + String(pageNum)
         }
       }
     },

@@ -5,13 +5,13 @@
       img.footer__guide__logo(src="/image/logo_inline.svg" decoding="async")
     ul.footer__guide__menu
       li
-        a(href="/category/design") DESIGN
+        a(href="/categories/design/1") DESIGN
       li
-        a(href="/category/technology") TECHNOLOGY
+        a(href="/categories/technology/1") TECHNOLOGY
       li
-        a(href="/category/culture") CULTURE
+        a(href="/categories/culture/1") CULTURE
       li
-        a(href="/category/gadgetm ") GADGET
+        a(href="/categories/gadget/1") GADGET
     .footer__guide__sns
       a(href="/")
         feather-facebook

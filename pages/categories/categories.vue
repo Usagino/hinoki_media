@@ -1,5 +1,8 @@
 <template lang="pug">
-  h1 hogehoge
+  .container
+    AppHeader
+
+    AppFooter
 </template>
 
 <script>
