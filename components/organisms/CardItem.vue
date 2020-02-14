@@ -1,8 +1,7 @@
 <template lang="pug">
-//a.carditem.item(:href="'news/'+post.id")
 a.carditem.item(:href="getLink(post)")
   .carditem__wrap
-    p.carditem__category {{ getCategory(post) }}
+    a.carditem__category(:href="getCategoryLink(post)") {{ getCategory(post) }}
     img.carditem__thumbnail(:src="getThumbnail(post)" decoding="async")
     h2.carditem__title {{ getTitle(post) }}
   .carditem__info
@@ -44,6 +43,8 @@ $card-width: 300px;
   &__wrap {
     @include gap-bottom(12px);
     margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
   }
   &__category {
     color: $color-textsecondary;

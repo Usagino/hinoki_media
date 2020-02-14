@@ -1,7 +1,9 @@
 import axios from 'axios'
 const apiUrl = 'https://admin.frontartgraph.com'
+require('dotenv').config()
+const { ENDPOINT } = process.env
 export default {
-  mode: 'universal',
+  mode: 'spa',
   head: {
     titleTemplate: '%s | HINOKI',
     meta: [
@@ -26,19 +28,20 @@ export default {
     duration: 4000
   },
   plugins: [
-    '~plugins/fetchData.js',
     '~plugins/components.js',
     '~plugins/postDecode.js',
     { src: '~/plugins/feather.js' },
     { src: '~/plugins/carousel.js', ssr: false },
-    { src: 'plugins/axios.js', ssr: false }
+    { src: '~plugins/axios.js', ssr: false },
+    { src: '~plugins/fetchData.js', ssr: true }
   ],
   buildModules: ['@nuxtjs/eslint-module'],
   modules: [
     '@nuxtjs/axios',
     'nuxt-webfontloader',
     '@nuxtjs/style-resources',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/dotenv'
   ],
   styleResources: {
     scss: ['~/assets/stylesheets/style.scss']
@@ -48,9 +51,13 @@ export default {
   },
   proxy: {
     '/api/': {
-      target: 'https://admin.frontartgraph.com/wp-json/wp/v2/posts',
-      pathRewrite: { '^/api/': '/' }
+      target: apiUrl,
+      pathRewrite: { '^/api/': '' },
+      changeOrigin: true
     }
+  },
+  env: {
+    ENDPOINT
   },
   webfontloader: {
     google: {
@@ -69,17 +76,16 @@ export default {
   generate: {
     interval: 2000,
     async routes() {
-      // paginate
+      // news
       const paginate = await axios.get(
         `${apiUrl}/wp-json/wp/v2/posts?per_page=100&page=1&_embed=1`
       )
-      const paginateRes = paginate.data.map((paginate) => {
+      const newsRes = paginate.data.map((paginate) => {
         return {
           route: '/news/' + paginate.id,
           payload: { paginate }
         }
       })
-      // console.log(paginateRes)
       // pagination
       const { headers } = await axios(`${apiUrl}/wp-json/wp/v2/posts`, {
         'Access-Control-Expose-Headers': 'x-wp-total'
@@ -91,7 +97,6 @@ export default {
       }
       const canDisplayPageNum =
         Math.floor(Number(headers['x-wp-total']) / getPostNum) + count
-
       const paginationRes = []
       for (let i = 1; i < canDisplayPageNum + 1; i++) {
         paginationRes.push({
@@ -99,9 +104,26 @@ export default {
           payload: { i }
         })
       }
-      return Promise.all([paginateRes, paginationRes]).then((values) => {
-        return [...values[0], ...values[1]]
-      })
+      // categories
+      const categoriesRes = []
+      const categoriesList = await axios.get(
+        `${apiUrl}/wp-json/wp/v2/categories`
+      )
+
+      for (let i = 0; i < categoriesList.data.length; i++) {
+        categoriesRes.push({
+          route: `/categories/${categoriesList.data[i].slug}/1`,
+          payload: { i }
+        })
+      }
+      console.log(newsRes)
+      console.log(paginationRes)
+      console.log(categoriesRes)
+      return Promise.all([newsRes, paginationRes, categoriesRes]).then(
+        (values) => {
+          return [...values[0], ...values[1], ...values[2]]
+        }
+      )
     }
   }
 }

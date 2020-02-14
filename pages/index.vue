@@ -8,7 +8,7 @@
         :style="{ backgroundImage: 'url(' + getThumbnail(post) + ')' }")
         .carousel__cover
         a.carousel__text.item(:href="'news/'+post.id")
-          p.category {{ getCategory(post) }}
+          a.category(:href="getCategoryLink(post)") {{ getCategory(post) }}
           h2.carousel__text__title {{ getTitle(post) }}
           .carousel__info
             p {{ getCreatedAt(post) }}
@@ -16,18 +16,18 @@
     .latest-news
       .latest-news__items
         CardItem(
-          v-for="post in this.latestPosts"
-          :key="post.id"
-          :post ="post"
+          v-for="item in this.latestPosts"
+          :key="item.id"
+          :post ="item"
           )
         span
         span
       AppButton(text="NEXT" to="/page/1")
     .feature
       FeatureItem(
-        v-for="post in this.featurePosts"
-        :key="post.id"
-        :post="post" )
+        v-for="item in this.featurePosts"
+        :key="item.id"
+        :post="item" )
     AppFooter
 </template>
 
@@ -37,9 +37,7 @@ export default {
     return {
       title: 'TOP'
     }
-  },
-  mounted() {},
-  methods: {}
+  }
 }
 </script>
 

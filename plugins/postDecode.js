@@ -31,6 +31,9 @@ Vue.mixin({
     },
     getArticle(id) {
       return id
+    },
+    getCategoryLink(post) {
+      return `/categories/${this.getCategory(post).toLowerCase()}/1`
     }
   }
 })

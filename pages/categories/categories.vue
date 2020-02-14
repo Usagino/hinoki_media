@@ -1,5 +1,8 @@
 <template lang="pug">
-.container
+  .container
+    AppHeader
+
+    AppFooter
 </template>
 
 <script>
