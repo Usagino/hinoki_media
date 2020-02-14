@@ -116,9 +116,9 @@ export default {
           payload: { i }
         })
       }
-      console.log(newsRes)
-      console.log(paginationRes)
-      console.log(categoriesRes)
+      console.table(newsRes)
+      console.table(paginationRes)
+      console.table(categoriesRes)
       return Promise.all([newsRes, paginationRes, categoriesRes]).then(
         (values) => {
           return [...values[0], ...values[1], ...values[2]]
