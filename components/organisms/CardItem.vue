@@ -1,5 +1,7 @@
 <template lang="pug">
-a.carditem.item(:href="getLink(post)")
+// a.carditem.item(:href="getLink(post)")
+//a.carditem.item(@click="goNewsPage(post.id)")
+nuxt-link.carditem.item(:to="'/news?id=' + post.id")
   .carditem__wrap
     a.carditem__category(:href="getCategoryLink(post)") {{ getCategory(post) }}
     img.carditem__thumbnail(:src="getThumbnail(post)" decoding="async")

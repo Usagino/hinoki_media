@@ -34,6 +34,12 @@ Vue.mixin({
     },
     getCategoryLink(post) {
       return `/categories/${this.getCategory(post).toLowerCase()}/1`
+    },
+    goNewsPage(key) {
+      this.$router.push({
+        path: '/news',
+        query: { post: key }
+      })
     }
   }
 })

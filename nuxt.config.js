@@ -3,7 +3,7 @@ const apiUrl = 'https://admin.frontartgraph.com'
 require('dotenv').config()
 const { ENDPOINT } = process.env
 export default {
-  mode: 'spa',
+  mode: 'universal',
   head: {
     titleTemplate: '%s | HINOKI',
     meta: [
@@ -21,19 +21,13 @@ export default {
     '~/assets/stylesheets/reset.css',
     { src: '~/assets/stylesheets/style.scss', lang: 'scss' }
   ],
-  loading: {
-    color: '#333333',
-    height: '5px',
-    continuous: true,
-    duration: 4000
-  },
   plugins: [
     '~plugins/components.js',
     '~plugins/postDecode.js',
     { src: '~/plugins/feather.js' },
     { src: '~/plugins/carousel.js', ssr: false },
-    { src: '~plugins/axios.js', ssr: false },
-    { src: '~plugins/fetchData.js', ssr: true }
+    { src: '~/plugins/axios.js', ssr: false },
+    { src: '~/plugins/fetchData.js', ssr: true }
   ],
   buildModules: ['@nuxtjs/eslint-module'],
   modules: [
@@ -41,7 +35,8 @@ export default {
     'nuxt-webfontloader',
     '@nuxtjs/style-resources',
     '@nuxtjs/pwa',
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/proxy'
   ],
   styleResources: {
     scss: ['~/assets/stylesheets/style.scss']
@@ -50,11 +45,7 @@ export default {
     proxy: true
   },
   proxy: {
-    '/api/': {
-      target: apiUrl,
-      pathRewrite: { '^/api/': '' },
-      changeOrigin: true
-    }
+    '/api/': { target: apiUrl, pathRewrite: { '^/api/': '' } }
   },
   env: {
     ENDPOINT
@@ -65,7 +56,7 @@ export default {
     }
   },
   build: {
-    hardSource: true,
+    // hardSource: true,
     extend(config, ctx) {},
     terser: {
       terserOptions: {

@@ -3,6 +3,7 @@ import Vue from 'vue'
 Vue.mixin({
   data() {
     return {
+      endpoint: 'https://admin.frontartgraph.com/',
       latestPosts: [],
       featurePosts: [],
       rankingPosts: [],
@@ -20,7 +21,6 @@ Vue.mixin({
       const params = app.context.params
       const endpoint = 'https://admin.frontartgraph.com/'
       const getPostNum = 10
-
       const {
         headers
       } = await app.$axios(
@@ -33,7 +33,6 @@ Vue.mixin({
       const canDisplayPageNum =
         Math.floor(Number(headers['x-wp-total']) / getPostNum) + pageCount
 
-      // const Posts = await app.$axios.$get(`${endpoint}wp-json/wp/v2/posts`)
       const latestItems = await app.$axios.$get(
         endpoint + 'wp-json/wp/v2/posts?per_page=12&page=1&_embed=1'
       )
@@ -88,10 +87,7 @@ Vue.mixin({
         : 0
 
       // ------------------------------------------------------------------
-      const categoriesList = await app.$axios.get(
-        `${endpoint}wp-json/wp/v2/categories`
-      )
-      console.log(categoriesList.data[0])
+
       return {
         latestPosts: latestItems,
         featurePosts: featureItems,
