@@ -3,7 +3,6 @@ import Vue from 'vue'
 Vue.mixin({
   data() {
     return {
-      endpoint: 'https://admin.frontartgraph.com/',
       latestPosts: [],
       featurePosts: [],
       rankingPosts: [],
@@ -19,7 +18,7 @@ Vue.mixin({
   async asyncData({ app, error }) {
     try {
       const params = app.context.params
-      const endpoint = 'https://admin.frontartgraph.com/'
+      const endpoint = process.env.ENDPOINT
       const getPostNum = 10
       const {
         headers

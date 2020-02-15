@@ -21,6 +21,11 @@ export default {
         return []
       }
     }
+  },
+  data() {
+    return {
+      rankingPosts: {}
+    }
   }
 }
 </script>
