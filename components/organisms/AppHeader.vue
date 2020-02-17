@@ -41,7 +41,7 @@ export default {
     searchMethods() {
       console.log(this.searchText)
       if (!(this.searchText === '')) {
-        this.$router.push(`/search/${this.searchText}`)
+        this.$router.push(`/search?title=${this.searchText}`)
       }
     }
   }

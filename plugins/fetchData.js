@@ -20,7 +20,8 @@ Vue.mixin({
   async asyncData({ app, error }) {
     try {
       const params = app.context.params
-      const endpoint = process.env.ENDPOINT
+      const query = app.context.query
+      const endpoint = `/api/`
       const getPostNum = 10
       const {
         headers
@@ -93,9 +94,10 @@ Vue.mixin({
       )
       // -----------------------------------------
       let seatchItems = []
-      if (!(params.title === undefined)) {
-        const seatchLink = `${endpoint}wp-json/wp/v2/posts/?search=${params.title}&_embed=1`
+      if (!(query.title === undefined)) {
+        const seatchLink = `${endpoint}wp-json/wp/v2/posts/?search=${query.title}&_embed=1`
         seatchItems = await app.$axios.$get(encodeURI(seatchLink))
+        console.log(seatchItems)
       }
 
       return {
