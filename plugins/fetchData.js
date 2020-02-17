@@ -11,8 +11,10 @@ Vue.mixin({
       postNum: 0,
       whatPageNum: 0,
       totalArticleNum: 0,
+      categoriesItem: [],
       paginationData: {},
-      categoriesPaginationData: {}
+      categoriesPaginationData: {},
+      searchItem: []
     }
   },
   async asyncData({ app, error }) {
@@ -86,6 +88,15 @@ Vue.mixin({
         : 0
 
       // ------------------------------------------------------------------
+      const categoriesList = await app.$axios.$get(
+        `${endpoint}wp-json/wp/v2/categories`
+      )
+      // -----------------------------------------
+      let seatchItems = []
+      if (!(params.title === undefined)) {
+        const seatchLink = `${endpoint}wp-json/wp/v2/posts/?search=${params.title}&_embed=1`
+        seatchItems = await app.$axios.$get(encodeURI(seatchLink))
+      }
 
       return {
         latestPosts: latestItems,
@@ -104,7 +115,9 @@ Vue.mixin({
           canDisplayPage: cgCanDisplayPageNum, // 表示できるページ数
           getTotalArticle: cgAllgetPostNum, // 全ての投稿件数
           displayPostNum: getPostNum
-        }
+        },
+        categoriesItem: categoriesList,
+        searchItem: seatchItems
       }
     } catch (err) {
       console.log(err)

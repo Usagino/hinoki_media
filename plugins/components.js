@@ -14,6 +14,7 @@ import CardItemInline from '@/components/organisms/CardItemInline.vue'
 import FeatureItem from '@/components/organisms/FeatureItem.vue'
 import RankingItems from '@/components/organisms/RankingItems.vue'
 import AppPagination from '@/components/organisms/AppPagination.vue'
+import FeatureItemsBlock from '@/components/organisms/FeatureItemsBlock.vue'
 
 // Vue original component
 Vue.component('AppHeader', AppHeader)
@@ -25,6 +26,7 @@ Vue.component('FeatureItem', FeatureItem)
 Vue.component('TagButton', TagButton)
 Vue.component('RankingItems', RankingItems)
 Vue.component('AppPagination', AppPagination)
+Vue.component('FeatureItemsBlock', FeatureItemsBlock)
 
 // Vue carousel
 Vue.component('Carousel', Carousel)

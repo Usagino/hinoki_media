@@ -15,10 +15,10 @@
           feather-search
 
   transition
-    form.header__search(v-if="searchToggle")
+    form.header__search(v-if="searchToggle" @submit="searchMethods()")
       .header__wrap
-        input(type="text" placeholder="ここにテキストを入力して検索")
-        button
+        input(type="text" placeholder="ここにテキストを入力して検索" v-model="searchText")
+        a(@click="searchMethods()")
           feather-search
   transition
     .header__cover(v-if="searchToggle" @click="searchToggle = false")
@@ -33,7 +33,16 @@ export default {
   data() {
     return {
       searchToggle: false,
-      spMenuToggle: false
+      spMenuToggle: false,
+      searchText: ''
+    }
+  },
+  methods: {
+    searchMethods() {
+      console.log(this.searchText)
+      if (!(this.searchText === '')) {
+        this.$router.push(`/search/${this.searchText}`)
+      }
     }
   }
 }
@@ -49,14 +58,15 @@ export default {
   padding: 20px 0;
   z-index: 100;
   border-bottom: 1px solid rgba($color-textsecondary, 0.2);
-
   &__wrap {
-    width: $default-size;
-    margin: auto;
+    @include defaultPCwidth;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    span {
+      cursor: pointer;
+    }
     @include mq(sm) {
       width: $default-size-sp;
       padding: 0 20px;
@@ -86,7 +96,7 @@ export default {
     top: 0%;
     left: 0;
     z-index: 900;
-    padding: 20px 0;
+    padding: 19px 0;
     input {
       height: 42px;
       @include font-textbold;

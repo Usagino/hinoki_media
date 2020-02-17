@@ -12,18 +12,16 @@
           p Written by {{getAuthor(this.Article)}}
       img.article__body__thumbnail(:src="getThumbnail(this.Article)" decoding="async")
       .article__body__text(v-html="this.Article.content.rendered")
-      .article__body__tags
-        TagButton(
-          v-for="post in getTags(this.Article)"
-          :key="post.id"
-          :tag="post"
-          )
     RankingItems(:posts="rankingPosts")
-  .feature
-    FeatureItem(
-      v-for="post in this.featurePosts"
-      :key="post.id"
-      :post="post" )
+  .featureBlocks
+    h2 FEATURE
+    .featureBlocks__items
+      CardItem(
+        v-for="item in this.featurePosts"
+        :key="item.id"
+        :post="item"
+        addClass="black"
+         )
   AppFooter
 </template>
 

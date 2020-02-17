@@ -24,9 +24,9 @@ export default {
   plugins: [
     '~plugins/components.js',
     '~plugins/postDecode.js',
+    '~/plugins/axios',
     { src: '~/plugins/feather.js' },
     { src: '~/plugins/carousel.js', ssr: false },
-    { src: '~/plugins/axios.js', ssr: false },
     { src: '~/plugins/fetchData.js', ssr: true }
   ],
   buildModules: ['@nuxtjs/eslint-module'],
