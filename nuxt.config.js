@@ -106,6 +106,7 @@ export default {
           payload: { i }
         })
       }
+      console.log(endpoint)
       console.table(newsRes)
       console.table(paginationRes)
       console.table(categoriesRes)
