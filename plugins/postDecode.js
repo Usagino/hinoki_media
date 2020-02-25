@@ -6,16 +6,19 @@ Vue.mixin({
       return post.title.rendered
     },
     getCategory(post) {
-      const category = post._embedded['wp:term'][0][0].name
-      if (!(category === undefined)) {
-        if (category === 'RANKING' || category === 'FEATURE') {
-          return post._embedded['wp:term'][0][1].name
-        } else {
-          return post._embedded['wp:term'][0][0].name
-        }
-      } else {
-        return 'not category'
-      }
+      // console.log(post)
+      // const category = post._embedded['wp:term'][0][0].name
+      //
+      // if (!(category === undefined)) {
+      //   if (category === 'RANKING' || category === 'FEATURE') {
+      //     return post._embedded['wp:term'][0][1].name
+      //   } else {
+      //     return post._embedded['wp:term'][0][0].name
+      //   }
+      // } else {
+      //   return 'not category'
+      // }
+      return 'DESIGN'
     },
     getTags(post) {
       return post._embedded['wp:term'][1]

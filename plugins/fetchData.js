@@ -73,7 +73,6 @@ Vue.mixin({
       let categoryItem = []
       let cgMaxGetArticles = []
       if (checkCategoryName) {
-        console.log('checkCategoryName: ', checkCategoryName)
         const category = categorieItem.find((el) => el.slug === categoryName)
         categoryItem = await app.$axios.$get(
           `${endpoint}wp-json/wp/v2/posts?per_page=${getPostNum}&categories=${category.id}&_embed=1`
@@ -94,11 +93,9 @@ Vue.mixin({
       )
       // -----------------------------------------
       let seatchItems = []
-      console.log(params.title)
       if (!(params.title === undefined)) {
         const seatchLink = `${endpoint}wp-json/wp/v2/posts/?search=${params.title}&_embed=1`
         seatchItems = await app.$axios.$get(encodeURI(seatchLink))
-        console.log(seatchItems)
       }
 
       return {
