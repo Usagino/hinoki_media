@@ -5,7 +5,7 @@
       img(src="/image/logo_inline.svg")
     ul.header__menu
       li
-        a(href="/news/1") NEWS
+        a(href="/page/1") NEWS
       li
         a(href="/contact") CONTACT
       li

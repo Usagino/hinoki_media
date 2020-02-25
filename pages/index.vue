@@ -23,9 +23,9 @@
         span
         span
       AppButton(text="NEXT" to="/page/1")
-    .featureBlocks
+    .feature-blocks
       h2 FEATURE
-      .featureBlocks__items
+      .feature-blocks__items
         CardItem(
           v-for="item in this.featurePosts"
           :key="item.id"

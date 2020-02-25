@@ -13,9 +13,9 @@
       img.article__body__thumbnail(:src="getThumbnail(this.Article)" decoding="async")
       .article__body__text(v-html="this.Article.content.rendered")
     RankingItems(:posts="rankingPosts")
-  .featureBlocks
+  .feature-blocks
     h2 FEATURE
-    .featureBlocks__items
+    .feature-blocks__items
       CardItem(
         v-for="item in this.featurePosts"
         :key="item.id"
