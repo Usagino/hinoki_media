@@ -1,6 +1,5 @@
 import axios from 'axios'
 require('dotenv').config()
-const { ENDPOINT } = process.env
 const endpoint = process.env.ENDPOINT
 export default {
   mode: 'universal',
@@ -48,7 +47,7 @@ export default {
     '/api/': { target: endpoint, pathRewrite: { '^/api/': '/' } }
   },
   env: {
-    ENDPOINT
+    ENDPOINT: process.env.ENDPOINT
   },
   webfontloader: {
     google: {

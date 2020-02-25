@@ -36,7 +36,7 @@ Vue.mixin({
         Math.floor(Number(headers['x-wp-total']) / getPostNum) + pageCount
 
       const latestItems = await app.$axios.$get(
-        endpoint + 'wp-json/wp/v2/posts?per_page=12&page=1&_embed=1'
+        `${endpoint}wp-json/wp/v2/posts?per_page=12&page=1&_embed=1`
       )
       const categorieItem = await app.$axios.$get(
         `${endpoint}wp-json/wp/v2/categories`
