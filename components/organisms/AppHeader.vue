@@ -41,7 +41,7 @@ export default {
     searchMethods() {
       console.log(this.searchText)
       if (!(this.searchText === '')) {
-        window.location.href = `/search/${this.searchText}`
+        window.location.href = `/search?title=${this.searchText}`
         // this.$router.push(`/search/${this.searchText}`)
       }
     }
