@@ -1,9 +1,8 @@
 import axios from 'axios'
-const apiUrl = 'https://admin.frontartgraph.com'
 require('dotenv').config()
-const { ENDPOINT } = process.env
+const endpoint = process.env.ENDPOINT
 export default {
-  mode: 'spa',
+  mode: 'universal',
   head: {
     titleTemplate: '%s | HINOKI',
     meta: [
@@ -21,27 +20,22 @@ export default {
     '~/assets/stylesheets/reset.css',
     { src: '~/assets/stylesheets/style.scss', lang: 'scss' }
   ],
-  loading: {
-    color: '#333333',
-    height: '5px',
-    continuous: true,
-    duration: 4000
-  },
   plugins: [
     '~plugins/components.js',
     '~plugins/postDecode.js',
     { src: '~/plugins/feather.js' },
     { src: '~/plugins/carousel.js', ssr: false },
-    { src: '~plugins/axios.js', ssr: false },
-    { src: '~plugins/fetchData.js', ssr: true }
+    { src: '~/plugins/fetchData.js', ssr: true },
+    { src: '~/plugins/axios', ssr: false }
   ],
   buildModules: ['@nuxtjs/eslint-module'],
   modules: [
-    '@nuxtjs/axios',
     'nuxt-webfontloader',
     '@nuxtjs/style-resources',
     '@nuxtjs/pwa',
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
   styleResources: {
     scss: ['~/assets/stylesheets/style.scss']
@@ -50,14 +44,10 @@ export default {
     proxy: true
   },
   proxy: {
-    '/api/': {
-      target: apiUrl,
-      pathRewrite: { '^/api/': '' },
-      changeOrigin: true
-    }
+    '/api/': { target: endpoint, pathRewrite: { '^/api/': '/' } }
   },
   env: {
-    ENDPOINT
+    ENDPOINT: process.env.ENDPOINT
   },
   webfontloader: {
     google: {
@@ -65,7 +55,7 @@ export default {
     }
   },
   build: {
-    hardSource: true,
+    // hardSource: true,
     extend(config, ctx) {},
     terser: {
       terserOptions: {
@@ -78,7 +68,7 @@ export default {
     async routes() {
       // news
       const paginate = await axios.get(
-        `${apiUrl}/wp-json/wp/v2/posts?per_page=100&page=1&_embed=1`
+        `${endpoint}/wp-json/wp/v2/posts?per_page=100&page=1&_embed=1`
       )
       const newsRes = paginate.data.map((paginate) => {
         return {
@@ -87,7 +77,7 @@ export default {
         }
       })
       // pagination
-      const { headers } = await axios(`${apiUrl}/wp-json/wp/v2/posts`, {
+      const { headers } = await axios(`${endpoint}wp-json/wp/v2/posts`, {
         'Access-Control-Expose-Headers': 'x-wp-total'
       })
       const getPostNum = 10
@@ -107,7 +97,7 @@ export default {
       // categories
       const categoriesRes = []
       const categoriesList = await axios.get(
-        `${apiUrl}/wp-json/wp/v2/categories`
+        `${endpoint}wp-json/wp/v2/categories`
       )
 
       for (let i = 0; i < categoriesList.data.length; i++) {
@@ -116,6 +106,7 @@ export default {
           payload: { i }
         })
       }
+      console.log(endpoint)
       console.table(newsRes)
       console.table(paginationRes)
       console.table(categoriesRes)

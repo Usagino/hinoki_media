@@ -23,11 +23,15 @@
         span
         span
       AppButton(text="NEXT" to="/page/1")
-    .feature
-      FeatureItem(
-        v-for="item in this.featurePosts"
-        :key="item.id"
-        :post="item" )
+    .feature-blocks
+      h2 FEATURE
+      .feature-blocks__items
+        CardItem(
+          v-for="item in this.featurePosts"
+          :key="item.id"
+          :post="item"
+          addClass="black"
+           )
     AppFooter
 </template>
 
@@ -37,6 +41,9 @@ export default {
     return {
       title: 'TOP'
     }
+  },
+  mounted() {
+    console.log(process.env.ENDPOINT)
   }
 }
 </script>
@@ -44,15 +51,14 @@ export default {
 <style lang="scss" scoped>
 .container {
   .carousel {
+    @include defaultPCwidth;
     padding-top: 40px;
-    margin: auto;
-    width: $default-size;
     @include mq(sm) {
       width: $default-size-sp;
     }
     height: 500px;
     &__slide {
-      width: $default-size;
+      width: 100%;
       cursor: grab;
       &:active {
         cursor: grabbing;
@@ -88,6 +94,7 @@ export default {
       padding: 24px;
       z-index: 2;
       @include gap-bottom(8px);
+      width: fit-content;
       @include mq(sm) {
         width: $default-size-sp;
         box-sizing: border-box;
@@ -122,9 +129,9 @@ export default {
     flex-direction: column;
     padding: 48px 0;
     &__items {
-      padding: 16px 0;
-      margin: auto;
-      width: $default-size;
+      @include defaultPCwidth;
+      padding-top: 16px;
+      padding-bottom: 16px;
       @include mq(sm) {
         width: $default-size-sp;
       }

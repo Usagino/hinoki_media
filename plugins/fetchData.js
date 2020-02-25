@@ -11,16 +11,19 @@ Vue.mixin({
       postNum: 0,
       whatPageNum: 0,
       totalArticleNum: 0,
+      categoriesItem: [],
       paginationData: {},
-      categoriesPaginationData: {}
+      categoriesPaginationData: {},
+      searchItem: []
     }
   },
   async asyncData({ app, error }) {
     try {
       const params = app.context.params
-      const endpoint = 'https://admin.frontartgraph.com/'
+      const query = app.context.query
+      // const endpoint = `/api/`
+      const endpoint = process.env.ENDPOINT
       const getPostNum = 10
-
       const {
         headers
       } = await app.$axios(
@@ -33,9 +36,8 @@ Vue.mixin({
       const canDisplayPageNum =
         Math.floor(Number(headers['x-wp-total']) / getPostNum) + pageCount
 
-      // const Posts = await app.$axios.$get(`${endpoint}wp-json/wp/v2/posts`)
       const latestItems = await app.$axios.$get(
-        endpoint + 'wp-json/wp/v2/posts?per_page=12&page=1&_embed=1'
+        `${endpoint}wp-json/wp/v2/posts?per_page=12&page=1&_embed=1`
       )
       const categorieItem = await app.$axios.$get(
         `${endpoint}wp-json/wp/v2/categories`
@@ -72,7 +74,6 @@ Vue.mixin({
       let categoryItem = []
       let cgMaxGetArticles = []
       if (checkCategoryName) {
-        console.log('checkCategoryName: ', checkCategoryName)
         const category = categorieItem.find((el) => el.slug === categoryName)
         categoryItem = await app.$axios.$get(
           `${endpoint}wp-json/wp/v2/posts?per_page=${getPostNum}&categories=${category.id}&_embed=1`
@@ -88,10 +89,16 @@ Vue.mixin({
         : 0
 
       // ------------------------------------------------------------------
-      const categoriesList = await app.$axios.get(
+      const categoriesList = await app.$axios.$get(
         `${endpoint}wp-json/wp/v2/categories`
       )
-      console.log(categoriesList.data[0])
+      // -----------------------------------------
+      let seatchItems = []
+      if (!(query.title === undefined)) {
+        const seatchLink = `${endpoint}wp-json/wp/v2/posts/?search=${query.title}&_embed=1`
+        seatchItems = await app.$axios.$get(encodeURI(seatchLink))
+      }
+
       return {
         latestPosts: latestItems,
         featurePosts: featureItems,
@@ -109,7 +116,9 @@ Vue.mixin({
           canDisplayPage: cgCanDisplayPageNum, // 表示できるページ数
           getTotalArticle: cgAllgetPostNum, // 全ての投稿件数
           displayPostNum: getPostNum
-        }
+        },
+        categoriesItem: categoriesList,
+        searchItem: seatchItems
       }
     } catch (err) {
       console.log(err)

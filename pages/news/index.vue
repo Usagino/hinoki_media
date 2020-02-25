@@ -1,5 +1,6 @@
 <template lang="pug">
-  h1 hogehoge
+  .container
+    p aaa
 </template>
 
 <script>
