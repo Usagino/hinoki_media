@@ -15,7 +15,7 @@
           feather-search
 
   transition
-    form.header__search(v-if="searchToggle" @submit="searchMethods()")
+    form.header__search(v-if="searchToggle" v-on:submit.prevent="searchMethods()")
       .header__wrap
         input(type="text" placeholder="ここにテキストを入力して検索" v-model="searchText")
         a(@click="searchMethods()")
@@ -41,7 +41,8 @@ export default {
     searchMethods() {
       console.log(this.searchText)
       if (!(this.searchText === '')) {
-        this.$router.push(`/search?title=${this.searchText}`)
+        window.location.href = `/search/${this.searchText}`
+        // this.$router.push(`/search/${this.searchText}`)
       }
     }
   }
