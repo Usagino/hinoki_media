@@ -2,7 +2,6 @@ import axios from 'axios'
 require('dotenv').config()
 const { ENDPOINT } = process.env
 const endpoint = process.env.ENDPOINT
-const devurl = process.env.DEV_URL
 export default {
   mode: 'universal',
   head: {
