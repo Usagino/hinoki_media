@@ -21,7 +21,8 @@ Vue.mixin({
     try {
       const params = app.context.params
       // const query = app.context.query
-      const endpoint = `/api/`
+      // const endpoint = `/api/`
+      const endpoint = process.env.ENDPOINT
       const getPostNum = 10
       const {
         headers
