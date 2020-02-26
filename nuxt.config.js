@@ -47,7 +47,7 @@ export default {
     '/api/': { target: endpoint, pathRewrite: { '^/api/': '/' } }
   },
   env: {
-    ENDPOINT: process.env.ENDPOINT
+    endpoint: process.env.ENDPOINT || 'http://localhost:3000'
   },
   webfontloader: {
     google: {

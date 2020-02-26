@@ -25,6 +25,7 @@ export default {
     return { searchNews: searchNewss }
   },
   mounted() {
+    console.log(process.browser)
     console.log(this.searchNews)
   }
 }
