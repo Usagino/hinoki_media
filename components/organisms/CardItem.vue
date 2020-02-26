@@ -52,13 +52,12 @@ $card-width: 300px;
   background: $color-textcolorwhite;
 }
 .carditem {
-  max-width: 330px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   padding: 16px 20px;
-  min-height: 360px;
+  width: 100%;
+  box-sizing: border-box;
   @include mq(sm) {
     margin: auto;
   }
@@ -72,7 +71,7 @@ $card-width: 300px;
     color: $color-textsecondary;
   }
   &__thumbnail {
-    width: $card-width;
+    width: 100%;
     height: 200px;
     object-fit: cover;
   }

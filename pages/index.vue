@@ -20,8 +20,6 @@
           :key="item.id"
           :post ="item"
           )
-        span
-        span
       AppButton(text="NEXT" to="/page/1")
     .feature-blocks
       h2 FEATURE
@@ -127,6 +125,7 @@ export default {
     display: flex;
     justify-content: center;
     flex-direction: column;
+
     padding: 48px 0;
     &__items {
       @include defaultPCwidth;
@@ -135,16 +134,7 @@ export default {
       @include mq(sm) {
         width: $default-size-sp;
       }
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      & > * {
-        margin-bottom: 36px;
-      }
-      span {
-        width: 340px;
-        margin-bottom: 0px;
-      }
+      @include baseGrid;
     }
   }
 }
