@@ -5,13 +5,35 @@
   .pages
     .pages__body
       h1.pages__title {{$route.query.title}}
-      CardItemInline(v-for="post in searchItem" :key="post.id" :post="post")
-    RankingItems(:posts="rankingPosts")
+      CardItemInline(v-for="post in searchNews" :key="post.id" :post="post")
+
   AppFooter
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      searchNews: []
+    }
+  },
+  async asyncData({ app, error }) {
+    const query = app.context.query
+    const endpoint = process.env.ENDPOINT
+    const seatchLink = `${endpoint}wp-json/wp/v2/posts/?search=${query.title}&_embed=1`
+    const searchNewss = await app.$axios.$get(encodeURI(seatchLink))
+    return { searchNews: searchNewss }
+  },
+  mounted() {
+    console.log(this.searchNews)
+  }
+}
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.pages {
+  &__body {
+    width: 100%;
+  }
+}
+</style>
