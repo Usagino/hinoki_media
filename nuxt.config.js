@@ -59,7 +59,7 @@ export default {
     extend(config, ctx) {},
     terser: {
       terserOptions: {
-        compress: { drop_console: true }
+        compress: { drop_console: false }
       }
     }
   },
