@@ -19,14 +19,11 @@ export default {
   },
   async asyncData({ app, error }) {
     const query = app.context.query
-    const endpoint = process.env.ENDPOINT
-    const seatchLink = `${endpoint}wp-json/wp/v2/posts/?search=${query.title}&_embed=1`
-    const searchNewss = await app.$axios.$get(encodeURI(seatchLink))
-    return { searchNews: searchNewss }
-  },
-  mounted() {
-    console.log(process.browser)
-    console.log(this.searchNews)
+    console.log(query)
+    const seatchLink = `/api/wp-json/wp/v2/posts/?search=${query.title}&_embed=1`
+    const item = await app.$axios.$get(encodeURI(seatchLink))
+
+    return { searchNews: item }
   }
 }
 </script>
