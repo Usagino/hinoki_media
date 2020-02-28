@@ -75,7 +75,7 @@ export default {
     async routes() {
       // news
       const paginate = await axios.get(
-        `${endpoint}/posts?per_page=100&page=1&_embed=1`
+        `${endpoint}/wp-json/wp/v2/posts?per_page=100&page=1&_embed=1`
       )
       const newsRes = paginate.data.map((paginate) => {
         return {
@@ -84,7 +84,7 @@ export default {
         }
       })
       // pagination
-      const { headers } = await axios(`${endpoint}/posts`, {
+      const { headers } = await axios(`${endpoint}/wp-json/wp/v2/posts`, {
         'Access-Control-Expose-Headers': 'x-wp-total'
       })
       const getPostNum = 10
@@ -103,7 +103,9 @@ export default {
       }
       // categories
       const categoriesRes = []
-      const categoriesList = await axios.get(`${endpoint}/categories`)
+      const categoriesList = await axios.get(
+        `${endpoint}/wp-json/wp/v2/categories`
+      )
 
       for (let i = 0; i < categoriesList.data.length; i++) {
         categoriesRes.push({
