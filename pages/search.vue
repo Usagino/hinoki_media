@@ -26,9 +26,11 @@ export default {
     )
     console.log(seatchLink)
 
-    const item = await app.$axios.$get(seatchLink).catch((err) => {
-      return err.response
-    })
+    const item = await app.$axios
+      .$get(seatchLink, { 'Access-Control-Allow-Origin': '*' })
+      .catch((err) => {
+        return err.response
+      })
     console.log(item)
     return { searchNews: item }
   }
