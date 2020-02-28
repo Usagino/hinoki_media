@@ -38,25 +38,25 @@ Vue.mixin({
         Math.floor(Number(headers['x-wp-total']) / getPostNum) + pageCount
 
       const latestItems = await app.$axios.$get(
-        `${endpoint}wp-json/wp/v2/posts?per_page=12&page=1&_embed=1`
+        `${endpoint}/wp-json/wp/v2/posts?per_page=12&page=1&_embed=1`
       )
       const categorieItem = await app.$axios.$get(
-        `${endpoint}wp-json/wp/v2/categories`
+        `${endpoint}/wp-json/wp/v2/categories`
       )
       const featureData = categorieItem.find((el) => el.slug === 'feature')
       const featureItems = await app.$axios.$get(
-        `${endpoint}wp-json/wp/v2/posts?categories=${featureData.id}&_embed=1`
+        `${endpoint}/wp-json/wp/v2/posts?categories=${featureData.id}&_embed=1`
       )
       const rankingID = categorieItem.find((el) => el.name === 'RANKING')
       const rankingItems = await app.$axios.$get(
-        `${endpoint}wp-json/wp/v2/posts?categories=${rankingID.id}&_embed=1`
+        `${endpoint}/wp-json/wp/v2/posts?categories=${rankingID.id}&_embed=1`
       )
 
       const id = params.id
       let ArticleItem = []
       if (!(id === undefined)) {
         ArticleItem = await app.$axios.$get(
-          `${endpoint}wp-json/wp/v2/posts/${id}?_embed`
+          `${endpoint}/wp-json/wp/v2/posts/${id}?_embed`
         )
       }
 
@@ -64,7 +64,7 @@ Vue.mixin({
       const checkPagination = !(pagination === undefined)
       const paginationItems = checkPagination
         ? await app.$axios.$get(
-            `${endpoint}wp-json/wp/v2/posts?per_page=${getPostNum}&page=${pagination}&_embed=1`
+            `${endpoint}/wp-json/wp/v2/posts?per_page=${getPostNum}&page=${pagination}&_embed=1`
           )
         : []
 
@@ -77,10 +77,10 @@ Vue.mixin({
       if (checkCategoryName) {
         const category = categorieItem.find((el) => el.slug === categoryName)
         categoryItem = await app.$axios.$get(
-          `${endpoint}wp-json/wp/v2/posts?per_page=${getPostNum}&categories=${category.id}&_embed=1`
+          `${endpoint}/wp-json/wp/v2/posts?per_page=${getPostNum}&categories=${category.id}&_embed=1`
         )
         cgMaxGetArticles = await app.$axios.$get(
-          `${endpoint}wp-json/wp/v2/posts?per_page=100&categories=${category.id}&_embed=1`
+          `${endpoint}/wp-json/wp/v2/posts?per_page=100&categories=${category.id}&_embed=1`
         )
       }
       const cgAllgetPostNum = cgMaxGetArticles.length
@@ -91,12 +91,12 @@ Vue.mixin({
 
       // ------------------------------------------------------------------
       const categoriesList = await app.$axios.$get(
-        `${endpoint}wp-json/wp/v2/categories`
+        `${endpoint}/wp-json/wp/v2/categories`
       )
       // -----------------------------------------
       let seatchItems = []
       if (!(query.title === undefined)) {
-        const seatchLink = `${endpoint}wp-json/wp/v2/posts/?search=${query.title}&_embed=1`
+        const seatchLink = `${endpoint}/wp-json/wp/v2/posts/?search=${query.title}&_embed=1`
         seatchItems = await app.$axios.$get(encodeURI(seatchLink))
       }
 
@@ -126,4 +126,4 @@ Vue.mixin({
     }
   }
 })
-// curl -s -D - https://admin.frontartgraph.com/path/to/wordpress/wp-json/posts -o /dev/null
+// curl -s -D - https://admin.frontartgraph.com/path/to/wordpress//wp-json/posts -o /dev/null

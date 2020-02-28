@@ -19,10 +19,9 @@ export default {
   },
   async asyncData({ app, error }) {
     const query = app.context.query
-    console.log(query)
-    const seatchLink = `/api/wp-json/wp/v2/posts/?search=${query.title}&_embed=1`
+    const endpoint = process.env.ENDPOINT
+    const seatchLink = `${endpoint}/wp-json/wp/v2/posts/?search=${query.title}&_embed=1`
     const item = await app.$axios.$get(encodeURI(seatchLink))
-
     return { searchNews: item }
   }
 }

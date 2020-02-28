@@ -41,10 +41,17 @@ export default {
     scss: ['~/assets/stylesheets/style.scss']
   },
   axios: {
-    proxy: true
+    proxy: true,
+    baseURL: '/.netlify/functions'
   },
   proxy: {
-    '/api/': { target: endpoint, pathRewrite: { '^/api/': '/' } }
+    '/api': {
+      target: endpoint,
+      pathRewrite: { '^/api': '/' }
+    },
+    '/.netlify/functions/connpass': {
+      target: endpoint
+    }
   },
   env: {
     endpoint: process.env.ENDPOINT || 'http://localhost:3000'
