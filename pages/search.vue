@@ -31,6 +31,7 @@ export default {
       .catch((err) => {
         return err.response
       })
+
     console.log(item)
     return { searchNews: item }
   }
