@@ -20,6 +20,7 @@ export default {
   async asyncData({ app, error }) {
     const query = app.context.query
     const endpoint = process.env.ENDPOINT
+    console.log(query.title)
     const seatchLink = encodeURI(
       `${endpoint}/wp-json/wp/v2/posts/?search=${query.title}&_embed=1`
     )
