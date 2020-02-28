@@ -62,7 +62,7 @@ export default {
     }
   },
   build: {
-    // hardSource: true,
+    hardSource: true,
     extend(config, ctx) {},
     terser: {
       terserOptions: {
