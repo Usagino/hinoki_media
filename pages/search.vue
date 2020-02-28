@@ -27,7 +27,10 @@ export default {
     console.log(seatchLink)
 
     const item = await app.$axios
-      .$get(seatchLink, { 'Access-Control-Allow-Origin': '*' })
+      .$get(seatchLink, {
+        headers: { 'Access-Control-Allow-Origin': '*' },
+        data: {}
+      })
       .catch((err) => {
         return err.response
       })
