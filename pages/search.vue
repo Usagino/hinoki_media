@@ -18,15 +18,18 @@ export default {
     }
   },
   async asyncData({ app, error }) {
-    try {
-      const query = app.context.query
-      const endpoint = process.env.ENDPOINT
-      const seatchLink = `${endpoint}/wp-json/wp/v2/posts/?search=${query.title}&_embed=1`
-      const item = await app.$axios.$get(encodeURI(seatchLink))
-      return { searchNews: item }
-    } catch (e) {
-      console.log(e)
-    }
+    const query = app.context.query
+    const endpoint = process.env.ENDPOINT
+    const seatchLink = encodeURI(
+      `${endpoint}/wp-json/wp/v2/posts/?search=${query.title}&_embed=1`
+    )
+    console.log(seatchLink)
+
+    const item = await app.$axios.$get(seatchLink).catch((err) => {
+      return err.response
+    })
+    console.log(item)
+    return { searchNews: item }
   }
 }
 </script>
