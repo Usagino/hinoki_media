@@ -17,22 +17,19 @@ export default {
     }
   },
   async asyncData({ app, error }) {
-    console.log('working search page asyncData')
     const query = app.context.query
     const endpoint = process.env.ENDPOINT
     const seatchLink = encodeURI(
       `${endpoint}/wp-json/wp/v2/posts/?search=${query.title}&_embed=1`
     )
-    const item = await app.$axios
-      .$get(seatchLink, {
-        headers: { 'Access-Control-Allow-Origin': '*' },
-        data: {}
-      })
-      .catch((err) => {
-        return err.response
-      })
+    const item = await app.$axios.$get(seatchLink).catch((err) => {
+      return err.response
+    })
 
     return { searchNews: item }
+  },
+  mounted() {
+    console.log(this.searchNews)
   }
 }
 </script>

@@ -1,22 +1,21 @@
 <template lang="pug">
   .container
     AppHeader
-
+    .latest-news
+      .latest-news__items
+        p {{list}}
     AppFooter
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-
 export default {
-  mounted() {
-    this.getList()
-    console.log(this.getList())
+  data() {
+    return {
+      list: Array
+    }
   },
-  methods: {
-    ...mapActions({
-      getList: 'getList'
-    })
+  mounted() {
+    console.log(this.$store)
   }
 }
 </script>
