@@ -39,9 +39,6 @@ export default {
     return {
       title: 'TOP'
     }
-  },
-  mounted() {
-    console.log(process.env.ENDPOINT)
   }
 }
 </script>

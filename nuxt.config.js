@@ -1,6 +1,7 @@
 import axios from 'axios'
 require('dotenv').config()
 const endpoint = process.env.ENDPOINT
+const { ENDPOINT } = process.env.ENDPOINT
 export default {
   mode: 'universal',
   head: {
@@ -22,7 +23,6 @@ export default {
   ],
   plugins: [
     '~plugins/components.js',
-    '~plugins/postDecode.js',
     { src: '~/plugins/feather.js' },
     { src: '~/plugins/carousel.js', ssr: false },
     { src: '~/plugins/fetchData.js', ssr: true },
@@ -54,7 +54,8 @@ export default {
     }
   },
   env: {
-    endpoint: process.env.ENDPOINT || 'http://localhost:3000'
+    endpoint: process.env.ENDPOINT || 'http://localhost:3000',
+    ENDPOINT
   },
   webfontloader: {
     google: {
@@ -75,7 +76,7 @@ export default {
     async routes() {
       // news
       const paginate = await axios.get(
-        `${endpoint}/posts?per_page=100&page=1&_embed=1`
+        `${endpoint}/wp-json/wp/v2/posts?per_page=100&page=1&_embed=1`
       )
       const newsRes = paginate.data.map((paginate) => {
         return {
@@ -84,7 +85,7 @@ export default {
         }
       })
       // pagination
-      const { headers } = await axios(`${endpoint}/posts`, {
+      const { headers } = await axios(`${endpoint}/wp-json/wp/v2/posts`, {
         'Access-Control-Expose-Headers': 'x-wp-total'
       })
       const getPostNum = 10
@@ -103,7 +104,9 @@ export default {
       }
       // categories
       const categoriesRes = []
-      const categoriesList = await axios.get(`${endpoint}/categories`)
+      const categoriesList = await axios.get(
+        `${endpoint}/wp-json/wp/v2/categories`
+      )
 
       for (let i = 0; i < categoriesList.data.length; i++) {
         categoriesRes.push({

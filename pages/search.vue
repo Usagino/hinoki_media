@@ -6,7 +6,6 @@
     .pages__body
       h1.pages__title {{$route.query.title}}
       CardItemInline(v-for="post in searchNews" :key="post.id" :post="post")
-
   AppFooter
 </template>
 
@@ -17,26 +16,26 @@ export default {
       searchNews: []
     }
   },
-  async asyncData({ app, error }) {
-    const query = app.context.query
-    const endpoint = process.env.ENDPOINT
-    console.log(query.title)
-    const seatchLink = encodeURI(
-      `${endpoint}/wp-json/wp/v2/posts/?search=${query.title}&_embed=1`
-    )
-    console.log(seatchLink)
-
-    const item = await app.$axios
-      .$get(seatchLink, {
-        headers: { 'Access-Control-Allow-Origin': '*' },
-        data: {}
-      })
-      .catch((err) => {
+  mounted() {
+    // console.log('data: ', this.searchData())
+    this.searchData().then((res) => {
+      console.log(res)
+      this.searchNews = res
+    })
+  },
+  methods: {
+    async searchData() {
+      const query = this.$route.query
+      // const endpoint = process.env.ENDPOINT
+      const endpoint = 'https://admin.frontartgraph.com'
+      const seatchLink = encodeURI(
+        `${endpoint}/wp-json/wp/v2/posts/?search=${query.title}&_embed=1`
+      )
+      const item = await this.$axios.$get(seatchLink).catch((err) => {
         return err.response
       })
-
-    console.log(item)
-    return { searchNews: item }
+      return item
+    }
   }
 }
 </script>
