@@ -11,11 +11,11 @@
 
 <script>
 export default {
-  // data() {
-  //   return {
-  //     searchNews: []
-  //   }
-  // },
+  data() {
+    return {
+      searchNews: null
+    }
+  },
   // async asyncData({ app, error }) {
   //   const query = app.context.query
   //   const endpoint = process.env.ENDPOINT
@@ -28,7 +28,8 @@ export default {
   //   return { searchNews: item }
   // },
   mounted() {
-    console.log('data: ', this.searchData())
+    console.log(process)
+    // console.log('data: ', this.searchData())
     this.searchData().then((res) => {
       console.log(res)
     })
@@ -36,14 +37,18 @@ export default {
   methods: {
     async searchData() {
       const query = this.$route.query
-      const endpoint = process.env.ENDPOINT
+
+      // const endpoint = process.env.ENDPOINT
+      const endpoint = 'https://admin.frontartgraph.com'
+      console.log(endpoint)
       const seatchLink = encodeURI(
         `${endpoint}/wp-json/wp/v2/posts/?search=${query.title}&_embed=1`
       )
       const item = await this.$axios.$get(seatchLink).catch((err) => {
         return err.response
       })
-      console.log(item)
+      // console.log(item)
+      // console.log(process.env.ENDPOINT)
       return item
     }
   }

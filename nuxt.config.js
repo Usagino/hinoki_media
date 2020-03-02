@@ -1,6 +1,7 @@
 import axios from 'axios'
 require('dotenv').config()
 const endpoint = process.env.ENDPOINT
+const { ENDPOINT } = process.env.ENDPOINT
 export default {
   mode: 'universal',
   head: {
@@ -53,7 +54,8 @@ export default {
     }
   },
   env: {
-    endpoint: process.env.ENDPOINT || 'http://localhost:3000'
+    endpoint: process.env.ENDPOINT || 'http://localhost:3000',
+    ENDPOINT
   },
   webfontloader: {
     google: {
