@@ -94,6 +94,7 @@ Vue.mixin({
       )
       // -----------------------------------------
       let seatchItems = []
+      console.log(query.title)
       if (!(query.title === undefined)) {
         const seatchLink = `${endpoint}/wp-json/wp/v2/posts/?search=${query.title}&_embed=1`
         seatchItems = await app.$axios.$get(encodeURI(seatchLink))
