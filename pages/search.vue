@@ -3,7 +3,10 @@
 .container
   AppHeader
   .pages
-    .pages__body
+    .pages__body(v-if="searchNews.length === 0")
+      h1.pages__title {{$route.query.title}}
+      h2 読み込み中...
+    .pages__body(v-else)
       h1.pages__title {{$route.query.title}}
       CardItemInline(v-for="post in searchNews" :key="post.id" :post="post")
   AppFooter
