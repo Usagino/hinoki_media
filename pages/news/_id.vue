@@ -13,15 +13,7 @@
       img.article__body__thumbnail(:src="getThumbnail(this.Article)" decoding="async")
       .article__body__text(v-html="this.Article.content.rendered")
     RankingItems(:posts="rankingPosts")
-  .feature-blocks
-    h2 FEATURE
-    .feature-blocks__items
-      CardItem(
-        v-for="item in this.featurePosts"
-        :key="item.id"
-        :post="item"
-        addClass="black"
-         )
+  AppFeature(:posts="featurePosts")
   AppFooter
 </template>
 

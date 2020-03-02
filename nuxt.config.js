@@ -30,6 +30,7 @@ export default {
   ],
   buildModules: ['@nuxtjs/eslint-module'],
   modules: [
+    'nuxt-user-agent',
     'nuxt-webfontloader',
     '@nuxtjs/style-resources',
     '@nuxtjs/pwa',

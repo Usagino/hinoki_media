@@ -14,22 +14,20 @@
             p {{ getCreatedAt(post) }}
             p Written by {{getAuthor(post)}}
     .latest-news
-      .latest-news__items
+      .latest-news__items(v-if="$ua.deviceType() === 'pc'")
         CardItem(
           v-for="item in this.latestPosts"
           :key="item.id"
           :post ="item"
           )
-      AppButton(text="NEXT" to="/page/1")
-    .feature-blocks
-      h2 FEATURE
-      .feature-blocks__items
-        CardItem(
-          v-for="item in this.featurePosts"
+      .latest-news__items(v-else)
+        CardItemInline(
+          v-for="item in this.latestPosts"
           :key="item.id"
-          :post="item"
-          addClass="black"
-           )
+          :post ="item"
+          )
+      AppButton(text="NEXT" to="/page/1")
+    AppFeature(:posts="featurePosts")
     AppFooter
 </template>
 
@@ -39,17 +37,25 @@ export default {
     return {
       title: 'TOP'
     }
+  },
+  mounted() {
+    console.log(this.$ua.deviceType())
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .container {
+  @include mq(sm) {
+    background: $color-textcolorwhite;
+  }
   .carousel {
     @include defaultPCwidth;
     padding-top: 40px;
     @include mq(sm) {
       width: $default-size-sp;
+      padding: 0px;
+      height: 200px;
     }
     height: 500px;
     &__slide {
@@ -60,6 +66,7 @@ export default {
       }
       @include mq(sm) {
         width: $default-size-sp;
+        height: 200px;
       }
       height: 500px;
       background-size: cover;
@@ -122,16 +129,23 @@ export default {
     display: flex;
     justify-content: center;
     flex-direction: column;
-
     padding: 48px 0;
+    @include mq(sm) {
+      padding: 0px;
+      padding-bottom: 32px;
+    }
     &__items {
       @include defaultPCwidth;
+      @include baseGrid;
       padding-top: 16px;
       padding-bottom: 16px;
       @include mq(sm) {
+        padding: 32px 8px;
         width: $default-size-sp;
+        box-sizing: border-box;
+        grid-auto-rows: 100px;
+        grid-gap: 10px 10px;
       }
-      @include baseGrid;
     }
   }
 }

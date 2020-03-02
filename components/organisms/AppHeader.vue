@@ -23,8 +23,18 @@
   transition
     .header__cover(v-if="searchToggle" @click="searchToggle = false")
   transition
-    .header__sp-menu(v-if="spMenuToggle")
-      button.header__sp-menu__close(@click="spMenuToggle=false")
+    ul.header__sp-menu(v-if="spMenuToggle")
+      li.header__sp-menu--item
+        input(type="text" placeholder="ここにテキストを入力して検索" v-model="searchText")
+        a(@click="searchMethods()")
+          feather-search
+      li.header__sp-menu--item.header__sp-menu--list
+        a(href="/page/1") NEWS
+      li.header__sp-menu--item.header__sp-menu--list
+        a(href="/contact") CONTACT
+      li.header__sp-menu--item.header__sp-menu--list
+        a(href="/about") ABOUT
+
   button.header__menu-button(@click="spMenuToggle=!spMenuToggle")
 </template>
 
@@ -59,6 +69,9 @@ export default {
   padding: 20px 0;
   z-index: 100;
   border-bottom: 1px solid rgba($color-textsecondary, 0.2);
+  @include mq(sm) {
+    padding: 8px 0px;
+  }
   &__wrap {
     @include defaultPCwidth;
     display: flex;
@@ -114,14 +127,12 @@ export default {
   }
   &__menu-button {
     display: none;
-    height: 44px;
-    width: 44px;
     background: red;
     height: 44px;
     width: 44px;
     background: red;
     position: fixed;
-    top: 20px;
+    top: 8px;
     right: 20px;
     background: red;
     z-index: 1001;
@@ -136,6 +147,15 @@ export default {
     top: 0;
     left: 0;
     z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 0;
+    flex-direction: column;
+    box-sizing: border-box;
+    a {
+      @include font-title;
+      color: $color-textcolorwhite;
+    }
   }
 }
 

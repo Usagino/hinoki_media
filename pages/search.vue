@@ -19,7 +19,6 @@ export default {
   mounted() {
     // console.log('data: ', this.searchData())
     this.searchData().then((res) => {
-      console.log(res)
       this.searchNews = res
     })
   },
