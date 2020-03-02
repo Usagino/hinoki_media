@@ -5,7 +5,7 @@
   .pages
     .pages__body
       h1.pages__title {{$route.query.title}}
-      //CardItemInline(v-for="post in searchNews" :key="post.id" :post="post")
+      CardItemInline(v-for="post in searchNews" :key="post.id" :post="post")
   AppFooter
 </template>
 
@@ -13,42 +13,27 @@
 export default {
   data() {
     return {
-      searchNews: null
+      searchNews: []
     }
   },
-  // async asyncData({ app, error }) {
-  //   const query = app.context.query
-  //   const endpoint = process.env.ENDPOINT
-  //   const seatchLink = encodeURI(
-  //     `${endpoint}/wp-json/wp/v2/posts/?search=${query.title}&_embed=1`
-  //   )
-  //   const item = await app.$axios.$get(seatchLink).catch((err) => {
-  //     return err.response
-  //   })
-  //   return { searchNews: item }
-  // },
   mounted() {
-    console.log(process)
     // console.log('data: ', this.searchData())
     this.searchData().then((res) => {
       console.log(res)
+      this.searchNews = res
     })
   },
   methods: {
     async searchData() {
       const query = this.$route.query
-
       // const endpoint = process.env.ENDPOINT
       const endpoint = 'https://admin.frontartgraph.com'
-      console.log(endpoint)
       const seatchLink = encodeURI(
         `${endpoint}/wp-json/wp/v2/posts/?search=${query.title}&_embed=1`
       )
       const item = await this.$axios.$get(seatchLink).catch((err) => {
         return err.response
       })
-      // console.log(item)
-      // console.log(process.env.ENDPOINT)
       return item
     }
   }
