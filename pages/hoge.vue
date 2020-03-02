@@ -1,44 +1,22 @@
 <template lang="pug">
   .container
     AppHeader
-    Carousel.carousel(:per-page="1" :paginationEnabled="false" :autoplay="true" :autoplayTimeout="3000" :loop="true")
-      Slide.carousel__slide(
-        v-for="post in rankingPosts"
-        :key="post.id"
-        :style="{ backgroundImage: 'url(' + getThumbnail(post) + ')' }")
-        .carousel__cover
-        a.carousel__text.item(:href="'news/'+post.id")
-          a.category(:href="getCategoryLink(post)") {{ getCategory(post) }}
-          h2.carousel__text__title {{ getTitle(post) }}
-          .carousel__info
-            p {{ getCreatedAt(post) }}
-            p Written by {{getAuthor(post)}}
-    .latest-news
-      .latest-news__items
-        CardItem(
-          v-for="item in this.latestPosts"
-          :key="item.id"
-          :post ="item"
-          )
-      AppButton(text="NEXT" to="/page/1")
-    .feature-blocks
-      h2 FEATURE
-      .feature-blocks__items
-        CardItem(
-          v-for="item in this.featurePosts"
-          :key="item.id"
-          :post="item"
-          addClass="black"
-           )
+
     AppFooter
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
-  head() {
-    return {
-      title: 'TOP'
-    }
+  mounted() {
+    this.getList()
+    console.log(this.getList())
+  },
+  methods: {
+    ...mapActions({
+      getList: 'getList'
+    })
   }
 }
 </script>

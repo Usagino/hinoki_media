@@ -22,7 +22,6 @@ export default {
   ],
   plugins: [
     '~plugins/components.js',
-    '~plugins/postDecode.js',
     { src: '~/plugins/feather.js' },
     { src: '~/plugins/carousel.js', ssr: false },
     { src: '~/plugins/fetchData.js', ssr: true },
