@@ -29,7 +29,7 @@ export default {
     align-items: center;
     padding: 0px 36px;
     cursor: pointer;
-    border-radius: 100vh;
+    border-radius: 2.5px;
     margin: auto;
     @include font-cardtitle;
     color: $color-textcolorwhite;

@@ -1,12 +1,12 @@
 <template lang="pug">
 a.carditem.item(:href="getLink(post)" :class="addClass")
   .carditem__wrap
-    a.carditem__category(:href="getCategoryLink(post)") {{ getCategory(post) }}
     img.carditem__thumbnail(:src="getThumbnail(post)" decoding="async")
+  .carditem__texts
     h2.carditem__title {{ getTitle(post) }}
-  .carditem__info
-    p {{ getCreatedAt(post) }}
-    p Written by {{getAuthor(post)}}
+    .carditem__info
+      a(:href="getCategoryLink(post)") {{ getCategory(post) }}
+      p {{ getCreatedAt(post) }}
 </template>
 
 <script>
@@ -55,15 +55,20 @@ $card-width: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 16px 20px;
   width: 100%;
   box-sizing: border-box;
   @include mq(sm) {
     margin: auto;
   }
+  &__texts {
+    padding: 12px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
   &__wrap {
     @include gap-bottom(12px);
-    margin-bottom: 12px;
     display: flex;
     flex-direction: column;
   }
@@ -80,7 +85,7 @@ $card-width: 300px;
     display: block;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     overflow: hidden;
     text-overflow: ellipsis;
     @include font-cardtitle;
@@ -89,7 +94,9 @@ $card-width: 300px;
   &__info {
     display: flex;
     justify-content: space-between;
-    * {
+    a,
+    p {
+      @include font-textbold;
       color: $color-textsecondary;
     }
   }
