@@ -23,9 +23,9 @@ export default {
     return {
       swiperOption: {
         loop: true,
-        slidesPerView: this.uaSlider(),
+        slidesPerView: this.uaSlider().slidesPerView,
         centeredSlides: true,
-        spaceBetween: 40,
+        spaceBetween: this.uaSlider().spaceBetween,
         autoplay: {
           delay: 3000,
           disableOnInteraction: false
@@ -39,9 +39,15 @@ export default {
   methods: {
     uaSlider() {
       if (this.$ua.deviceType() === 'pc') {
-        return 4
+        return {
+          slidesPerView: 4,
+          spaceBetween: 40
+        }
       } else {
-        return 2
+        return {
+          slidesPerView: 2,
+          spaceBetween: 20
+        }
       }
     }
   }
@@ -65,6 +71,9 @@ export default {
     width: auto;
     height: auto;
     img {
+      @include mq(sm) {
+        height: 100px;
+      }
       width: 100%;
       height: 180px;
       margin-bottom: 8px;
@@ -79,6 +88,10 @@ export default {
       -webkit-line-clamp: 2;
       overflow: hidden;
       text-overflow: ellipsis;
+      @include mq(sm) {
+        @include font-textbold;
+        color: $color-textcolorwhite;
+      }
     }
   }
 }

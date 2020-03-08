@@ -53,6 +53,7 @@ export default {
     width: 100vw;
     margin-bottom: 40px;
     @include mq(sm) {
+      margin-bottom: 0px;
       width: $default-size-sp;
       padding: 0px;
       height: 200px;
@@ -132,13 +133,12 @@ export default {
     flex-direction: column;
     @include mq(sm) {
       padding: 0px;
-      padding-bottom: 32px;
     }
     &__items {
       @include defaultPCwidth;
       @include baseGrid;
       @include mq(sm) {
-        padding: 32px 8px;
+        padding: 32px 8px 0px;
         width: $default-size-sp;
         box-sizing: border-box;
         grid-auto-rows: 100px;

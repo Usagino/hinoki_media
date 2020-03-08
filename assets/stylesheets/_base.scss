@@ -137,4 +137,7 @@ img{
 }
 .nextbutton{
   margin: 40px 0;
+  @include mq(sm){
+    margin: 20px 0;
+  }
 }
