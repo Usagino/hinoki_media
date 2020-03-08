@@ -75,27 +75,7 @@ img{
   width: 100vw;
 
 }
-.feature-blocks {
-  background: $color-textcolorblack;
-  padding: 40px 0;
-  & > h2 {
-    text-align: center;
-    color: $color-textcolorwhite;
-  }
-  &__items{
-    @include defaultPCwidth;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    display: -webkit-box;
-    @include baseGrid;
-    @include mq(sm) {
-      padding: 32px 8px;
-      box-sizing: border-box;
-      grid-auto-rows: 100px;
-      grid-gap: 10px 10px;
-    }
-  }
-}
+
 .pages {
   width: $default-size;
   padding: 16px 0 48px;

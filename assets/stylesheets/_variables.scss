@@ -1,7 +1,8 @@
 $color-textcolorblack: rgba(51,51,51,1);
 $color-textcolorwhite: rgba(255,255,255,1);
-$color-textsecondary: #AAAAAA;
+$color-textsecondary: rgba(170,170,170,1);
 $color-background: rgba(244,244,244,1);
+$color-black: rgba(0,0,0,1);
 @mixin font-title {
 	font-size:30px;
 	font-family:"Noto Sans JP";
@@ -9,7 +10,7 @@ $color-background: rgba(244,244,244,1);
   color:$color-textcolorblack;
 }
 @mixin font-cardtitle {
-	font-size:20px;
+	font-size:18px;
 	font-family:"Noto Sans JP";
 	font-weight:bold;
   color:$color-textcolorblack;

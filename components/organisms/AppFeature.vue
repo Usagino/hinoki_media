@@ -1,18 +1,12 @@
 <template lang="pug">
 .feature-blocks
   h2 FEATURE
-  .feature-blocks__items(v-if="$ua.deviceType() === 'pc'")
-    CardItem(
-      v-for="item in posts"
-      :key="item.id"
-      :post="item"
-      addClass="black")
-  .feature-blocks__items(v-else)
-    CardItemInline(
-      v-for="item in posts"
-      :key="item.id"
-      :post="item"
-      addClass="black")
+  swiper.feature-blocks__carousel(:options="swiperOption")
+    swiper-slide.feature-blocks__slide(v-for="post in posts"
+      :key="post.id"
+      :post="post")
+      img(:src="getThumbnail(post)")
+      h2 {{ getTitle(post) }}
 </template>
 
 <script>
@@ -24,6 +18,32 @@ export default {
         return []
       }
     }
+  },
+  data() {
+    return {
+      swiperOption: {
+        loop: true,
+        slidesPerView: this.uaSlider(),
+        centeredSlides: true,
+        spaceBetween: 40,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false
+        }
+      }
+    }
+  },
+  mounted() {
+    console.log(this.swiperOption.slidesPerView)
+  },
+  methods: {
+    uaSlider() {
+      if (this.$ua.deviceType() === 'pc') {
+        return 4
+      } else {
+        return 1
+      }
+    }
   }
 }
 </script>
@@ -31,22 +51,33 @@ export default {
 <style lang="scss" scoped>
 .feature-blocks {
   background: $color-textcolorblack;
-  padding: 40px 0;
+  padding: 28px 0;
   & > h2 {
+    margin-bottom: 28px;
+    @include font-title;
     text-align: center;
     color: $color-textcolorwhite;
   }
-  &__items {
-    @include defaultPCwidth;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    display: -webkit-box;
-    @include baseGrid;
-    @include mq(sm) {
-      padding: 32px 8px;
-      box-sizing: border-box;
-      grid-auto-rows: 100px;
-      grid-gap: 10px 10px;
+  &__carousel {
+    width: 100%;
+  }
+  &__slide {
+    width: auto;
+    height: auto;
+    img {
+      width: 100%;
+      height: 180px;
+      margin-bottom: 8px;
+    }
+    h2 {
+      @include font-cardtitle;
+      color: $color-textcolorwhite;
+      display: block;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }

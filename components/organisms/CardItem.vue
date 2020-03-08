@@ -35,17 +35,12 @@ export default {
 <style lang="scss" scoped>
 $card-width: 300px;
 .black {
-  background: $color-textsecondary;
-  .carditem__wrap {
-    a,
-    h2 {
-      color: $color-textcolorwhite;
-    }
+  background: transparent;
+  .carditem__title {
+    color: $color-textcolorwhite;
   }
   .carditem__info {
-    p {
-      color: $color-textcolorwhite;
-    }
+    display: none;
   }
 }
 .white {
