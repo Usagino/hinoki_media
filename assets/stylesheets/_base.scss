@@ -55,6 +55,8 @@ h2{
   font-size: 16px;
 }
 img{
+  -o-object-fit: cover;
+  object-fit: cover;
   pointer-events: none;
 }
 #__nuxt{

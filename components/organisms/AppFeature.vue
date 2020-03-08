@@ -41,7 +41,7 @@ export default {
       if (this.$ua.deviceType() === 'pc') {
         return 4
       } else {
-        return 1
+        return 2
       }
     }
   }
@@ -68,6 +68,7 @@ export default {
       width: 100%;
       height: 180px;
       margin-bottom: 8px;
+      object-fit: cover;
     }
     h2 {
       @include font-cardtitle;
