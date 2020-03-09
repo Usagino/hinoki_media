@@ -1,13 +1,12 @@
 <template lang="pug">
-//a.carditem.item(:href="'news/'+post.id")
-a.carditem.item(:href="getLink(post)")
+a.carditem.item(:href="getLink(post)" :class="addClass")
   .carditem__wrap
-    p.carditem__category {{ getCategory(post) }}
     img.carditem__thumbnail(:src="getThumbnail(post)" decoding="async")
+  .carditem__texts
     h2.carditem__title {{ getTitle(post) }}
-  .carditem__info
-    p {{ getCreatedAt(post) }}
-    p Written by {{getAuthor(post)}}
+    .carditem__info
+      a(:href="getCategoryLink(post)") {{ getCategory(post) }}
+      p {{ getCreatedAt(post) }}
 </template>
 
 <script>
@@ -18,6 +17,10 @@ export default {
       default: () => {
         return []
       }
+    },
+    addClass: {
+      type: String,
+      default: 'white'
     }
   },
   data() {
@@ -31,25 +34,44 @@ export default {
 
 <style lang="scss" scoped>
 $card-width: 300px;
+.black {
+  background: transparent;
+  .carditem__title {
+    color: $color-textcolorwhite;
+  }
+  .carditem__info {
+    display: none;
+  }
+}
+.white {
+  background: $color-textcolorwhite;
+}
 .carditem {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: $color-textcolorwhite;
-  padding: 16px 20px;
-  min-height: 360px;
+  width: 100%;
+  box-sizing: border-box;
   @include mq(sm) {
     margin: auto;
   }
+  &__texts {
+    padding: 12px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
   &__wrap {
     @include gap-bottom(12px);
-    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
   }
   &__category {
     color: $color-textsecondary;
   }
   &__thumbnail {
-    width: $card-width;
+    width: 100%;
     height: 200px;
     object-fit: cover;
   }
@@ -58,7 +80,7 @@ $card-width: 300px;
     display: block;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     overflow: hidden;
     text-overflow: ellipsis;
     @include font-cardtitle;
@@ -67,7 +89,9 @@ $card-width: 300px;
   &__info {
     display: flex;
     justify-content: space-between;
-    * {
+    a,
+    p {
+      @include font-textbold;
       color: $color-textsecondary;
     }
   }

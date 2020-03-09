@@ -1,5 +1,5 @@
 <template lang="pug">
-.container
+  h1 hogehoge
 </template>
 
 <script>

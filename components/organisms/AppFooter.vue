@@ -5,13 +5,13 @@
       img.footer__guide__logo(src="/image/logo_inline.svg" decoding="async")
     ul.footer__guide__menu
       li
-        a(href="/news") DESIGN
+        a(href="/categories/design/1") DESIGN
       li
-        a(href="/news") TECHNOLOGY
+        a(href="/categories/technology/1") TECHNOLOGY
       li
-        a(href="/news") CULTURE
+        a(href="/categories/culture/1") CULTURE
       li
-        a(href="/news") GADGET
+        a(href="/categories/gadget/1") GADGET
     .footer__guide__sns
       a(href="/")
         feather-facebook
@@ -35,7 +35,8 @@ export default {}
 <style lang="scss" scoped>
 .footer {
   background: $color-textcolorwhite;
-  padding: 40px 0;
+  padding: 40px 24px;
+  width: 100vw;
   &__guide {
     width: 400px;
     margin: auto;
@@ -43,6 +44,7 @@ export default {}
     flex-direction: column;
     @include repeat-columns(24px);
     @include mq(sm) {
+      width: 100%;
       & > a {
         display: inline;
         margin: auto;
@@ -88,7 +90,10 @@ export default {}
     }
   }
   &__info {
-    width: $default-size;
+    width: 100%;
+    padding: 0 24px;
+    box-sizing: border-box;
+    max-width: $default-size;
     margin: auto;
     display: flex;
     justify-content: space-between;
@@ -104,6 +109,7 @@ export default {}
     }
     &__menu {
       display: flex;
+
       @include gap-right(12px);
       @include mq(sm) {
         justify-content: center;

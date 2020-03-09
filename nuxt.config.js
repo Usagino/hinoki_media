@@ -1,5 +1,7 @@
 import axios from 'axios'
-const apiUrl = 'https://admin.frontartgraph.com'
+require('dotenv').config()
+const endpoint = process.env.ENDPOINT
+const { ENDPOINT } = process.env.ENDPOINT
 export default {
   mode: 'universal',
   head: {
@@ -17,40 +19,46 @@ export default {
   },
   css: [
     '~/assets/stylesheets/reset.css',
-    { src: '~/assets/stylesheets/style.scss', lang: 'scss' }
+    { src: '~/assets/stylesheets/style.scss', lang: 'scss' },
+    'swiper/dist/css/swiper.css'
   ],
-  loading: {
-    color: '#333333',
-    height: '5px',
-    continuous: true,
-    duration: 4000
-  },
   plugins: [
-    '~plugins/fetchData.js',
     '~plugins/components.js',
-    '~plugins/postDecode.js',
     { src: '~/plugins/feather.js' },
+    { src: '~/plugins/vue-awesome-swiper', ssr: false },
     { src: '~/plugins/carousel.js', ssr: false },
-    { src: 'plugins/axios.js', ssr: false }
+    { src: '~/plugins/fetchData.js', ssr: true },
+    { src: '~/plugins/axios', ssr: false }
   ],
   buildModules: ['@nuxtjs/eslint-module'],
   modules: [
-    '@nuxtjs/axios',
+    'nuxt-user-agent',
     'nuxt-webfontloader',
     '@nuxtjs/style-resources',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/dotenv',
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
   styleResources: {
     scss: ['~/assets/stylesheets/style.scss']
   },
   axios: {
-    proxy: true
+    proxy: true,
+    baseURL: '/.netlify/functions'
   },
   proxy: {
-    '/api/': {
-      target: 'https://admin.frontartgraph.com/wp-json/wp/v2/posts',
-      pathRewrite: { '^/api/': '/' }
+    '/api': {
+      target: endpoint,
+      pathRewrite: { '^/api': '/' }
+    },
+    '/.netlify/functions/connpass': {
+      target: endpoint
     }
+  },
+  env: {
+    endpoint: process.env.ENDPOINT || 'http://localhost:3000',
+    ENDPOINT
   },
   webfontloader: {
     google: {
@@ -58,30 +66,31 @@ export default {
     }
   },
   build: {
-    hardSource: true,
+    // hardSource: true,
     extend(config, ctx) {},
+    vendor: ['vue-awesome-swiper'],
     terser: {
       terserOptions: {
-        compress: { drop_console: true }
+        compress: { drop_console: false }
       }
     }
   },
   generate: {
     interval: 2000,
+    fallback: true,
     async routes() {
-      // paginate
+      // news
       const paginate = await axios.get(
-        `${apiUrl}/wp-json/wp/v2/posts?per_page=100&page=1&_embed=1`
+        `${endpoint}/wp-json/wp/v2/posts?per_page=100&page=1&_embed=1`
       )
-      const paginateRes = paginate.data.map((paginate) => {
+      const newsRes = paginate.data.map((paginate) => {
         return {
           route: '/news/' + paginate.id,
           payload: { paginate }
         }
       })
-      // console.log(paginateRes)
       // pagination
-      const { headers } = await axios(`${apiUrl}/wp-json/wp/v2/posts`, {
+      const { headers } = await axios(`${endpoint}/wp-json/wp/v2/posts`, {
         'Access-Control-Expose-Headers': 'x-wp-total'
       })
       const getPostNum = 10
@@ -91,7 +100,6 @@ export default {
       }
       const canDisplayPageNum =
         Math.floor(Number(headers['x-wp-total']) / getPostNum) + count
-
       const paginationRes = []
       for (let i = 1; i < canDisplayPageNum + 1; i++) {
         paginationRes.push({
@@ -99,9 +107,27 @@ export default {
           payload: { i }
         })
       }
-      return Promise.all([paginateRes, paginationRes]).then((values) => {
-        return [...values[0], ...values[1]]
-      })
+      // categories
+      const categoriesRes = []
+      const categoriesList = await axios.get(
+        `${endpoint}/wp-json/wp/v2/categories`
+      )
+
+      for (let i = 0; i < categoriesList.data.length; i++) {
+        categoriesRes.push({
+          route: `/categories/${categoriesList.data[i].slug}/1`,
+          payload: { i }
+        })
+      }
+      console.log(endpoint)
+      console.table(newsRes)
+      console.table(paginationRes)
+      console.table(categoriesRes)
+      return Promise.all([newsRes, paginationRes, categoriesRes]).then(
+        (values) => {
+          return [...values[0], ...values[1], ...values[2]]
+        }
+      )
     }
   }
 }

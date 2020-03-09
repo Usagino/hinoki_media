@@ -5,25 +5,23 @@
     .article__body
       .article__body__title
         .article__body__info
+          h1 {{ getTitle(this.Article) }}
+        .article__body__info
           p {{ getCategory(this.Article) }}
           p {{ getCreatedAt(this.Article) }}
-        .article__body__info
-          h1 {{ getTitle(this.Article) }}
-          p Written by {{getAuthor(this.Article)}}
+
       img.article__body__thumbnail(:src="getThumbnail(this.Article)" decoding="async")
       .article__body__text(v-html="this.Article.content.rendered")
-      .article__body__tags
-        TagButton(
-          v-for="post in getTags(this.Article)"
-          :key="post.id"
-          :tag="post"
-          )
+      p.article__body__auther Written by {{getAuthor(this.Article)}}
+      .article__social-btns
+        .article__social-btns__fb.article__social-btns__button
+          feather-facebook
+        .article__social-btns__tw.article__social-btns__button
+          feather-twitter
+        .article__social-btns__url.article__social-btns__button
+          feather-external-link
     RankingItems(:posts="rankingPosts")
-  .feature
-    FeatureItem(
-      v-for="post in this.featurePosts"
-      :key="post.id"
-      :post="post" )
+  AppFeature(:posts="featurePosts")
   AppFooter
 </template>
 
@@ -55,7 +53,7 @@ export default {
       width: $default-size-sp;
     }
     &__title {
-      padding: 32px;
+      padding: 20px;
       @include mq(sm) {
         padding: 12px;
       }
@@ -66,11 +64,12 @@ export default {
       align-items: flex-end;
       h1 {
         @include font-title;
+        margin-bottom: 8px;
       }
       p,
       a {
-        color: $color-textsecondary;
         @include font-textbold;
+        color: $color-textsecondary;
       }
       @include mq(sm) {
         &:last-child {
@@ -83,14 +82,17 @@ export default {
       width: 100%;
       height: 400px;
       object-fit: cover;
+      margin-bottom: 20px;
     }
     &__text {
-      padding: 32px 0;
       @include mq(sm) {
         padding: 12px;
       }
       * {
         margin-bottom: 32px;
+        &:last-child {
+          margin-bottom: 0px;
+        }
         @include mq(sm) {
           margin-bottom: 16px;
         }
@@ -130,6 +132,34 @@ export default {
       @include mq(sm) {
         padding: 0px 12px 24px;
       }
+    }
+    &__auther {
+      padding: 20px;
+      text-align: right;
+      color: $color-textsecondary;
+    }
+  }
+  &__social-btns {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 64px;
+    &__button {
+      width: calc(100% / 3);
+      @include flex-middle;
+      svg,
+      path {
+        stroke: $color-textcolorwhite !important;
+      }
+    }
+    &__fb {
+      background: #3b5998;
+    }
+    &__tw {
+      background: #1da1f2;
+    }
+    &__url {
+      background: $color-textcolorblack;
     }
   }
 }

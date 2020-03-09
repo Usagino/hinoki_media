@@ -5,26 +5,36 @@
       img(src="/image/logo_inline.svg")
     ul.header__menu
       li
-        a(href="/news") NEWS
+        a(href="/page/1") NEWS
       li
-        a(href="/news") CONTACT
+        a(href="/contact") CONTACT
       li
-        a(href="/news") ABOUT
+        a(href="/about") ABOUT
       li
         button(@click="searchToggle = true")
           feather-search
 
   transition
-    form.header__search(v-if="searchToggle")
+    form.header__search(v-if="searchToggle" v-on:submit.prevent="searchMethods()")
       .header__wrap
-        input(type="text" placeholder="ここにテキストを入力して検索")
-        button
+        input(type="text" placeholder="ここにテキストを入力して検索" v-model="searchText")
+        a(@click="searchMethods()")
           feather-search
   transition
     .header__cover(v-if="searchToggle" @click="searchToggle = false")
   transition
-    .header__sp-menu(v-if="spMenuToggle")
-      button.header__sp-menu__close(@click="spMenuToggle=false")
+    ul.header__sp-menu(v-if="spMenuToggle")
+      li.header__sp-menu--item
+        input(type="text" placeholder="ここにテキストを入力して検索" v-model="searchText")
+        a(@click="searchMethods()")
+          feather-search
+      li.header__sp-menu--item.header__sp-menu--list
+        a(href="/page/1") NEWS
+      li.header__sp-menu--item.header__sp-menu--list
+        a(href="/contact") CONTACT
+      li.header__sp-menu--item.header__sp-menu--list
+        a(href="/about") ABOUT
+
   button.header__menu-button(@click="spMenuToggle=!spMenuToggle")
 </template>
 
@@ -33,7 +43,17 @@ export default {
   data() {
     return {
       searchToggle: false,
-      spMenuToggle: false
+      spMenuToggle: false,
+      searchText: ''
+    }
+  },
+  methods: {
+    searchMethods() {
+      console.log(this.searchText)
+      if (!(this.searchText === '')) {
+        window.location.href = `/search?title=${this.searchText}`
+        // this.$router.push(`/search/${this.searchText}`)
+      }
     }
   }
 }
@@ -49,14 +69,18 @@ export default {
   padding: 20px 0;
   z-index: 100;
   border-bottom: 1px solid rgba($color-textsecondary, 0.2);
-
+  @include mq(sm) {
+    padding: 8px 0px;
+  }
   &__wrap {
-    width: $default-size;
-    margin: auto;
+    @include defaultPCwidth;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    span {
+      cursor: pointer;
+    }
     @include mq(sm) {
       width: $default-size-sp;
       padding: 0 20px;
@@ -86,7 +110,7 @@ export default {
     top: 0%;
     left: 0;
     z-index: 900;
-    padding: 20px 0;
+    padding: 19px 0;
     input {
       height: 42px;
       @include font-textbold;
@@ -103,14 +127,12 @@ export default {
   }
   &__menu-button {
     display: none;
-    height: 44px;
-    width: 44px;
     background: red;
     height: 44px;
     width: 44px;
     background: red;
     position: fixed;
-    top: 20px;
+    top: 8px;
     right: 20px;
     background: red;
     z-index: 1001;
@@ -125,6 +147,15 @@ export default {
     top: 0;
     left: 0;
     z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 0;
+    flex-direction: column;
+    box-sizing: border-box;
+    a {
+      @include font-title;
+      color: $color-textcolorwhite;
+    }
   }
 }
 

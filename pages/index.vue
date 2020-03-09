@@ -8,26 +8,26 @@
         :style="{ backgroundImage: 'url(' + getThumbnail(post) + ')' }")
         .carousel__cover
         a.carousel__text.item(:href="'news/'+post.id")
-          p.category {{ getCategory(post) }}
+          a.category(:href="getCategoryLink(post)") {{ getCategory(post) }}
           h2.carousel__text__title {{ getTitle(post) }}
           .carousel__info
             p {{ getCreatedAt(post) }}
             p Written by {{getAuthor(post)}}
     .latest-news
-      .latest-news__items
+      .latest-news__items(v-if="$ua.deviceType() === 'pc'")
         CardItem(
-          v-for="post in this.latestPosts"
-          :key="post.id"
-          :post ="post"
+          v-for="item in this.latestPosts"
+          :key="item.id"
+          :post ="item"
           )
-        span
-        span
-      AppButton(text="NEXT" to="/page/1")
-    .feature
-      FeatureItem(
-        v-for="post in this.featurePosts"
-        :key="post.id"
-        :post="post" )
+      .latest-news__items(v-else)
+        CardItemInline(
+          v-for="item in this.latestPosts"
+          :key="item.id"
+          :post ="item"
+          )
+      AppButton.nextbutton(text="NEXT" to="/page/1")
+    AppFeature(:posts="featurePosts")
     AppFooter
 </template>
 
@@ -38,29 +38,35 @@ export default {
       title: 'TOP'
     }
   },
-  mounted() {},
-  methods: {}
+  mounted() {
+    console.log(this.$ua.deviceType())
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .container {
+  @include mq(sm) {
+    background: $color-textcolorwhite;
+  }
   .carousel {
-    padding-top: 40px;
-    margin: auto;
-    width: $default-size;
+    width: 100vw;
+    margin-bottom: 40px;
     @include mq(sm) {
+      margin-bottom: 0px;
       width: $default-size-sp;
+      padding: 0px;
+      height: 200px;
     }
     height: 500px;
     &__slide {
-      width: $default-size;
       cursor: grab;
       &:active {
         cursor: grabbing;
       }
       @include mq(sm) {
         width: $default-size-sp;
+        height: 200px;
       }
       height: 500px;
       background-size: cover;
@@ -84,10 +90,14 @@ export default {
       );
     }
     &__text {
+      padding-bottom: 24px;
+      padding-top: 24px;
+      @include defaultPCwidth;
       position: absolute;
       bottom: 0;
       left: 0;
-      padding: 24px;
+      right: 0;
+      margin: auto;
       z-index: 2;
       @include gap-bottom(8px);
       @include mq(sm) {
@@ -102,7 +112,7 @@ export default {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        width: $default-size - 48px;
+        width: $default-size;
         color: $color-textcolorwhite;
         @include mq(sm) {
           width: $default-size-sp;
@@ -122,23 +132,18 @@ export default {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    padding: 48px 0;
+    @include mq(sm) {
+      padding: 0px;
+    }
     &__items {
-      padding: 16px 0;
-      margin: auto;
-      width: $default-size;
+      @include defaultPCwidth;
+      @include baseGrid;
       @include mq(sm) {
+        padding: 32px 8px 0px;
         width: $default-size-sp;
-      }
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      & > * {
-        margin-bottom: 36px;
-      }
-      span {
-        width: 340px;
-        margin-bottom: 0px;
+        box-sizing: border-box;
+        grid-auto-rows: 100px;
+        grid-gap: 10px 10px;
       }
     }
   }
