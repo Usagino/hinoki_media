@@ -90,13 +90,14 @@ export default {
       );
     }
     &__text {
-      width: $default-size;
+      padding-bottom: 24px;
+      padding-top: 24px;
+      @include defaultPCwidth;
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
       margin: auto;
-      padding: 24px 0;
       z-index: 2;
       @include gap-bottom(8px);
       @include mq(sm) {

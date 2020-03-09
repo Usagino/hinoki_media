@@ -138,7 +138,8 @@ $breakpoints: (
 }
 @mixin defaultPCwidth{
   max-width: $default-size;
-  padding: 0 40px;
+  padding-left: 40px;
+  padding-right: 40px;
   margin: auto;
 }
 @mixin baseGrid{
