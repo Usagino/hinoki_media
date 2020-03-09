@@ -26,7 +26,7 @@
           :key="item.id"
           :post ="item"
           )
-      AppButton(text="NEXT" to="/page/1")
+      AppButton.nextbutton(text="NEXT" to="/page/1")
     AppFeature(:posts="featurePosts")
     AppFooter
 </template>
@@ -50,16 +50,16 @@ export default {
     background: $color-textcolorwhite;
   }
   .carousel {
-    @include defaultPCwidth;
-    padding-top: 40px;
+    width: 100vw;
+    margin-bottom: 40px;
     @include mq(sm) {
+      margin-bottom: 0px;
       width: $default-size-sp;
       padding: 0px;
       height: 200px;
     }
     height: 500px;
     &__slide {
-      width: 100%;
       cursor: grab;
       &:active {
         cursor: grabbing;
@@ -90,13 +90,16 @@ export default {
       );
     }
     &__text {
+      padding-bottom: 24px;
+      padding-top: 24px;
+      @include defaultPCwidth;
       position: absolute;
       bottom: 0;
       left: 0;
-      padding: 24px;
+      right: 0;
+      margin: auto;
       z-index: 2;
       @include gap-bottom(8px);
-      width: fit-content;
       @include mq(sm) {
         width: $default-size-sp;
         box-sizing: border-box;
@@ -109,7 +112,7 @@ export default {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        width: $default-size - 48px;
+        width: $default-size;
         color: $color-textcolorwhite;
         @include mq(sm) {
           width: $default-size-sp;
@@ -129,18 +132,14 @@ export default {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    padding: 48px 0;
     @include mq(sm) {
       padding: 0px;
-      padding-bottom: 32px;
     }
     &__items {
       @include defaultPCwidth;
       @include baseGrid;
-      padding-top: 16px;
-      padding-bottom: 16px;
       @include mq(sm) {
-        padding: 32px 8px;
+        padding: 32px 8px 0px;
         width: $default-size-sp;
         box-sizing: border-box;
         grid-auto-rows: 100px;

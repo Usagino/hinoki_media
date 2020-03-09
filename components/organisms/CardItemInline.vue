@@ -2,11 +2,10 @@
   a.pages__link(:href="getLink(post)" :class="addClass")
     img.pages__link--image(:src="getThumbnail(post)" decoding="async")
     .pages__link__textbox
-      a.pages__link--category(:href="getCategoryLink(post)") {{ getCategory(post) }}
       h2.pages__link--title {{ getTitle(post) }}
       .pages__link__tags
+        a.pages__link--category(:href="getCategoryLink(post)") {{ getCategory(post) }}
         p.pages__link--careated {{ getCreatedAt(post) }}
-        p.pages__link--author Written by {{getAuthor(post)}}
 </template>
 
 <script>
@@ -61,7 +60,7 @@ export default {
     }
   }
   &--category {
-    color: $color-textsecondary;
+    @include font-textbold color: $color-textsecondary;
   }
   &__textbox {
     display: flex;

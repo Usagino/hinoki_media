@@ -19,11 +19,13 @@ export default {
   },
   css: [
     '~/assets/stylesheets/reset.css',
-    { src: '~/assets/stylesheets/style.scss', lang: 'scss' }
+    { src: '~/assets/stylesheets/style.scss', lang: 'scss' },
+    'swiper/dist/css/swiper.css'
   ],
   plugins: [
     '~plugins/components.js',
     { src: '~/plugins/feather.js' },
+    { src: '~/plugins/vue-awesome-swiper', ssr: false },
     { src: '~/plugins/carousel.js', ssr: false },
     { src: '~/plugins/fetchData.js', ssr: true },
     { src: '~/plugins/axios', ssr: false }
@@ -66,6 +68,7 @@ export default {
   build: {
     // hardSource: true,
     extend(config, ctx) {},
+    vendor: ['vue-awesome-swiper'],
     terser: {
       terserOptions: {
         compress: { drop_console: false }
