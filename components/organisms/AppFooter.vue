@@ -104,6 +104,7 @@ export default {}
     }
     &__menu {
       display: flex;
+
       @include gap-right(12px);
       @include mq(sm) {
         justify-content: center;
