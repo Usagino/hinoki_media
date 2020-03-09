@@ -35,7 +35,8 @@ export default {}
 <style lang="scss" scoped>
 .footer {
   background: $color-textcolorwhite;
-  padding: 40px 0;
+  padding: 40px 24px;
+  width: 100vw;
   &__guide {
     width: 400px;
     margin: auto;
@@ -43,6 +44,7 @@ export default {}
     flex-direction: column;
     @include repeat-columns(24px);
     @include mq(sm) {
+      width: 100%;
       & > a {
         display: inline;
         margin: auto;
@@ -88,7 +90,10 @@ export default {}
     }
   }
   &__info {
-    width: $default-size;
+    width: 100%;
+    padding: 0 24px;
+    box-sizing: border-box;
+    max-width: $default-size;
     margin: auto;
     display: flex;
     justify-content: space-between;
