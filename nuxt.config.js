@@ -77,6 +77,7 @@ export default {
   },
   generate: {
     interval: 2000,
+    fallback: true,
     async routes() {
       // news
       const paginate = await axios.get(
