@@ -55,16 +55,30 @@ export default {}
       height: 336px;
       width: auto;
       margin-bottom: 40px;
+      @include mq(sm) {
+        width: 164px;
+        height: auto;
+      }
     }
     &__text {
+      @include mq(sm) {
+        padding: 40px;
+      }
       h1 {
         @include font-title;
         text-align: center;
         margin-bottom: 12px;
+        @include mq(sm) {
+          @include font-cardtitle;
+        }
       }
       p {
         @include font-cardtitle;
         text-align: center;
+        @include mq(sm) {
+          text-align: left;
+          @include font-text;
+        }
       }
     }
   }
@@ -75,6 +89,9 @@ export default {}
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
+    @include mq(sm) {
+      height: 200px;
+    }
   }
   &__third {
     background: $color-textcolorwhite;
@@ -94,6 +111,9 @@ export default {}
       h2 {
         writing-mode: vertical-lr;
         margin-right: 120px;
+        @include mq(sm) {
+          margin-right: 20px;
+        }
       }
     }
     .member {
@@ -106,8 +126,26 @@ export default {}
         grid-template-rows: 1fr;
         grid-gap: 40px;
         align-items: center;
+        @include mq(sm) {
+          grid-gap: 16px;
+          grid-template-columns: 90px min-content 1fr;
+        }
+        h3 {
+          white-space: nowrap;
+          @include mq(sm) {
+            @include font-minifytextbold;
+          }
+        }
         p {
           @include font-text;
+          @include mq(sm) {
+            @include font-minifytextbold;
+          }
+        }
+        svg {
+          @include mq(sm) {
+            width: 27px;
+          }
         }
       }
     }

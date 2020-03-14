@@ -23,19 +23,33 @@
   transition
     .header__cover(v-if="searchToggle" @click="searchToggle = false")
   transition
-    ul.header__sp-menu(v-if="spMenuToggle")
-      li.header__sp-menu--item
+    .header__sp-menu(v-if="spMenuToggle")
+      .header__sp-menu__wrap
+        img(src="/image/logo_inline_white.svg")
+      .header__sp-menu__search
         input(type="text" placeholder="ここにテキストを入力して検索" v-model="searchText")
         a(@click="searchMethods()")
-          feather-search
-      li.header__sp-menu--item.header__sp-menu--list
-        a(href="/page/1") NEWS
-      li.header__sp-menu--item.header__sp-menu--list
-        a(href="/contact") CONTACT
-      li.header__sp-menu--item.header__sp-menu--list
-        a(href="/about") ABOUT
+          feather-search.header__sp-menu__search--icon
+      ul.header__sp-menu__category
+        li.header__sp-menu--item
+          a(href="/design/1") DESIGN
+        li.header__sp-menu--item
+          a(href="/technology/1") TECHNOLOGY
+        li.header__sp-menu--item
+          a(href="/culture/1") CULTURE
+        li.header__sp-menu--item
+          a(href="/gadget/1") GADGET
+      ul.header__sp-menu__menu
+        li.header__sp-menu--item
+          a(href="/about") ABOUT<span> | 私たちについて</span>
+        li.header__sp-menu--item
+          a(href="/page/1") NEWS<span> | 記事一覧</span>
+        li.header__sp-menu--item
+          a(href="/contact") CONTACT<span> | お問い合わせ</span>
 
-  button.header__menu-button(@click="spMenuToggle=!spMenuToggle")
+  button.header__menu-button(@click="spMenuToggle=!spMenuToggle" :class="{'open-menu':spMenuToggle}")
+    span.bar
+    span.bar
 </template>
 
 <script>
@@ -127,34 +141,96 @@ export default {
   }
   &__menu-button {
     display: none;
-    background: red;
     height: 44px;
     width: 44px;
-    background: red;
     position: fixed;
     top: 8px;
     right: 20px;
-    background: red;
     z-index: 1001;
+    .bar {
+      position: absolute;
+      display: block;
+      content: '';
+      width: 32px;
+      height: 3px;
+      background: $color-black;
+      transition: all 300ms ease;
+      left: 0px;
+      right: 0px;
+      margin: auto;
+      &:first-child {
+        top: 16px;
+      }
+      &:last-child {
+        bottom: 16px;
+      }
+    }
     @include mq(sm) {
       display: block;
     }
   }
+  .open-menu {
+    .bar {
+      background: $color-textcolorwhite;
+      &:first-child {
+        top: auto;
+        transform: rotate(45deg);
+      }
+      &:last-child {
+        bottom: auto;
+        transform: rotate(-45deg);
+      }
+    }
+  }
   &__sp-menu {
+    padding: 8px 0px;
     @include full-screen;
-    background: $color-textcolorblack;
+    background: $color-black;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    padding: 24px 0;
-    flex-direction: column;
     box-sizing: border-box;
-    a {
-      @include font-title;
-      color: $color-textcolorwhite;
+    &__search {
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+
+      input {
+        background: transparent;
+        width: 100%;
+        color: $color-textcolorwhite;
+      }
+      &--icon {
+        stroke: $color-textcolorwhite;
+      }
+    }
+    &__category {
+      display: grid;
+      grid-template-columns: repeat(2, 50%);
+      grid-template-rows: repeat(2, 60px);
+    }
+    &__menu {
+      display: grid;
+      grid-template-columns: repeat(1, 100%);
+      grid-template-rows: repeat(3, 60px);
+      grid-column-gap: 0px;
+      grid-row-gap: 0px;
+    }
+    &--item {
+      border: 1px solid $color-textcolorwhite;
+      @include flex-middle;
+      a {
+        @include font-cardtitle;
+        color: $color-textcolorwhite;
+        span {
+          @include font-textbold;
+          color: $color-textcolorwhite;
+        }
+      }
+    }
+    &__wrap {
+      padding: 0px 20px;
     }
   }
 }

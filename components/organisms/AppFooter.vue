@@ -37,6 +37,9 @@ export default {}
   background: $color-textcolorwhite;
   padding: 40px 24px;
   width: 100vw;
+  @include mq(sm) {
+    padding: 40px 0px;
+  }
   &__guide {
     width: 400px;
     margin: auto;
