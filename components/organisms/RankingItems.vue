@@ -6,10 +6,12 @@
       :key="post.id"
       :href="getLink(post)"
       )
-      .ranking-items__item__text
-        p.ranking-items__item--ranking TOP {{index + 1}}
+      p.ranking-items__item--ranking {{index + 1}}
+      .ranking-items__blocks
         h3 {{getTitle(post)}}
-      img.ranking-items__item__image(:src="getThumbnail(post)" decoding="async")
+        .ranking-items__blocks--info
+          p {{getCategory(post)}}
+          p {{getCreatedAt(post)}}
 </template>
 
 <script>
@@ -48,33 +50,35 @@ export default {
     display: block;
   }
   &__item {
-    height: 90px;
-    display: grid;
-    grid-template-columns: auto 90px;
-    grid-template-rows: 100%;
-    grid-gap: 8px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     &--ranking {
-      opacity: 0.3;
+      margin-right: 20px;
+      @include font-cardtitle;
     }
-    &__text {
-      p {
-        @include font-tagtitle;
-        color: $color-textcolorblack;
-      }
-      h3 {
-        @include font-minifytextbold;
-        display: block;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 3;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    }
+
     &__image {
       height: 90px;
       width: 90px;
       object-fit: cover;
+    }
+  }
+  &__blocks {
+    h3 {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      height: 40px;
+    }
+    &--info {
+      display: flex;
+      justify-content: space-between;
+
+      p {
+        @include font-infomationtext;
+      }
     }
   }
 }

@@ -66,6 +66,12 @@ $color-sns-instagram: rgba(228,64,95,1);
 	line-height:200px;
   color:$color-textcolorblack;
 }
+@mixin font-infomationtext {
+	font-size:12px;
+	font-family:"Noto Sans JP";
+	font-weight:bold;
+	color: $color-textsecondary;
+}
 
 $default-size:1080px;
 $default-size-sp:100%;
