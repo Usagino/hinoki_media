@@ -15,6 +15,7 @@ import FeatureItem from '@/components/organisms/FeatureItem.vue'
 import RankingItems from '@/components/organisms/RankingItems.vue'
 import AppPagination from '@/components/organisms/AppPagination.vue'
 import AppFeature from '@/components/organisms/AppFeature.vue'
+import AppBreadcrumbs from '@/components/organisms/AppBreadcrumbs.vue'
 
 // Vue original component
 Vue.component('AppHeader', AppHeader)
@@ -27,6 +28,7 @@ Vue.component('TagButton', TagButton)
 Vue.component('RankingItems', RankingItems)
 Vue.component('AppPagination', AppPagination)
 Vue.component('AppFeature', AppFeature)
+Vue.component('AppBreadcrumbs', AppBreadcrumbs)
 
 // Vue carousel
 Vue.component('Carousel', Carousel)

@@ -2,6 +2,7 @@
   // Posts page
   .container
     AppHeader
+    AppBreadcrumbs
     .pages
       .pages__body
         h1.pages__title LATEST NEWS

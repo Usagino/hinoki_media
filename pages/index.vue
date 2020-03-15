@@ -1,6 +1,7 @@
 <template lang="pug">
   .container
     AppHeader
+    AppBreadcrumbs
     Carousel.carousel(:per-page="1" :paginationEnabled="false" :autoplay="true" :autoplayTimeout="3000" :loop="true")
       Slide.carousel__slide(
         v-for="post in rankingPosts"

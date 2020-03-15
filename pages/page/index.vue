@@ -1,6 +1,5 @@
 <template lang="pug">
   .container
-    p HINOKI MEDIA
 </template>
 
 <script>

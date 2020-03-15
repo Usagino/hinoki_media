@@ -22,9 +22,9 @@
   .footer__info
     ul.footer__info__menu
       li
-        a(href="/news") ABOUT
+        a(href="/about") ABOUT
       li
-        a(href="/news") CONTACT
+        a(href="https://yuki275480.typeform.com/to/LX69Al" target="_brank") CONTACT
     p ©HINOKI, All RIGHTS RESERVED.
 </template>
 

@@ -7,7 +7,7 @@
       li
         a(href="/page/1") NEWS
       li
-        a(href="/contact") CONTACT
+        a(href="https://yuki275480.typeform.com/to/LX69Al" target="_brank") CONTACT
       li
         a(href="/about") ABOUT
       li
@@ -36,7 +36,7 @@
         li.header__sp-menu--item
           a(href="/page/1") NEWS<span> | 記事一覧</span>
         li.header__sp-menu--item
-          a(href="/contact") CONTACT<span> | お問い合わせ</span>
+          a(href="https://yuki275480.typeform.com/to/LX69Al" target="_brank") CONTACT<span> | お問い合わせ</span>
       ul.header__sp-menu__category
         li.header__sp-menu--item
           a(href="/design/1") DESIGN

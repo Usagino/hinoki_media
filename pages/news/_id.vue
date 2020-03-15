@@ -1,6 +1,7 @@
 <template lang="pug">
 .container
   AppHeader
+  AppBreadcrumbs(:thirdTitle='getTitle(this.Article)' )
   .article
     .article__body
       .article__body__title
@@ -38,7 +39,7 @@ export default {
 <style lang="scss">
 .article {
   width: $default-size;
-  padding: 16px 0 48px;
+  padding: 0px 0 48px;
   margin: auto;
   display: flex;
   justify-content: space-around;
