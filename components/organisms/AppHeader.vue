@@ -30,6 +30,13 @@
         input(type="text" placeholder="ここにテキストを入力して検索" v-model="searchText")
         a(@click="searchMethods()")
           feather-search.header__sp-menu__search--icon
+      ul.header__sp-menu__menu
+        li.header__sp-menu--item
+          a(href="/about") ABOUT<span> | 私たちについて</span>
+        li.header__sp-menu--item
+          a(href="/page/1") NEWS<span> | 記事一覧</span>
+        li.header__sp-menu--item
+          a(href="/contact") CONTACT<span> | お問い合わせ</span>
       ul.header__sp-menu__category
         li.header__sp-menu--item
           a(href="/design/1") DESIGN
@@ -39,13 +46,15 @@
           a(href="/culture/1") CULTURE
         li.header__sp-menu--item
           a(href="/gadget/1") GADGET
-      ul.header__sp-menu__menu
+      ul.header__sp-menu__social
+        li.header__sp-menu--item.back-twitter
+          img(src="/twitter_white.svg")
+        li.header__sp-menu--item.back-instagram
+          feather-instagram.social-icon
+        li.header__sp-menu--item.back-facebook
+          feather-facebook.social-icon
         li.header__sp-menu--item
-          a(href="/about") ABOUT<span> | 私たちについて</span>
-        li.header__sp-menu--item
-          a(href="/page/1") NEWS<span> | 記事一覧</span>
-        li.header__sp-menu--item
-          a(href="/contact") CONTACT<span> | お問い合わせ</span>
+      p.header__sp-menu__legal ©HINOKI, All RIGHTS RESERVED.
 
   button.header__menu-button(@click="spMenuToggle=!spMenuToggle" :class="{'open-menu':spMenuToggle}")
     span.bar
@@ -209,6 +218,32 @@ export default {
       display: grid;
       grid-template-columns: repeat(2, 50%);
       grid-template-rows: repeat(2, 60px);
+      *:nth-child(even) {
+        border-left: 1px solid $color-textcolorwhite;
+      }
+    }
+    &__social {
+      display: grid;
+      grid-template-columns: repeat(2, 50%);
+      grid-template-rows: repeat(2, 60px);
+      *:nth-child(even) {
+        border-left: 1px solid $color-textcolorwhite;
+      }
+      .social-icon {
+        stroke: $color-textcolorwhite;
+        path {
+          stroke: $color-textcolorwhite !important;
+        }
+      }
+      .back-twitter {
+        background: $color-sns-twitter;
+      }
+      .back-instagram {
+        background: $color-sns-instagram;
+      }
+      .back-facebook {
+        background: $color-sns-facebook;
+      }
     }
     &__menu {
       display: grid;
@@ -216,10 +251,12 @@ export default {
       grid-template-rows: repeat(3, 60px);
       grid-column-gap: 0px;
       grid-row-gap: 0px;
+      border-top: 1px solid $color-textcolorwhite;
     }
     &--item {
-      border: 1px solid $color-textcolorwhite;
+      border-bottom: 1px solid $color-textcolorwhite;
       @include flex-middle;
+
       a {
         @include font-cardtitle;
         color: $color-textcolorwhite;
@@ -231,6 +268,13 @@ export default {
     }
     &__wrap {
       padding: 0px 20px;
+    }
+    &__legal {
+      position: absolute;
+      text-align: center;
+      bottom: 20px;
+      width: 100%;
+      color: $color-textcolorwhite;
     }
   }
 }
