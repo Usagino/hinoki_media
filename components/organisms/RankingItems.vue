@@ -1,6 +1,6 @@
 <template lang="pug">
   .ranking-items
-    h2.ranking-items__title WEEKLY RANKING TOP3
+    h2.ranking-items__title WEEKLY RANKING
     a.ranking-items__item(
       v-for="(post,index) in posts"
       :key="post.id"
@@ -39,7 +39,7 @@ export default {
   background: $color-textcolorwhite;
   padding: 20px;
   box-sizing: border-box;
-  @include gap-bottom(20px);
+  @include gap-bottom(8px);
   height: 0%;
   @include mq(sm) {
     width: $default-size-sp;
@@ -48,23 +48,25 @@ export default {
   &__title {
     text-align: center;
     display: block;
+    margin-bottom: 12px !important;
+    @include font-cardtitle;
   }
   &__item {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
+    padding: 0px 8px 8px;
+    border-bottom: 1px solid $color-background;
+    &:last-child {
+      border-bottom: 0px;
+    }
     align-items: center;
     &--ranking {
       margin-right: 20px;
       @include font-cardtitle;
     }
-
-    &__image {
-      height: 90px;
-      width: 90px;
-      object-fit: cover;
-    }
   }
   &__blocks {
+    width: 100%;
     h3 {
       display: -webkit-box;
       -webkit-box-orient: vertical;

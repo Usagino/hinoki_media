@@ -23,15 +23,14 @@ export default {
 .appbutton {
   display: inline-flex;
   .text {
-    height: 42px;
     background: $color-textcolorblack;
     display: inline-flex;
     align-items: center;
-    padding: 0px 36px;
+    padding: 6px 16px;
     cursor: pointer;
     border-radius: 2.5px;
     margin: auto;
-    @include font-cardtitle;
+    @include font-pagebutton;
     color: $color-textcolorwhite;
   }
 }

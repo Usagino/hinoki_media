@@ -1,6 +1,7 @@
 import axios from 'axios'
 require('dotenv').config()
 const endpoint = process.env.ENDPOINT
+const gaid = process.env.GAID
 const { ENDPOINT } = process.env.ENDPOINT
 export default {
   mode: 'universal',
@@ -38,7 +39,8 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
     '@nuxtjs/axios',
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
+    '@nuxtjs/google-analytics'
   ],
   styleResources: {
     scss: ['~/assets/stylesheets/style.scss']
@@ -64,6 +66,9 @@ export default {
     google: {
       families: ['Noto+Sans+JP:400,700', 'Open+Sans']
     }
+  },
+  googleAnalytics: {
+    id: gaid
   },
   build: {
     // hardSource: true,

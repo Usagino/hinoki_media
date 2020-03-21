@@ -20,7 +20,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$route)
     const route = this.$route.path
     const resBreadcrumbs = route.split('/')
     if (resBreadcrumbs[1] !== undefined) {
