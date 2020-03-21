@@ -7,7 +7,7 @@
       li
         a(href="/page/1") NEWS
       li
-        a(href="/contact") CONTACT
+        a(href="https://yuki275480.typeform.com/to/LX69Al" target="_brank") CONTACT
       li
         a(href="/about") ABOUT
       li
@@ -21,21 +21,55 @@
         a(@click="searchMethods()")
           feather-search
   transition
-    .header__cover(v-if="searchToggle" @click="searchToggle = false")
+    .header__cover(v-if="searchToggle || spSearchToggle" @click="searchToggleStyle()")
   transition
-    ul.header__sp-menu(v-if="spMenuToggle")
-      li.header__sp-menu--item
+    .header__sp-menu(v-if="spMenuToggle")
+      .header__sp-menu__wrap
+        img(src="/image/logo_inline_white.svg")
+      .header__sp-menu__search
+        input(type="text" placeholder="ここにテキストを入力して検索" v-model="searchText")
+        a(@click="searchMethods()")
+          feather-search.header__sp-menu__search--icon
+      ul.header__sp-menu__menu
+        li.header__sp-menu--item
+          a(href="/about") ABOUT<span> | 私たちについて</span>
+        li.header__sp-menu--item
+          a(href="/page/1") NEWS<span> | 記事一覧</span>
+        li.header__sp-menu--item
+          a(href="https://yuki275480.typeform.com/to/LX69Al" target="_brank") CONTACT<span> | お問い合わせ</span>
+      ul.header__sp-menu__category
+        li.header__sp-menu--item
+          a(href="/design/1") DESIGN
+        li.header__sp-menu--item
+          a(href="/technology/1") TECHNOLOGY
+        li.header__sp-menu--item
+          a(href="/culture/1") CULTURE
+        li.header__sp-menu--item
+          a(href="/gadget/1") GADGET
+      ul.header__sp-menu__social
+        li.header__sp-menu--item.back-twitter
+          a(href="https://twitter.com/hinoki_media" target="_brank")
+            img(src="/twitter_white.svg")
+        li.header__sp-menu--item.back-instagram
+          a(href="https://www.instagram.com/hinoki_media/" target="_brank")
+            feather-instagram.social-icon
+        li.header__sp-menu--item.back-facebook
+          a(href="https://www.facebook.com/hinoki.media/" target="_brank")
+            feather-facebook.social-icon
+        li.header__sp-menu--item
+      p.header__sp-menu__legal ©HINOKI, All RIGHTS RESERVED.
+  transition
+    form.header__search.header__sp-search(v-if="spSearchToggle" v-on:submit.prevent="searchMethods()")
+      .header__wrap
         input(type="text" placeholder="ここにテキストを入力して検索" v-model="searchText")
         a(@click="searchMethods()")
           feather-search
-      li.header__sp-menu--item.header__sp-menu--list
-        a(href="/page/1") NEWS
-      li.header__sp-menu--item.header__sp-menu--list
-        a(href="/contact") CONTACT
-      li.header__sp-menu--item.header__sp-menu--list
-        a(href="/about") ABOUT
 
-  button.header__menu-button(@click="spMenuToggle=!spMenuToggle")
+  button.header__menu-button(@click="spMenuToggle=!spMenuToggle" :class="{'open-menu':spMenuToggle}")
+    span.bar
+    span.bar
+  button.header__search-button(@click="spSearchToggle=!spSearchToggle" )
+    feather-search
 </template>
 
 <script>
@@ -44,10 +78,15 @@ export default {
     return {
       searchToggle: false,
       spMenuToggle: false,
+      spSearchToggle: false,
       searchText: ''
     }
   },
   methods: {
+    searchToggleStyle() {
+      this.searchToggle = false
+      this.spSearchToggle = false
+    },
     searchMethods() {
       console.log(this.searchText)
       if (!(this.searchText === '')) {
@@ -84,6 +123,7 @@ export default {
     @include mq(sm) {
       width: $default-size-sp;
       padding: 0 20px;
+      padding-right: 72px;
       box-sizing: border-box;
     }
   }
@@ -109,12 +149,24 @@ export default {
     top: -100%;
     top: 0%;
     left: 0;
-    z-index: 900;
+    z-index: 1001;
     padding: 19px 0;
     input {
       height: 42px;
       @include font-textbold;
       width: $default-size - 32px;
+      @include mq(sm) {
+        width: calc(100% - 44px);
+      }
+    }
+    @include mq(sm) {
+      padding: 8px 0;
+      padding-right: 72px;
+      a {
+        height: 44px;
+        width: 44px;
+        @include flex-middle;
+      }
     }
   }
   &__cover {
@@ -127,35 +179,146 @@ export default {
   }
   &__menu-button {
     display: none;
-    background: red;
     height: 44px;
     width: 44px;
-    background: red;
     position: fixed;
     top: 8px;
     right: 20px;
-    background: red;
     z-index: 1001;
+    .bar {
+      position: absolute;
+      display: block;
+      content: '';
+      width: 32px;
+      height: 3px;
+      background: $color-black;
+      transition: all 300ms ease;
+      left: 0px;
+      right: 0px;
+      margin: auto;
+      &:first-child {
+        top: 16px;
+      }
+      &:last-child {
+        bottom: 16px;
+      }
+    }
     @include mq(sm) {
       display: block;
     }
   }
+  &__search-button {
+    display: none;
+    position: fixed;
+    top: 8px;
+    right: 72px;
+    z-index: 1000;
+    height: 44px;
+    width: 44px;
+    @include mq(sm) {
+      display: block;
+    }
+  }
+  .open-menu {
+    .bar {
+      background: $color-textcolorwhite;
+      &:first-child {
+        top: auto;
+        transform: rotate(45deg);
+      }
+      &:last-child {
+        bottom: auto;
+        transform: rotate(-45deg);
+      }
+    }
+  }
   &__sp-menu {
+    padding: 8px 0px;
     @include full-screen;
-    background: $color-textcolorblack;
+    background: $color-black;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    padding: 24px 0;
-    flex-direction: column;
     box-sizing: border-box;
-    a {
-      @include font-title;
+    &__search {
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+
+      input {
+        background: transparent;
+        width: 100%;
+        color: $color-textcolorwhite;
+      }
+      &--icon {
+        stroke: $color-textcolorwhite;
+      }
+    }
+    &__category {
+      display: grid;
+      grid-template-columns: repeat(2, 50%);
+      grid-template-rows: repeat(2, 60px);
+      *:nth-child(even) {
+        border-left: 1px solid $color-textcolorwhite;
+      }
+    }
+    &__social {
+      display: grid;
+      grid-template-columns: repeat(2, 50%);
+      grid-template-rows: repeat(2, 60px);
+      *:nth-child(even) {
+        border-left: 1px solid $color-textcolorwhite;
+      }
+      .social-icon {
+        stroke: $color-textcolorwhite;
+        path {
+          stroke: $color-textcolorwhite !important;
+        }
+      }
+      .back-twitter {
+        background: $color-sns-twitter;
+      }
+      .back-instagram {
+        background: $color-sns-instagram;
+      }
+      .back-facebook {
+        background: $color-sns-facebook;
+      }
+    }
+    &__menu {
+      display: grid;
+      grid-template-columns: repeat(1, 100%);
+      grid-template-rows: repeat(3, 60px);
+      grid-column-gap: 0px;
+      grid-row-gap: 0px;
+      border-top: 1px solid $color-textcolorwhite;
+    }
+    &--item {
+      border-bottom: 1px solid $color-textcolorwhite;
+      @include flex-middle;
+
+      a {
+        @include font-cardtitle;
+        color: $color-textcolorwhite;
+        span {
+          @include font-textbold;
+          color: $color-textcolorwhite;
+        }
+      }
+    }
+    &__wrap {
+      padding: 0px 20px;
+    }
+    &__legal {
+      position: absolute;
+      text-align: center;
+      bottom: 20px;
+      width: 100%;
       color: $color-textcolorwhite;
     }
+  }
+  &__sp-search {
   }
 }
 

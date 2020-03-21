@@ -3,6 +3,9 @@ $color-textcolorwhite: rgba(255,255,255,1);
 $color-textsecondary: rgba(170,170,170,1);
 $color-background: rgba(244,244,244,1);
 $color-black: rgba(0,0,0,1);
+$color-sns-twitter: rgba(29,161,242,1);
+$color-sns-facebook: rgba(59,89,152,1);
+$color-sns-instagram: rgba(228,64,95,1);
 @mixin font-title {
 	font-size:30px;
 	font-family:"Noto Sans JP";
@@ -63,7 +66,17 @@ $color-black: rgba(0,0,0,1);
 	line-height:200px;
   color:$color-textcolorblack;
 }
-
+@mixin font-infomationtext {
+	font-size:12px;
+	font-family:"Noto Sans JP";
+	font-weight:normal;
+  color: $color-textsecondary;
+}
+@mixin font-pagebutton {
+	font-size:20px;
+	font-family:"Noto Sans JP";
+	font-weight:bold;
+}
 $default-size:1080px;
 $default-size-sp:100%;
 
@@ -145,7 +158,7 @@ $breakpoints: (
 @mixin baseGrid{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-auto-rows: 360px;
+  grid-auto-rows: 324px;
   grid-gap: 40px 40px;
   @media screen and (max-width: 1000px) {
     grid-template-columns: 1fr 1fr;

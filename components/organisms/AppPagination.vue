@@ -1,5 +1,5 @@
 <template lang="pug">
-.pagination
+.pagination(v-if="this.data.canDisplayPage < 10")
   AppButton.prevButton(text="PREV" :to="`/page/${Number(currentPageNum()) -  1}`" v-if='currentPageNum() > 1')
   .pagination--more(v-if="currentPageNum() >= 3") ……
   AppButton(:text="String(currentPageNum() - 2)" :to="`${routeString()}${Number(currentPageNum()) -  2}`" v-if="this.data.canDisplayPage === this.currentPageNum() && this.data.canDisplayPage > 2")
@@ -20,17 +20,15 @@ export default {
     }
   },
   mounted() {
-    console.log(this.data)
     this.routeString()
+    console.log(this.data.canDisplayPage)
   },
   methods: {
     routeString() {
       const params = this.$route.params
       if (!(params.categories === undefined)) {
-        console.log(`/categories/${params.categories}/`)
         return `/categories/${params.categories}/`
       } else {
-        console.log('/page/')
         return '/page/'
       }
     },

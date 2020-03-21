@@ -13,18 +13,18 @@
       li
         a(href="/categories/gadget/1") GADGET
     .footer__guide__sns
-      a(href="/")
+      a(href="https://www.facebook.com/hinoki.media/")
         feather-facebook
-      a(href="/")
+      a(href="https://twitter.com/hinoki_media")
         feather-twitter
-      a(href="/")
+      a(href="https://www.instagram.com/hinoki_media/")
         feather-instagram
   .footer__info
     ul.footer__info__menu
       li
-        a(href="/news") ABOUT
+        a(href="/about") ABOUT
       li
-        a(href="/news") CONTACT
+        a(href="https://yuki275480.typeform.com/to/LX69Al" target="_brank") CONTACT
     p ©HINOKI, All RIGHTS RESERVED.
 </template>
 
@@ -37,6 +37,9 @@ export default {}
   background: $color-textcolorwhite;
   padding: 40px 24px;
   width: 100vw;
+  @include mq(sm) {
+    padding: 40px 0px;
+  }
   &__guide {
     width: 400px;
     margin: auto;

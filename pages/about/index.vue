@@ -13,11 +13,11 @@
       svg(width="34" height="34")
         line(x1="17" y1="0" x2="17" y2="34" stroke="#000000")
       .about__third__socials--icons
-        a(href="/")
+        a(href="https://www.facebook.com/hinoki.media/")
           feather-facebook
-        a(href="/")
+        a(href="https://twitter.com/hinoki_media")
           feather-twitter
-        a(href="/")
+        a(href="https://www.instagram.com/hinoki_media/")
           feather-instagram
     .about__third__members
       h2 MEMBER
@@ -55,16 +55,30 @@ export default {}
       height: 336px;
       width: auto;
       margin-bottom: 40px;
+      @include mq(sm) {
+        width: 164px;
+        height: auto;
+      }
     }
     &__text {
+      @include mq(sm) {
+        padding: 40px;
+      }
       h1 {
         @include font-title;
         text-align: center;
         margin-bottom: 12px;
+        @include mq(sm) {
+          @include font-cardtitle;
+        }
       }
       p {
         @include font-cardtitle;
         text-align: center;
+        @include mq(sm) {
+          text-align: left;
+          @include font-text;
+        }
       }
     }
   }
@@ -75,6 +89,9 @@ export default {}
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
+    @include mq(sm) {
+      height: 200px;
+    }
   }
   &__third {
     background: $color-textcolorwhite;
@@ -94,6 +111,9 @@ export default {}
       h2 {
         writing-mode: vertical-lr;
         margin-right: 120px;
+        @include mq(sm) {
+          margin-right: 20px;
+        }
       }
     }
     .member {
@@ -106,8 +126,26 @@ export default {}
         grid-template-rows: 1fr;
         grid-gap: 40px;
         align-items: center;
+        @include mq(sm) {
+          grid-gap: 16px;
+          grid-template-columns: 90px min-content 1fr;
+        }
+        h3 {
+          white-space: nowrap;
+          @include mq(sm) {
+            @include font-minifytextbold;
+          }
+        }
         p {
           @include font-text;
+          @include mq(sm) {
+            @include font-minifytextbold;
+          }
+        }
+        svg {
+          @include mq(sm) {
+            width: 27px;
+          }
         }
       }
     }
