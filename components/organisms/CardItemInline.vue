@@ -50,12 +50,12 @@ export default {
   }
   &--image {
     width: 300px;
-    height: 200px;
+    height: 164px;
     object-fit: cover;
-    margin-right: 30px;
+    margin-right: 8px;
     @include mq(sm) {
       height: 100px;
-      width: 130px;
+      width: 140px;
       margin-right: 0px;
     }
   }
@@ -66,11 +66,12 @@ export default {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    padding: 8px;
+    padding: 12px;
     width: 100%;
     @include mq(sm) {
       padding: 0px;
-      padding-left: 16px;
+      padding: 4px;
+      padding-left: 8px;
     }
   }
   &--title {

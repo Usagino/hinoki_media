@@ -56,7 +56,7 @@ $card-width: 300px;
     margin: auto;
   }
   &__texts {
-    padding: 12px;
+    padding: 8px 12px;
     height: 100%;
     display: flex;
     justify-content: space-between;
@@ -91,7 +91,7 @@ $card-width: 300px;
     justify-content: space-between;
     a,
     p {
-      @include font-textbold;
+      @include font-infomationtext;
       color: $color-textsecondary;
     }
   }

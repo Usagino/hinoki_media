@@ -80,13 +80,16 @@ img{
 
 .pages {
   width: $default-size;
-  padding: 16px 0 48px;
+  padding: 0px 0 48px;
   margin: auto;
   display: flex;
   justify-content: space-around;
   @include mq(sm) {
     width: $default-size-sp;
     flex-direction: column;
+  }
+  &__fullwidth {
+    width: 100% !important;
   }
   &__title {
     text-align: center;
@@ -98,7 +101,7 @@ img{
     width: 775px;
     box-sizing: border-box;
     padding: 30px;
-    @include gap-bottom(30px);
+    @include gap-bottom(20px);
     @include mq(sm) {
       width: $default-size-sp;
       padding:30px 12px;

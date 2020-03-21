@@ -13,11 +13,11 @@
       svg(width="34" height="34")
         line(x1="17" y1="0" x2="17" y2="34" stroke="#000000")
       .about__third__socials--icons
-        a(href="/")
+        a(href="https://www.facebook.com/hinoki.media/")
           feather-facebook
-        a(href="/")
+        a(href="https://twitter.com/hinoki_media")
           feather-twitter
-        a(href="/")
+        a(href="https://www.instagram.com/hinoki_media/")
           feather-instagram
     .about__third__members
       h2 MEMBER

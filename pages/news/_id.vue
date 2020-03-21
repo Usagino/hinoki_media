@@ -3,26 +3,29 @@
   AppHeader
   AppBreadcrumbs(:thirdTitle='getTitle(this.Article)' )
   .article
-    .article__body
+    .article__body(:class="{'article__fullwidth':rankingPosts.length === 0}")
       .article__body__title
-        .article__body__info
-          h1 {{ getTitle(this.Article) }}
         .article__body__info
           p {{ getCategory(this.Article) }}
           p {{ getCreatedAt(this.Article) }}
+        .article__body__info
+          h1 {{ getTitle(this.Article) }}
 
       img.article__body__thumbnail(:src="getThumbnail(this.Article)" decoding="async")
       .article__body__text(v-html="this.Article.content.rendered")
       p.article__body__auther Written by {{getAuthor(this.Article)}}
       .article__social-btns
         .article__social-btns__fb.article__social-btns__button
-          feather-facebook
+          a(href="https://www.facebook.com/hinoki.media/" target="_brank")
+            feather-facebook
         .article__social-btns__tw.article__social-btns__button
-          feather-twitter
+          a(href="https://twitter.com/hinoki_media" target="_brank")
+            feather-twitter
         .article__social-btns__url.article__social-btns__button
-          feather-external-link
-    RankingItems(:posts="rankingPosts")
-  AppFeature(:posts="featurePosts")
+          a(href="" target="_brank")
+            feather-external-link
+    RankingItems(:posts="rankingPosts" v-if="rankingPosts.length !== 0")
+  AppFeature(:posts="featurePosts" v-if="featurePosts.length !== 0")
   AppFooter
 </template>
 
@@ -42,10 +45,13 @@ export default {
   padding: 0px 0 48px;
   margin: auto;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   @include mq(sm) {
     width: $default-size-sp;
     flex-direction: column;
+  }
+  &__fullwidth {
+    width: 100% !important;
   }
   &__body {
     background: $color-textcolorwhite;
@@ -69,7 +75,7 @@ export default {
       }
       p,
       a {
-        @include font-textbold;
+        @include font-infomationtext;
         color: $color-textsecondary;
       }
       @include mq(sm) {
@@ -137,7 +143,7 @@ export default {
     &__auther {
       padding: 20px;
       text-align: right;
-      color: $color-textsecondary;
+      @include font-infomationtext;
     }
   }
   &__social-btns {

@@ -13,11 +13,11 @@
       li
         a(href="/categories/gadget/1") GADGET
     .footer__guide__sns
-      a(href="/")
+      a(href="https://www.facebook.com/hinoki.media/")
         feather-facebook
-      a(href="/")
+      a(href="https://twitter.com/hinoki_media")
         feather-twitter
-      a(href="/")
+      a(href="https://www.instagram.com/hinoki_media/")
         feather-instagram
   .footer__info
     ul.footer__info__menu

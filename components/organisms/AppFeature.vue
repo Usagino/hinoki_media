@@ -5,8 +5,9 @@
     swiper-slide.feature-blocks__slide(v-for="post in posts"
       :key="post.id"
       :post="post")
-      img(:src="getThumbnail(post)")
-      h2 {{ getTitle(post) }}
+      a.feature-blocks__slide__link(:href="getLink(post)")
+        img(:src="getThumbnail(post)")
+        h2 {{ getTitle(post) }}
 </template>
 
 <script>
@@ -33,9 +34,6 @@ export default {
       }
     }
   },
-  mounted() {
-    console.log(this.swiperOption.slidesPerView)
-  },
   methods: {
     uaSlider() {
       if (this.$ua.deviceType() === 'pc') {
@@ -56,13 +54,19 @@ export default {
 
 <style lang="scss" scoped>
 .feature-blocks {
-  background: $color-textcolorblack;
+  background: $color-black;
   padding: 28px 0;
   & > h2 {
-    margin-bottom: 28px;
+    margin-bottom: 20px;
     @include font-title;
     text-align: center;
     color: $color-textcolorwhite;
+    @include mq(sm) {
+      margin-bottom: 14px;
+    }
+  }
+  @include mq(sm) {
+    padding: 20px 0;
   }
   &__carousel {
     width: 100%;
@@ -70,6 +74,11 @@ export default {
   &__slide {
     width: auto;
     height: auto;
+    &__link {
+      height: 100%;
+      width: 100%;
+      display: block;
+    }
     img {
       @include mq(sm) {
         height: 100px;
@@ -85,7 +94,7 @@ export default {
       display: block;
       display: -webkit-box;
       -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 3;
       overflow: hidden;
       text-overflow: ellipsis;
       @include mq(sm) {

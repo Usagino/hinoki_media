@@ -1,7 +1,7 @@
 <template lang="pug">
   .container
     AppHeader
-    Carousel.carousel(:per-page="1" :paginationEnabled="false" :autoplay="true" :autoplayTimeout="3000" :loop="true")
+    Carousel.carousel(:per-page="1" :paginationEnabled="false" :autoplay="true" :autoplayTimeout="3000" :loop="true" v-if="rankingPosts.length !== 0")
       Slide.carousel__slide(
         v-for="post in rankingPosts"
         :key="post.id"
@@ -14,6 +14,7 @@
             p {{ getCreatedAt(post) }}
             p Written by {{getAuthor(post)}}
     .latest-news
+      h2 LATEST
       .latest-news__items(v-if="$ua.deviceType() === 'pc'")
         CardItem(
           v-for="item in this.latestPosts"
@@ -27,7 +28,7 @@
           :post ="item"
           )
       AppButton.nextbutton(text="NEXT" to="/page/1")
-    AppFeature(:posts="featurePosts")
+    AppFeature(:posts="featurePosts" v-if="featurePosts.length !== 0")
     AppFooter
 </template>
 
@@ -37,9 +38,6 @@ export default {
     return {
       title: 'TOP'
     }
-  },
-  mounted() {
-    console.log(this.$ua.deviceType())
   }
 }
 </script>
@@ -51,12 +49,11 @@ export default {
   }
   .carousel {
     width: 100vw;
-    margin-bottom: 40px;
     @include mq(sm) {
       margin-bottom: 0px;
       width: $default-size-sp;
       padding: 0px;
-      height: 200px;
+      height: 400px;
     }
     height: 500px;
     &__slide {
@@ -66,7 +63,7 @@ export default {
       }
       @include mq(sm) {
         width: $default-size-sp;
-        height: 200px;
+        height: 400px;
       }
       height: 500px;
       background-size: cover;
@@ -132,6 +129,15 @@ export default {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    h2 {
+      margin: 28px 0 20px;
+      @include font-title;
+      text-align: center;
+      @include mq(sm) {
+        margin: 20px 0 14px;
+        @include font-cardtitle;
+      }
+    }
     @include mq(sm) {
       padding: 0px;
     }
@@ -139,7 +145,7 @@ export default {
       @include defaultPCwidth;
       @include baseGrid;
       @include mq(sm) {
-        padding: 32px 8px 0px;
+        padding: 0px 8px 0px;
         width: $default-size-sp;
         box-sizing: border-box;
         grid-auto-rows: 100px;

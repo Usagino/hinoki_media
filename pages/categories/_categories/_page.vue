@@ -5,7 +5,7 @@
     .pages__body
       h1.pages__title {{getPageName()}}
       CardItemInline(v-for="post in categoryPosts" :key="post.id" :post="post")
-    RankingItems(:posts="rankingPosts")
+    RankingItems(:posts="rankingPosts" v-if="rankingPosts.length !== 0")
   AppPagination(:data="categoriesPaginationData")
   AppFooter
 </template>

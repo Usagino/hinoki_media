@@ -4,10 +4,10 @@
     AppHeader
     AppBreadcrumbs
     .pages
-      .pages__body
+      .pages__body(:class="{'pages__fullwidth':rankingPosts.length === 0}")
         h1.pages__title LATEST NEWS
         CardItemInline(v-for="post in paginationPosts" :key="post.id" :post="post")
-      RankingItems(:posts="rankingPosts")
+      RankingItems(:posts="rankingPosts" v-if="rankingPosts.length !== 0")
     AppPagination(:data="paginationData")
     AppFooter
 </template>

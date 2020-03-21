@@ -21,7 +21,7 @@
         a(@click="searchMethods()")
           feather-search
   transition
-    .header__cover(v-if="searchToggle" @click="searchToggle = false")
+    .header__cover(v-if="searchToggle || spSearchToggle" @click="searchToggleStyle()")
   transition
     .header__sp-menu(v-if="spMenuToggle")
       .header__sp-menu__wrap
@@ -48,17 +48,28 @@
           a(href="/gadget/1") GADGET
       ul.header__sp-menu__social
         li.header__sp-menu--item.back-twitter
-          img(src="/twitter_white.svg")
+          a(href="https://twitter.com/hinoki_media" target="_brank")
+            img(src="/twitter_white.svg")
         li.header__sp-menu--item.back-instagram
-          feather-instagram.social-icon
+          a(href="https://www.instagram.com/hinoki_media/" target="_brank")
+            feather-instagram.social-icon
         li.header__sp-menu--item.back-facebook
-          feather-facebook.social-icon
+          a(href="https://www.facebook.com/hinoki.media/" target="_brank")
+            feather-facebook.social-icon
         li.header__sp-menu--item
       p.header__sp-menu__legal ©HINOKI, All RIGHTS RESERVED.
+  transition
+    form.header__search.header__sp-search(v-if="spSearchToggle" v-on:submit.prevent="searchMethods()")
+      .header__wrap
+        input(type="text" placeholder="ここにテキストを入力して検索" v-model="searchText")
+        a(@click="searchMethods()")
+          feather-search
 
   button.header__menu-button(@click="spMenuToggle=!spMenuToggle" :class="{'open-menu':spMenuToggle}")
     span.bar
     span.bar
+  button.header__search-button(@click="spSearchToggle=!spSearchToggle" )
+    feather-search
 </template>
 
 <script>
@@ -67,10 +78,15 @@ export default {
     return {
       searchToggle: false,
       spMenuToggle: false,
+      spSearchToggle: false,
       searchText: ''
     }
   },
   methods: {
+    searchToggleStyle() {
+      this.searchToggle = false
+      this.spSearchToggle = false
+    },
     searchMethods() {
       console.log(this.searchText)
       if (!(this.searchText === '')) {
@@ -107,6 +123,7 @@ export default {
     @include mq(sm) {
       width: $default-size-sp;
       padding: 0 20px;
+      padding-right: 72px;
       box-sizing: border-box;
     }
   }
@@ -132,12 +149,24 @@ export default {
     top: -100%;
     top: 0%;
     left: 0;
-    z-index: 900;
+    z-index: 1001;
     padding: 19px 0;
     input {
       height: 42px;
       @include font-textbold;
       width: $default-size - 32px;
+      @include mq(sm) {
+        width: calc(100% - 44px);
+      }
+    }
+    @include mq(sm) {
+      padding: 8px 0;
+      padding-right: 72px;
+      a {
+        height: 44px;
+        width: 44px;
+        @include flex-middle;
+      }
     }
   }
   &__cover {
@@ -174,6 +203,18 @@ export default {
         bottom: 16px;
       }
     }
+    @include mq(sm) {
+      display: block;
+    }
+  }
+  &__search-button {
+    display: none;
+    position: fixed;
+    top: 8px;
+    right: 72px;
+    z-index: 1000;
+    height: 44px;
+    width: 44px;
     @include mq(sm) {
       display: block;
     }
@@ -276,6 +317,8 @@ export default {
       width: 100%;
       color: $color-textcolorwhite;
     }
+  }
+  &__sp-search {
   }
 }
 
