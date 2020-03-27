@@ -62,7 +62,7 @@ export default {
     '@nuxtjs/proxy',
     '@nuxtjs/google-analytics',
     [
-      '@nuxtjs/google-analytics',
+      '@nuxtjs/google-adsense',
       {
         id: 'ca-pub-9783845179819441'
       }
