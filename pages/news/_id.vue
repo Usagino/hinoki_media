@@ -91,6 +91,9 @@ export default {
       height: 400px;
       object-fit: cover;
       margin-bottom: 20px;
+      @include mq(sm) {
+        height: auto;
+      }
     }
     &__text {
       @include mq(sm) {
