@@ -21,22 +21,67 @@
         .article__social-btns__tw.article__social-btns__button
           a(href="https://twitter.com/hinoki_media" target="_brank")
             feather-twitter
-        .article__social-btns__url.article__social-btns__button
-          a(href="" target="_brank")
-            feather-external-link
+        .article__social-btns__url.article__social-btns__button(@click="copyLink()")
+          feather-external-link(v-if="copyed")
+          p(v-else) URLをコピーしました!
     RankingItems(:posts="rankingPosts" v-if="rankingPosts.length !== 0")
   AppFeature(:posts="featurePosts" v-if="featurePosts.length !== 0")
   AppFooter
 </template>
 
 <script>
+import Meta from '~/assets/mixins/meta'
 export default {
+  mixins: [Meta],
   head() {
+    const path = this.$route.path
+    this.meta.title = this.getTitle(this.Article)
+    this.meta.url = this.base + path
+    this.meta.image = this.getThumbnail(this.Article)
     return {
-      title: this.getTitle(this.Article)
+      title: this.meta.title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.meta.description
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: this.meta.description
+        },
+        { hid: 'og:title', property: 'og:title', content: this.meta.title },
+        { hid: 'og:type', property: 'og:type', content: this.meta.type },
+        { hid: 'og:url', property: 'og:url', content: this.meta.url },
+        { hid: 'og:image', property: 'og:image', content: this.meta.image },
+        { name: 'twitter:title', content: this.meta.title }
+      ]
     }
   },
-  middleware: 'aboutpage_redirect'
+  data() {
+    return {
+      copyed: true,
+      base: 'http://hinoki.media/',
+      meta: {
+        title: '',
+        description: '',
+        type: 'article',
+        url: '',
+        image: ''
+      }
+    }
+  },
+  middleware: 'aboutpage_redirect',
+  methods: {
+    copyLink() {
+      const url = location.href
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(url)
+      }
+      this.copyed = !this.copyed
+    }
+  }
 }
 </script>
 
@@ -158,6 +203,10 @@ export default {
     &__button {
       width: calc(100% / 3);
       @include flex-middle;
+      cursor: pointer;
+      p {
+        color: $color-textcolorwhite;
+      }
       svg,
       path {
         stroke: $color-textcolorwhite !important;
