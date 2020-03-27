@@ -61,12 +61,13 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
     '@nuxtjs/google-analytics',
-    '@nuxtjs/google-analytics'
+    [
+      '@nuxtjs/google-analytics',
+      {
+        id: 'ca-pub-9783845179819441'
+      }
+    ]
   ],
-
-  'google-adsense': {
-    id: 'ca-pub-9783845179819441'
-  },
   styleResources: {
     scss: ['~/assets/stylesheets/style.scss']
   },
