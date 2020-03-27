@@ -35,7 +35,8 @@ export default {
     return {
       title: this.getTitle(this.Article)
     }
-  }
+  },
+  middleware: 'aboutpage_redirect'
 }
 </script>
 
