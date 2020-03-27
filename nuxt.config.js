@@ -14,6 +14,26 @@ export default {
         hid: 'description',
         name: 'description',
         content: process.env.npm_package_description || ''
+      },
+      {
+        hid: 'og:site_name',
+        property: 'og:site_name',
+        content: 'ヒノキメディア'
+      },
+      { hid: 'og:type', property: 'og:type', content: 'website' },
+      { hid: 'og:url', property: 'og:url', content: 'https://hinoki.media' },
+      { hid: 'og:title', property: 'og:title', content: 'ヒノキメディア' },
+      {
+        hid: 'og:description',
+        property: 'og:description',
+        content:
+          'HINOKIは、ビギナーのデザイナー視点でデザインを中心としたクリエイティブに関わる、モノ、コトなどを紹介するメディアです。'
+      },
+      {
+        hid: 'og:image',
+        property: 'og:image',
+        content:
+          'https://dashboard.hinoki.media/wp-content/uploads/2020/03/Frame_47.png'
       }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
