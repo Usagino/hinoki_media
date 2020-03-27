@@ -60,8 +60,13 @@ export default {
     '@nuxtjs/dotenv',
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
+    '@nuxtjs/google-analytics',
     '@nuxtjs/google-analytics'
   ],
+
+  'google-adsense': {
+    id: 'ca-pub-9783845179819441'
+  },
   styleResources: {
     scss: ['~/assets/stylesheets/style.scss']
   },
