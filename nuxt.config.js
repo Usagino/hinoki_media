@@ -44,6 +44,11 @@ export default {
         name: 'twitter:creator',
         content: '@hinoki_media'
       },
+      {
+        name: 'twitter:description',
+        content:
+          'HINOKIは、ビギナーのデザイナー視点でデザインを中心としたクリエイティブに関わる、モノ、コトなどを紹介するメディアです。'
+      },
       { name: 'twitter:site', content: '@hinoki_media' }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
