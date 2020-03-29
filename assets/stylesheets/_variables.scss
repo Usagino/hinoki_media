@@ -13,7 +13,7 @@ $color-sns-instagram: rgba(228,64,95,1);
   color:$color-textcolorblack;
 }
 @mixin font-cardtitle {
-	font-size:18px;
+	font-size:16px;
 	font-family:"Noto Sans JP";
 	font-weight:bold;
   color:$color-textcolorblack;
@@ -26,7 +26,7 @@ $color-sns-instagram: rgba(228,64,95,1);
   color:$color-textcolorblack;
 }
 @mixin font-textbold {
-	font-size:14px;
+	font-size:12px;
 	font-family:"Noto Sans JP";
 	font-weight:bold;
 	line-height:1.7em;

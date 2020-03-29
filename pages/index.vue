@@ -53,7 +53,7 @@ export default {
       margin-bottom: 0px;
       width: $default-size-sp;
       padding: 0px;
-      height: 400px;
+      height: 240px;
     }
     height: 500px;
     &__slide {
@@ -63,7 +63,7 @@ export default {
       }
       @include mq(sm) {
         width: $default-size-sp;
-        height: 400px;
+        height: 240px;
       }
       height: 500px;
       background-size: cover;

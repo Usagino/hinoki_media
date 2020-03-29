@@ -46,7 +46,7 @@ export default {
 .pages__link {
   display: flex;
   @include mq(sm) {
-    height: 100px;
+    height: 90px;
   }
   &--image {
     width: 300px;
@@ -54,7 +54,7 @@ export default {
     object-fit: cover;
     margin-right: 8px;
     @include mq(sm) {
-      height: 100px;
+      height: 90px;
       width: 140px;
       margin-right: 0px;
     }

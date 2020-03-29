@@ -55,7 +55,9 @@ export default {
         { hid: 'og:type', property: 'og:type', content: this.meta.type },
         { hid: 'og:url', property: 'og:url', content: this.meta.url },
         { hid: 'og:image', property: 'og:image', content: this.meta.image },
-        { name: 'twitter:title', content: this.meta.title }
+        { name: 'twitter:title', content: this.meta.title },
+        { name: 'twitter:card', content: this.meta.image },
+        { name: 'twitter:site', content: '@hinoki_media' }
       ]
     }
   },
@@ -161,14 +163,15 @@ export default {
       h5,
       h6,
       ul {
-        margin-left: 32px;
-        margin-right: 32px;
+        margin-left: 40px;
+        margin-right: 40px;
         @include mq(sm) {
           margin-left: 0px;
           margin-right: 0px;
         }
         color: $color-textcolorblack;
       }
+
       li {
         list-style: auto;
       }
@@ -180,7 +183,7 @@ export default {
         @include font-text;
       }
       h2 {
-        @include font-textbold;
+        @include font-cardtitle;
       }
     }
     &__tags {
