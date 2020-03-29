@@ -54,7 +54,7 @@ export default {
   &__item {
     display: flex;
     justify-content: space-between;
-    padding: 0px 8px 8px;
+    padding: 0px 8px;
     border-bottom: 1px solid $color-background;
     &:last-child {
       border-bottom: 0px;
@@ -73,6 +73,7 @@ export default {
       -webkit-line-clamp: 2;
       overflow: hidden;
       height: 40px;
+      margin-bottom: 10px;
     }
     &--info {
       display: flex;

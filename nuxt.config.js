@@ -34,7 +34,17 @@ export default {
         property: 'og:image',
         content:
           'https://dashboard.hinoki.media/wp-content/uploads/2020/03/Frame_47.png'
-      }
+      },
+      { name: 'twitter:title', content: 'ヒノキメディア' },
+      {
+        name: 'twitter:card',
+        content: 'summary'
+      },
+      {
+        name: 'twitter:creator',
+        content: '@hinoki_media'
+      },
+      { name: 'twitter:site', content: '@hinoki_media' }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
