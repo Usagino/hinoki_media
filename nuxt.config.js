@@ -38,8 +38,7 @@ export default {
       { name: 'twitter:title', content: 'ヒノキメディア' },
       {
         name: 'twitter:card',
-        content:
-          'https://dashboard.hinoki.media/wp-content/uploads/2020/03/Frame_47.png'
+        content: 'summary'
       },
       { name: 'twitter:site', content: '@hinoki_media' }
     ],
