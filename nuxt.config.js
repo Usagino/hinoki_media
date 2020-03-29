@@ -40,6 +40,10 @@ export default {
         name: 'twitter:card',
         content: 'summary'
       },
+      {
+        name: 'twitter:creator',
+        content: '@hinoki_media'
+      },
       { name: 'twitter:site', content: '@hinoki_media' }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
