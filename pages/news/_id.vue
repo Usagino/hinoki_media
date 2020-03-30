@@ -55,9 +55,7 @@ export default {
         { hid: 'og:type', property: 'og:type', content: this.meta.type },
         { hid: 'og:url', property: 'og:url', content: this.meta.url },
         { hid: 'og:image', property: 'og:image', content: this.meta.image },
-        { name: 'twitter:title', content: this.meta.title },
-        { name: 'twitter:card', content: this.meta.image },
-        { name: 'twitter:site', content: '@hinoki_media' }
+        { name: 'twitter:title', content: this.meta.title }
       ]
     }
   },
