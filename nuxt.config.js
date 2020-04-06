@@ -6,7 +6,7 @@ const { ENDPOINT } = process.env.ENDPOINT
 export default {
   mode: 'universal',
   head: {
-    titleTemplate: '%s | HINOKI',
+    titleTemplate: '%s | ヒノキメディア',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -38,7 +38,7 @@ export default {
       { name: 'twitter:title', content: 'ヒノキメディア' },
       {
         name: 'twitter:card',
-        content: 'summary'
+        content: 'summary_large_image'
       },
       {
         name: 'twitter:creator',
