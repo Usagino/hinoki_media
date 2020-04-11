@@ -75,7 +75,7 @@ export default {}
         }
       }
       p {
-        @include font-cardtitle;
+        @include font-text;
         text-align: left;
         width: 740px;
         margin-top: 12px;
