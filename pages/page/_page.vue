@@ -14,7 +14,10 @@
 
 <script>
 export default {
-  mounted() {}
+  mounted() {
+    const hoge = Math.ceil(200 / 10)
+    console.log(hoge)
+  }
 }
 </script>
 

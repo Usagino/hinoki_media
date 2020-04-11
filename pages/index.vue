@@ -27,8 +27,7 @@
           :key="item.id"
           :post ="item"
           )
-      //AppButton.nextbutton(text="NEXT" to="/page/1")
-      AppButton.nextbutton(text="NEXT" to="/pagination?page=1")
+      AppButton.nextbutton(text="NEXT" to="/page/1")
     AppFeature(:posts="featurePosts" v-if="featurePosts.length !== 0")
     AppFooter
 </template>
