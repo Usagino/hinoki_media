@@ -27,7 +27,7 @@ Vue.mixin({
       const {
         headers
       } = await app.$axios(
-        'https://admin.frontartgraph.com/wp-json/wp/v2/posts',
+        'https://dashboard.hinoki.media/wp-json/wp/v2/posts',
         { 'Access-Control-Expose-Headers': 'x-wp-total' }
       )
       const allgetPostNum = Number(headers['x-wp-total'])

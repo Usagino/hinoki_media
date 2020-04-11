@@ -107,6 +107,7 @@ export default {
     }
     &__title {
       padding: 20px;
+
       @include mq(sm) {
         padding: 12px;
       }
@@ -117,7 +118,7 @@ export default {
       align-items: flex-end;
       h1 {
         @include font-title;
-        margin-bottom: 8px;
+        margin: 12px 0px 8px;
       }
       p,
       a {
@@ -141,48 +142,8 @@ export default {
       }
     }
     &__text {
-      @include mq(sm) {
-        padding: 12px;
-      }
-      * {
-        margin-bottom: 32px;
-        &:last-child {
-          margin-bottom: 0px;
-        }
-        @include mq(sm) {
-          margin-bottom: 16px;
-        }
-      }
-      p,
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6,
-      ul {
-        margin-left: 40px;
-        margin-right: 40px;
-        @include mq(sm) {
-          margin-left: 0px;
-          margin-right: 0px;
-        }
-        color: $color-textcolorblack;
-      }
-
-      li {
-        list-style: auto;
-      }
-      img {
-        width: 100%;
-        height: auto;
-      }
-      p {
-        @include font-text;
-      }
-      h2 {
-        @include font-cardtitle;
-      }
+      // 管理しやすいように別ファイルへ -> 'assets/stylesheets/_article.scss'
+      @include article_base;
     }
     &__tags {
       padding: 32px;

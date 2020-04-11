@@ -37,7 +37,7 @@ export default {
   width: 280px;
   display: inline;
   background: $color-textcolorwhite;
-  padding: 20px;
+  padding: 20px 16px;
   box-sizing: border-box;
   @include gap-bottom(8px);
   height: 0%;

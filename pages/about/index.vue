@@ -5,7 +5,9 @@
     img.about__first--image(src="/image/about_logo.svg")
     .about__first__text
       h1 Hello, We are creative media
-      p HINOKIは、ビギナーのデザイナー視点でデザインを中心とした<br>クリエイティブに関わる、モノ、コトなどを紹介するメディアです。
+      p 私たち「HINOKI」 は、デザインの学校を卒業したメンバーで結成したチームです。<br>デザインやWEBを中心とした、クリエイティブに関わるモノ・コトを紹介していきます。
+      p 私たちがこのメディアを始めた理由は、デザインやWEBを勉強するにあたり、とても悩んだ経験があるからです。領域が広く、常にアップデートされていく業界なので、何を勉強するべきなのか、何を求められているのかなど、分からないことが多くありました。<br>そんな方々のために、デザイナーとして働く私たちが、日々感じていることや、体験したことなど。学生時代に読みたかったと思えるような記事を私たちの視点で書いていきます。
+      p これからデザインやWEBを勉強したいと思っている方や、お仕事をされている方々の参考になればと思っています。<br>よろしければ、TwitterやInstagram、Facebookも始めましたので、登録してみて下さい。<br>これから「HINOKI」をどうぞよろしくお願いいたします。
   .about__second
   .about__third
     .about__third__socials
@@ -67,14 +69,16 @@ export default {}
       h1 {
         @include font-title;
         text-align: center;
-        margin-bottom: 12px;
+
         @include mq(sm) {
           @include font-cardtitle;
         }
       }
       p {
         @include font-cardtitle;
-        text-align: center;
+        text-align: left;
+        width: 740px;
+        margin-top: 12px;
         @include mq(sm) {
           text-align: left;
           @include font-text;
