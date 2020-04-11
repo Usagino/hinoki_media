@@ -28,8 +28,7 @@ export default {
   methods: {
     async searchData() {
       const query = this.$route.query
-      // const endpoint = process.env.ENDPOINT
-      const endpoint = 'https://admin.frontartgraph.com'
+      const endpoint = 'https://dashboard.hinoki.media'
       const seatchLink = encodeURI(
         `${endpoint}/wp-json/wp/v2/posts/?search=${query.title}&_embed=1`
       )

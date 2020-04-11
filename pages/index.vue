@@ -106,13 +106,15 @@ export default {
       }
       &__title {
         @include font-title;
+        color: $color-textcolorwhite !important;
+        width: 100%;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
         overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        width: $default-size;
-        color: $color-textcolorwhite;
         @include mq(sm) {
           width: $default-size-sp;
+          @include font-cardtitle;
         }
       }
     }
