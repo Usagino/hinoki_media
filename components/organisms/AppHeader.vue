@@ -26,10 +26,6 @@
     .header__sp-menu(v-if="spMenuToggle")
       .header__sp-menu__wrap
         img(src="/image/logo_inline_white.svg")
-      .header__sp-menu__search
-        input(type="text" placeholder="ここにテキストを入力して検索" v-model="searchText")
-        a(@click="searchMethods()")
-          feather-search.header__sp-menu__search--icon
       ul.header__sp-menu__menu
         li.header__sp-menu--item
           a(href="/about") ABOUT<span> | 私たちについて</span>
@@ -309,6 +305,7 @@ export default {
     }
     &__wrap {
       padding: 0px 20px;
+      padding-bottom: 8px;
     }
     &__legal {
       position: absolute;

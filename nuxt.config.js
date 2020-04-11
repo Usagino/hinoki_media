@@ -76,6 +76,7 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
     '@nuxtjs/google-analytics',
+    '@nuxtjs/sitemap',
     [
       '@nuxtjs/google-adsense',
       {
@@ -119,6 +120,22 @@ export default {
       terserOptions: {
         compress: { drop_console: false }
       }
+    }
+  },
+  sitemap: {
+    path: '/sitemap.xml',
+    hostname: 'https://hinoki.media',
+    routes() {
+      return Promise.all([
+        axios.get(
+          `${endpoint}/wp-json/wp/v2/posts?per_page=100&page=1&_embed=1`
+        )
+      ]).then(([posts]) => {
+        console.log('site map table')
+        const postMap = posts.data.map((post) => '/news/' + post.id)
+        console.table(postMap)
+        return postMap
+      })
     }
   },
   generate: {
