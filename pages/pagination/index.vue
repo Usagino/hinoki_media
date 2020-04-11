@@ -12,6 +12,7 @@
 <script>
 export default {
   mounted() {
+    console.log('hi')
     console.log(this.$route.query.page)
   }
 }
