@@ -61,7 +61,6 @@ Vue.mixin({
 
       // const pagination = params.page
       const pagination = query.page
-      console.log(pagination)
       const checkPagination = !(pagination === undefined)
       const paginationItems = checkPagination
         ? await app.$axios.$get(
