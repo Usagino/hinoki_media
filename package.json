@@ -17,6 +17,7 @@
     "@nuxtjs/google-analytics": "^2.2.3",
     "@nuxtjs/pwa": "^3.0.0-beta.19",
     "@nuxtjs/redirect-module": "^0.3.1",
+    "@nuxtjs/sitemap": "^2.2.0",
     "axios": "^0.19.1",
     "core-js": "^2.6.2",
     "feather-icons": "^4.25.0",
