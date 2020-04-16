@@ -21,7 +21,6 @@ export default {
   },
   mounted() {
     this.routeString()
-    console.log(this.data.canDisplayPage)
   },
   methods: {
     routeString() {
