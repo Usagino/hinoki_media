@@ -1,5 +1,7 @@
 @mixin article_base{
-
+  .iframely-embed{
+    @include defaultPCwidth;
+  }
   @include mq(sm) {
     padding: 12px;
   }
@@ -43,6 +45,7 @@
     height: auto;
   }
   iframe {
+
     width: 100%;
     @include mq(sm) {
       height: 200px;
