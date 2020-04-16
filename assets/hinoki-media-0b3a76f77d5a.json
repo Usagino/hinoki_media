@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "hinoki-media",
+  "private_key_id": "0b3a76f77d5ab6ee879dcb45d627024eaabf4448",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDqF/VqXf9m8f+5\n3pM/J+LV7w+ua7CxtZWWVs5YooCa8IzQG350JmpU74HPumtUxFUkduneoLagDqLh\nnShZXaLYlS40ocJfE1D/xaAqWomuHOWyGx3bSdj8m28TRhkpvKsw3B8qPD3U43as\ngeg8NoGhtF+qANz21oQl0Po2l9UymF6ZaoNHHlvhxHeArgAlEOgYOlVyzMMDaOp5\ntQOKGw52SYDWefFfNj/LYkVwMNMgmkYBq7ZnMSTef9yGjTd07gI7+h3Cf8HmBnB1\n8oTpDpkocGJlozT94EkSGonUQ29bYjB01kuwhxnIXiqnPPGVJsvD07IPTyTIMFdw\nU99cKhkFAgMBAAECggEAOMWyuScux7KtCFDYeRqdQrEFppFres3FB37p8EkI04q/\nO8FPO7ANXafwXYaifR5YX82PDnT/lXW3Puw0WugAlHIpkI4ia5htrnopS9xFQ7qy\nYi19Yi9Ytnqjx5Lai2q8Qc9Ap6eQf07i+xdOUTwO2D68bKhk7mA8EEfMRu0vwWMH\n0ybqqzvl++uC13eZMql+VGGYqrZvjOOug3OFP1IHG56GQYn73MHJUE7wRmQTRR2g\nB0Y8sOkR7cDN3VFHYSoTRWXrJ3jQwb2FHhk6/go0lavp3Z2Cp9wjCMQ1WZH32CKJ\nbKapgq7CIBN5GZ1QQ3B2sfqNDSQLVBvLxwCSG7gHyQKBgQD8O8nXLguGOG7yP267\nfu8ZP6VhulC8lkqG2Rt1cSLYiwE53EUFrIOpnK4wF/ZWuAC93Tnc0QL08f4Z9qkQ\npSxoRB7tXwo0ouZlaH5kxwqhIZHxfPUAlPRBAXJ8OI1ScMb3RrUkY3oMS12BUvXY\nZHf/Fq8XgHtHZaug2cE3z5aXNwKBgQDtltOjAubPvLPUQjTaPm0K5NL6aoKf5t2V\n3K1jJL04kPY7UKnlscTh+qR7kZAM3deWsDbmY5v0/gToL3VDBfrvLl/Vv/HDVu6U\n7p6pcC2cWXTBnHD+sCISOt5ENqs79+/CKip16YoXlwFZ59c5Ij1POu0l2osvCxr1\nW/iXkQ03owKBgQC+4JP3Fe48rVowUpZ+pylThxmlYjSU8nsFnyircGl5S4ArBCjr\niUi9w0cCODAAIhDVnaObGkTNjo/HoCUC5qw7X0m0QlbbzGbkWPZFV2cQ1vG1uOVD\ngnVw+CJmJPm1aIj5OfX8ypbi1Om240wObMFuNgFcnKsuNZ9zAza4AI0qcwKBgQDL\nWEqcexBG/g+/fEa1/7XeHAiCcQSJjNNbvzra3wfgURmdnKU8xRBoBNggNm5exMQO\n4ZSrTNefMIXMn0myanzhlwRI8nYeJNoft7ct96fh6CJoztda9C7FAYNYSJ33vnWC\n7gnXT2F0XTa31xi6epaUqC9uNYToZ43UL7otJuV0FwKBgQCX8zx2HejHQMHM1Prq\nWLjcL6BTK/CCRvzU4+Pj2QnL8E0XMBbxTovKtf1fInbCw6ieNgKe/eoDPJ46pOQe\nd82FVCUfBGg5v72mhchZhZGceod0VmKSlXYcL/QCuUV9fS+wy2JxdJGknlTGr121\n9lFuO/i+r1S97n4vgia/L88TmQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "hinoki-media-get@hinoki-media.iam.gserviceaccount.com",
+  "client_id": "108555664497603940307",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/hinoki-media-get%40hinoki-media.iam.gserviceaccount.com"
+}
