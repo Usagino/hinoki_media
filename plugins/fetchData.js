@@ -99,6 +99,12 @@ Vue.mixin({
         seatchItems = await app.$axios.$get(encodeURI(seatchLink))
       }
 
+      // ranking -------------------
+      const rankingItemsHoge = await app.$axios.$get(
+        `${endpoint}/wp-json/wp/v2/ranking`
+      )
+      console.log(rankingItemsHoge)
+
       return {
         latestPosts: latestItems,
         featurePosts: featureItems,
@@ -153,10 +159,12 @@ Vue.mixin({
       return post._embedded.author[0].name
     },
     getThumbnail: (post) => {
-      if (post._embedded['wp:featuredmedia'][0].source_url !== undefined) {
+      const thumbnailExit =
+        post?._embedded['wp:featuredmedia']?.[0]['source_url']
+      if (thumbnailExit !== undefined) {
         return post._embedded['wp:featuredmedia'][0].source_url
       } else {
-        return 'not thumbnail'
+        return 'https://images.unsplash.com/photo-1576526164505-9a2540866186?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1789&q=80'
       }
     },
     getLink: (post) => {
