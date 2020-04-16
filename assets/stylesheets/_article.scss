@@ -43,6 +43,7 @@
     height: auto;
   }
   iframe {
+    @include defaultPCwidth;
     width: 100%;
     @include mq(sm) {
       height: 200px;
