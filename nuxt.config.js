@@ -157,12 +157,8 @@ export default {
         'Access-Control-Expose-Headers': 'x-wp-total'
       })
       const getPostNum = 10
-      let count = 0
-      if (Number(headers['x-wp-total']) % getPostNum) {
-        count = 1
-      }
-      const canDisplayPageNum =
-        Math.floor(Number(headers['x-wp-total']) / getPostNum) + count
+      const totalPostNum = Number(headers['x-wp-total'])
+      const canDisplayPageNum = Math.ceil(totalPostNum / getPostNum)
       const paginationRes = []
       for (let i = 1; i < canDisplayPageNum + 1; i++) {
         paginationRes.push({
