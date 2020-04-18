@@ -38,7 +38,8 @@ export default {
     return {
       title: 'TOP'
     }
-  }
+  },
+  mounted() {}
 }
 </script>
 

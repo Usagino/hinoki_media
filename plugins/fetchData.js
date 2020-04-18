@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import dayjs from 'dayjs'
+// import dayjs from 'dayjs'
 import credential from '~/assets/hinoki-media-0b3a76f77d5a.json'
 
 Vue.mixin({
@@ -17,10 +17,10 @@ Vue.mixin({
       paginationData: {},
       categoriesPaginationData: {},
       searchItem: [],
-      rankinngArr: []
+      rankingArr: []
     }
   },
-  async asyncData({ app, error }) {
+  async asyncData({ app, error, context }) {
     try {
       const params = app.context.params
       const query = app.context.query
@@ -103,85 +103,81 @@ Vue.mixin({
       }
 
       // ranking v2 -------------------
-      if (process.server) {
-        const { GoogleApis } = require('googleapis')
-        const google = new GoogleApis()
-        const analytics = google.analyticsreporting('v4')
-        const viewId = '214175838' // GoogleAnalyticsのビューidを指定
-        const startDate = dayjs()
-          .subtract(14, 'day')
-          .format('YYYY-MM-DD')
-        const endDate = dayjs().format('YYYY-MM-DD')
-        const jwtClient = new google.auth.JWT(
-          credential.client_email,
-          null,
-          credential.private_key,
-          ['https://www.googleapis.com/auth/analytics.readonly'],
-          null
-        )
 
-        jwtClient.authorize((error, tokens) => {
+      const { GoogleApis } = require('googleapis')
+      const google = new GoogleApis()
+      const analytics = google.analyticsreporting('v4')
+      const viewId = '214175838' // GoogleAnalyticsのビューidを指定
+      const jwtClient = new google.auth.JWT(
+        credential.client_email,
+        null,
+        credential.private_key,
+        ['https://www.googleapis.com/auth/analytics.readonly'],
+        null
+      )
+      const gapiSet = {
+        resource: {
+          reportRequests: [
+            {
+              dateRanges: [
+                {
+                  startDate: '14daysAgo',
+                  endDate: 'today'
+                }
+              ],
+              viewId,
+              dimensions: [
+                {
+                  name: 'ga:pagePath'
+                }
+              ],
+              metrics: [
+                {
+                  expression: 'ga:pageviews'
+                }
+              ]
+            }
+          ]
+        },
+        auth: jwtClient
+      }
+      jwtClient.authorize((error, tokens) => {
+        if (error) {
+          console.log(error)
+          return
+        }
+        analytics.reports.batchGet(gapiSet, (error, response) => {
           if (error) {
             console.log(error)
             return
           }
-          analytics.reports.batchGet(
-            {
-              resource: {
-                reportRequests: [
-                  {
-                    dateRanges: [
-                      {
-                        startDate,
-                        endDate
-                      }
-                    ],
-                    viewId,
-                    dimensions: [
-                      {
-                        name: 'ga:pagePath'
-                      }
-                    ],
-                    metrics: [
-                      {
-                        expression: 'ga:pageviews'
-                      }
-                    ]
-                  }
-                ]
-              },
-              auth: jwtClient
-            },
-            (error, response) => {
-              if (error) {
-                console.log(error)
-                return
+          const responseRows = response.data.reports[0].data.rows
+          const newsRows = []
+          responseRows.forEach((row) => {
+            if (row.dimensions[0].includes('/news/')) {
+              let id = row.dimensions[0].replace(/\u002F/g, '')
+              id = id.replace(/news/g, '')
+              const rowData = {
+                newsID: id,
+                pv: Number(row.metrics[0].values[0])
               }
-              const responseRows = response.data.reports[0].data.rows
-              const newsRows = []
-              responseRows.forEach((row) => {
-                if (row.dimensions[0].includes('/news/')) {
-                  let id = row.dimensions[0].replace(/\u002F/g, '')
-                  id = id.replace(/news/g, '')
-                  const rowData = {
-                    newsID: id,
-                    pv: Number(row.metrics[0].values[0])
-                  }
-                  newsRows.push(rowData)
-                }
-              })
-              newsRows.sort((a, b) => {
-                if (a.pv > b.pv) return -1
-                if (a.pv < b.pv) return 1
-                return 0
-              })
-              console.table(newsRows)
-              return { rankinngArr: newsRows }
+              if (newsRows.length < 5) {
+                newsRows.push(rowData)
+              }
             }
-          )
+          })
+          newsRows.sort((highData, rowData) => {
+            if (highData.pv > rowData.pv) return -1
+            if (highData.pv < rowData.pv) return 1
+            return 0
+          })
+          console.table(newsRows)
         })
-        console.log(app)
-      }
+      })
+      // const getIdByPost = await app.$axios.$get(
+      //   `${endpoint}/wp-json/wp/v2/posts/${99}/?_embed`
+      // )
+      // returns
       return {
         latestPosts: latestItems,
         featurePosts: featureItems,

@@ -126,6 +126,8 @@ export default {
       // 以下を追記
       config.node = {
         fs: 'empty',
+        net: 'empty',
+        tls: 'empty',
         googleapis: 'empty',
         child_process: 'empty'
       }
