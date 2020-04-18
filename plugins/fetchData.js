@@ -20,7 +20,7 @@ Vue.mixin({
       rankingArr: []
     }
   },
-  async asyncData({ app, error, context }) {
+  async asyncData({ app, error }) {
     try {
       const params = app.context.params
       const query = app.context.query
@@ -104,80 +104,92 @@ Vue.mixin({
 
       // ranking v2 -------------------
 
-      const { GoogleApis } = require('googleapis')
-      const google = new GoogleApis()
-      const analytics = google.analyticsreporting('v4')
-      const viewId = '214175838' // GoogleAnalyticsのビューidを指定
-      const jwtClient = new google.auth.JWT(
-        credential.client_email,
-        null,
-        credential.private_key,
-        ['https://www.googleapis.com/auth/analytics.readonly'],
-        null
-      )
-      const gapiSet = {
-        resource: {
-          reportRequests: [
-            {
-              dateRanges: [
-                {
-                  startDate: '14daysAgo',
-                  endDate: 'today'
-                }
-              ],
-              viewId,
-              dimensions: [
-                {
-                  name: 'ga:pagePath'
-                }
-              ],
-              metrics: [
-                {
-                  expression: 'ga:pageviews'
-                }
-              ]
-            }
-          ]
-        },
-        auth: jwtClient
-      }
-      jwtClient.authorize((error, tokens) => {
-        if (error) {
-          console.log(error)
-          return
-        }
-        analytics.reports.batchGet(gapiSet, (error, response) => {
-          if (error) {
-            console.log(error)
-            return
-          }
-          const responseRows = response.data.reports[0].data.rows
-          const newsRows = []
-          responseRows.forEach((row) => {
-            if (row.dimensions[0].includes('/news/')) {
-              let id = row.dimensions[0].replace(/\u002F/g, '')
-              id = id.replace(/news/g, '')
-              const rowData = {
-                newsID: id,
-                pv: Number(row.metrics[0].values[0])
-              }
-              if (newsRows.length < 5) {
-                newsRows.push(rowData)
-              }
-            }
-          })
-          newsRows.sort((highData, rowData) => {
-            if (highData.pv > rowData.pv) return -1
-            if (highData.pv < rowData.pv) return 1
-            return 0
-          })
-          console.table(newsRows)
-        })
-      })
       // const getIdByPost = await app.$axios.$get(
       //   `${endpoint}/wp-json/wp/v2/posts/${99}/?_embed`
       // )
       // returns
+
+      const weeklyPreview = () => {
+        return new Promise((resolve, reject) => {
+          const { GoogleApis } = require('googleapis')
+          const google = new GoogleApis()
+          const analytics = google.analyticsreporting('v4')
+          const viewId = '214175838' // GoogleAnalyticsのビューidを指定
+          const jwtClient = new google.auth.JWT(
+            credential.client_email,
+            null,
+            credential.private_key,
+            ['https://www.googleapis.com/auth/analytics.readonly'],
+            null
+          )
+          const gapiSet = {
+            resource: {
+              reportRequests: [
+                {
+                  dateRanges: [
+                    {
+                      startDate: '14daysAgo',
+                      endDate: 'today'
+                    }
+                  ],
+                  viewId,
+                  dimensions: [
+                    {
+                      name: 'ga:pagePath'
+                    }
+                  ],
+                  metrics: [
+                    {
+                      expression: 'ga:pageviews'
+                    }
+                  ]
+                }
+              ]
+            },
+            auth: jwtClient
+          }
+          jwtClient.authorize((error, tokens) => {
+            if (error) {
+              console.log(error)
+              return
+            }
+            analytics.reports.batchGet(gapiSet, (error, response) => {
+              if (error) {
+                console.log(error)
+                reject(error)
+                return
+              }
+              const responseRows = response.data.reports[0].data.rows
+              const newsRows = []
+              responseRows.forEach((row) => {
+                if (row.dimensions[0].includes('/news/')) {
+                  let id = row.dimensions[0].replace(/\u002F/g, '')
+                  id = id.replace(/news/g, '')
+                  const rowData = {
+                    newsID: id,
+                    pv: Number(row.metrics[0].values[0])
+                  }
+                  if (newsRows.length < 5) {
+                    newsRows.push(rowData)
+                  }
+                }
+              })
+              newsRows.sort((highData, rowData) => {
+                if (highData.pv > rowData.pv) return -1
+                if (highData.pv < rowData.pv) return 1
+                return 0
+              })
+
+              // console.table(newsRows)
+              resolve(newsRows)
+            })
+          })
+        })
+      }
+      // console.log(weeklyPreview())
+      weeklyPreview().then((value) => {
+        console.log(value)
+      })
       return {
         latestPosts: latestItems,
         featurePosts: featureItems,
@@ -197,13 +209,17 @@ Vue.mixin({
           displayPostNum: getPostNum
         },
         categoriesItem: categoriesList,
-        searchItem: seatchItems
+        searchItem: seatchItems,
+        ramkingArr: weeklyPreview()
       }
     } catch (err) {
       console.log(err)
     }
   },
   methods: {
+    weeklyPreview: () => {
+      return 'hoge'
+    },
     getTitle: (post) => {
       return post.title.rendered
     },
