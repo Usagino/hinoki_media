@@ -13,12 +13,7 @@
 </template>
 
 <script>
-export default {
-  mounted() {
-    const hoge = Math.ceil(200 / 10)
-    console.log(hoge)
-  }
-}
+export default {}
 </script>
 
 <style lang="scss" scoped></style>

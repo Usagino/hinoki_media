@@ -51,7 +51,7 @@ export default {
     nextLink(boolean) {
       const pageNum = Number(this.whatPageNum) + 1
       if (boolean) {
-        console.log(this.displayPostNum > this.whatPageNum)
+        // console.log(this.displayPostNum > this.whatPageNum)
         return {
           link: '/page/' + String(pageNum),
           toggle:
