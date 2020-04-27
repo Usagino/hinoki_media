@@ -61,9 +61,11 @@ export default {
   plugins: [
     '~plugins/components.js',
     { src: '~/plugins/feather.js' },
+    { src: '~plugins/day.js' },
     { src: '~/plugins/vue-awesome-swiper', ssr: false },
     { src: '~/plugins/carousel.js', ssr: false },
     { src: '~/plugins/fetchData.js', ssr: true },
+    { src: '~/plugins/gaRanking.js', ssr: true },
     { src: '~/plugins/axios', ssr: false }
   ],
   buildModules: ['@nuxtjs/eslint-module'],
@@ -114,11 +116,20 @@ export default {
   },
   build: {
     // hardSource: true,
-    extend(config, ctx) {},
     vendor: ['vue-awesome-swiper'],
     terser: {
       terserOptions: {
         compress: { drop_console: false }
+      }
+    },
+    extend(config, ctx) {
+      // 以下を追記
+      config.node = {
+        fs: 'empty',
+        net: 'empty',
+        tls: 'empty',
+        googleapis: 'empty',
+        child_process: 'empty'
       }
     }
   },
