@@ -189,7 +189,19 @@ Vue.mixin({
       // console.log(weeklyPreview())
       weeklyPreview().then((value) => {
         console.log(value)
+        value.forEach((postItem) => {
+          async function getRankingPost(value) {
+            const getIdByPost = await app.$axios.$get(
+              `${endpoint}/wp-json/wp/v2/posts/${postItem.newsID}/?_embed`
+            )
+            return getIdByPost
+          }
+          getRankingPost(value).then((res) => {
+            console.log(res.title.rendered)
+          })
+        })
       })
+
       return {
         latestPosts: latestItems,
         featurePosts: featureItems,
