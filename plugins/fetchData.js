@@ -188,7 +188,7 @@ Vue.mixin({
       }
       // console.log(weeklyPreview())
       weeklyPreview().then((value) => {
-        console.log(value)
+        // console.log(value)
         value.forEach((postItem) => {
           async function getRankingPost(value) {
             const getIdByPost = await app.$axios.$get(
@@ -197,7 +197,7 @@ Vue.mixin({
             return getIdByPost
           }
           getRankingPost(value).then((res) => {
-            console.log(res.title.rendered)
+            // console.log(res.title.rendered)
           })
         })
       })
