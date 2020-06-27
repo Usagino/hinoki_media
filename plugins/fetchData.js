@@ -259,8 +259,7 @@ Vue.mixin({
       return post._embedded.author[0].name
     },
     getThumbnail: (post) => {
-      const thumbnailExit =
-        post?._embedded['wp:featuredmedia']?.[0]['source_url']
+      const thumbnailExit = post._embedded['wp:featuredmedia'][0].source_url
       if (thumbnailExit !== undefined) {
         return post._embedded['wp:featuredmedia'][0].source_url
       } else {
